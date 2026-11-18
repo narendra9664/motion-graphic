@@ -50,6 +50,7 @@ Place audio at start = hit time - peak offset.
 | tense-to-drop-tech-124bpm-44s.mp3 | tense tech, drop, energetic |
 | upbeat-tech-pluck-120bpm-61s.mp3 | upbeat tech reel, drums from bar 1, plucky arp, beats at 0.055 + 0.5n s (Astryx reel) |
 | playful-curious-pluck-104bpm-61s.mp3 | playful, curious explainer bed: sparse 4 s intro, light groove, thins out at the end so it loops (EGM reel) |
+| premium-saas-launch-110bpm-30s.mp3 | polished SaaS launch bed, airy pads + plucks, steady energy (shape drops/lifts yourself with a lowpass + volume crossfade, see the Quillra project) |
 
 ## brands/
 | Folder | Contents |

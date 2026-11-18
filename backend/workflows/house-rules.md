@@ -21,6 +21,10 @@ These are the owner's rules. When a skill says otherwise, these win.
 - **Group, offset, overlap.** Animate related pieces as one group; stagger children 2-4 frames; start the next move during the last ~20% of the previous one.
 - Exits are faster than entrances (about 60%), ease-in. Every click gets a small press (1 to 0.96 to 1).
 
+## Study motion, not frames
+- Before building or revising, watch the references with the `watch-video` skill (Gemini breakdown + motion profile). Still frames hide the motion.
+- A premium piece never goes still: the motion profile keeps a baseline (camera drift, parallax, light) between the spikes of transitions.
+
 ## Script
 - Never use the phrase "You see".
 - Every claim sourced; disclaimers the source requires (for example "not an officially supported product") are shown on screen.

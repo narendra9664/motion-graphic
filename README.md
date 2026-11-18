@@ -18,7 +18,7 @@ One backend, two frontends:
 .claude/skills/        The skills (backend brain). Loaded by Claude Code and OpenCode automatically.
 backend/
   workflows/           house-rules.md (wins over every skill), client-brief.md
-  scripts/             new-project, voiceover (ElevenLabs), music (ElevenLabs), finish-audio (-14 LUFS)
+  scripts/             new-project, voiceover, music, finish-audio, watch-video (Gemini), motion-profile
   templates/           reel-9x16 and client-16x9 HyperFrames starters
   assets/              shared library: logos, brands, characters, sfx, music, fonts (see its README)
   tests/               smoke and glass-flow test compositions
@@ -48,7 +48,7 @@ cd content/<date>-my-topic && npm run check && npm run render && npm run finish
 
 ## Skills
 
-`content-reel`, `client-video` (the two pipelines), `short-form-script`, `long-form-script`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`, `saas-animation`, `launch-motion`. See `docs/Motion-Graphic-Studio-Guide.pdf` for what each one does.
+`content-reel`, `client-video` (the two pipelines), `short-form-script`, `long-form-script`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`, `saas-animation`, `launch-motion`, `watch-video` (Gemini watches reference videos and reports their motion). See `docs/Motion-Graphic-Studio-Guide.pdf` for what each one does.
 
 ## Inspiration and credits
 

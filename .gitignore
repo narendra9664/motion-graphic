@@ -40,3 +40,7 @@ content/2026-11-05-nobody-called-them/assets/sfx/
 
 # temporary pipeline test project
 content/2026-11-18-smoke-test/
+
+# HyperFrames studio caches
+**/.thumbnails/
+**/.waveform-cache/

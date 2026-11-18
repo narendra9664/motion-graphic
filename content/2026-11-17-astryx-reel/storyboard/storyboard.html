@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Astryx reel storyboard</title>
+<style>
+  * { box-sizing: border-box; } html, body { margin: 0; background: #0B0B10; color: #f2f2f4; font-family: Inter, "Segoe UI", system-ui, sans-serif; }
+  .board { width: 1920px; padding: 40px 34px; }
+  h1 { margin: 0 0 6px; font-size: 42px; font-weight: 700; letter-spacing: -1.2px; } h1 span { color: #8a8a94; font-weight: 400; }
+  .sub { font-size: 18px; color: #b9b9c1; margin-bottom: 28px; max-width: 1840px; line-height: 1.45; }
+  .grid { display: grid; grid-template-columns: repeat(5, 352px); gap: 34px 22px; }
+  .frame { position: relative; width: 352px; height: 626px; border-radius: 14px; overflow: hidden;
+    background: radial-gradient(120% 80% at 50% 45%, #fbf8f2 0%, #f3eee4 60%, #e9e2d4 100%); color: #111; }
+  .frame.dark { background: radial-gradient(120% 80% at 50% 45%, #1b1d24 0%, #0d0e12 100%); color: #fff; }
+  .num { position: absolute; left: 12px; top: 10px; width: 44px; height: 44px; border-radius: 50%; background: #111; color: #fff; font-weight: 700; font-size: 22px; display: flex; align-items: center; justify-content: center; z-index: 5; }
+  .dark .num { background: #fff; color: #111; }
+  .hair { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(255,0,60,0.18); z-index: 4; }
+  .hair2 { position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(255,0,60,0.18); z-index: 4; }
+  .safe { position: absolute; left: 0; right: 0; top: 56px; height: 387px; border-top: 1px dashed rgba(0,0,0,.14); border-bottom: 1px dashed rgba(0,0,0,.14); }
+  .dark .safe { border-color: rgba(255,255,255,.14); }
+  .t { font-size: 13px; color: #7d7d87; margin-top: 10px; } .b { font-size: 19px; font-weight: 700; margin: 2px 0 4px; }
+  .vo { margin-top: 6px; font-size: 14.5px; color: #8BA5FD; } .d { font-size: 14.5px; color: #b9b9c1; line-height: 1.45; }
+  .mv { margin-top: 7px; font-size: 13.5px; color: #F5D04E; line-height: 1.4; } .tr { margin-top: 7px; font-size: 13.5px; color: #1FE39A; line-height: 1.4; }
+  .abs { position: absolute; } .c { left: 50%; transform: translateX(-50%); }
+  .hd { font-weight: 800; letter-spacing: -0.045em; text-align: center; white-space: nowrap; line-height: 1; }
+  .lt { font-weight: 500; color: #8a857a; }
+  .blue { color: #225bff; }
+  .card { background: #fff; border-radius: 12px; box-shadow: 0 16px 34px rgba(40,30,10,.16); }
+  .tile { position: absolute; width: 30px; height: 30px; border-radius: 8px; background: #fff; box-shadow: 0 6px 12px rgba(40,30,10,.12); }
+  .blur { filter: blur(3px); opacity: .55; } .blur2 { filter: blur(6px); opacity: .35; }
+  .cur { position: absolute; width: 0; height: 0; }
+  .cur svg { position: absolute; left: 0; top: 0; width: 22px; height: 26px; filter: drop-shadow(0 3px 4px rgba(0,0,0,.25)); }
+  .badge { position: absolute; left: 18px; top: 20px; font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 999px; white-space: nowrap; }
+  .comp { position: absolute; background: #fff; border-radius: 8px; box-shadow: 0 8px 18px rgba(40,30,10,.14); }
+  .bar { height: 7px; border-radius: 4px; background: #e9e4da; margin: 6px 8px; }
+  .btn { height: 18px; border-radius: 6px; background: #225bff; margin: 7px 8px; }
+  .pill { position: absolute; height: 24px; padding: 0 10px; border-radius: 999px; font-size: 10px; font-weight: 700; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .code { font-family: Consolas, monospace; font-size: 8.5px; line-height: 1.5; color: #3a3a3c; }
+</style></head><body>
+<div class="board">
+  <h1>Astryx reel <span>· ~58 s · 9:16 · storyboard · voice to be picked</span></h1>
+  <div class="sub">Look: warm cream ground (taken from Astryx's own banner), black type, Astryx blue <b style="color:#5b85ff">#225bff</b> as the only accent, real logos from the shared library. Two recurring characters: <b>your cursor</b> (black arrow) and <b>the agent's cursor</b> (blue arrow with an “agent” tag). One camera that only moves forward; each shot's key object turns into the next shot (no dissolves); action dead centre (red crosshair); background always soft (shallow depth of field); words slide in one after another. Dashed lines = Reels text-safe band. Blue = voiceover, yellow = what moves, green = how it becomes the next shot.</div>
+  <div class="grid" id="g"></div>
+</div>
+<script>
+const CUR = (x,y,col,tag) => `<div class="cur" style="left:${x}px;top:${y}px"><svg viewBox="0 0 22 26"><path d="M2 2 L2 21 L7 16.5 L10.5 24 L14 22.5 L10.6 15.2 L17 15 Z" fill="${col}" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>${tag?`<div class="badge" style="background:${col};color:#fff">${tag}</div>`:''}</div>`;
+const tiles = (n, seed) => { let s=''; let r=seed; for (let i=0;i<n;i++){ r=(r*9301+49297)%233280; const x=(r/233280)*330; r=(r*9301+49297)%233280; const y=(r/233280)*600; const b = (x>110&&x<240&&y>220&&y<400)?'' : (i%3? 'blur':'blur2'); s+=`<div class="tile ${b}" style="left:${x}px;top:${y}px"></div>`;} return s; };
+const S = [
+ ['0.0 – 3.6 s', '', `${tiles(40,7)}
+   <img class="abs c" src="meta.png" style="top:170px;width:110px">
+   <div class="abs c hd" style="top:262px;font-size:64px">13,000</div>
+   <div class="abs c hd lt" style="top:328px;font-size:20px">apps. One system.</div>`,
+   'The hook', '“Meta just gave away the system behind thirteen thousand of its apps.”',
+   'First frame already moving: Meta symbol centred, a field of blank app tiles in depth (near ones sharp, far ones soft). “13,000” counts up from 0 as the line is spoken.',
+   'Tiles drift toward camera; counter rolls; soft hit lands on “thirteen thousand”.',
+   'All tiles suck into the centre and stack into one block that becomes the vault door.'],
+ ['3.6 – 5.6 s', 'dark', `
+   <div class="abs" style="left:0;top:0;width:352px;height:626px;background:url(vault.jpg) center/cover;filter:blur(0px)"></div>
+   <div class="abs" style="left:0;top:0;width:352px;height:626px;background:radial-gradient(60% 45% at 50% 45%,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 100%)"></div>
+   <div class="abs c hd" style="top:250px;font-size:58px;color:#fff">8 years</div>
+   <div class="abs c hd" style="top:312px;font-size:18px;font-weight:500;color:#cfd3dc">never left Meta.</div>`,
+   'Locked away', '“For eight years, it never left Meta.”',
+   'The only dark shot: the generated steel vault door (Canva image) full frame, edges vignetted, “8 years” slides up in the centre.',
+   'Slow push-in on the vault wheel; low thud as the bolts lock.',
+   'The vault wheel spins and its centre hub becomes the Astryx symbol.'],
+ ['5.6 – 10.6 s', '', `
+   <img class="abs c" src="astryx.png" style="top:150px;width:96px">
+   <img class="abs c" src="astryx-wordmark-blue.png" style="top:258px;width:210px">
+   <div class="abs card" style="left:76px;top:316px;width:200px;height:58px;display:flex;align-items:center;justify-content:center;gap:10px">
+     <img src="github.png" style="width:24px"><div style="font-weight:800;font-size:22px;letter-spacing:-.03em">★ 10,939</div></div>
+   <div class="abs c" style="top:382px;font-size:11px;color:#8a857a;white-space:nowrap">stars this week</div>`,
+   'It unlocks', '“It\'s called Astryx. And this week it gained almost eleven thousand stars on GitHub.”',
+   'The Astryx symbol drops out of the hub, the wordmark slides out from behind it, then a GitHub star card slides up under it.',
+   'Star counter races to 10,939 with light ticks; card has deep soft shadow.',
+   'Hard stop: the counter freezes.'],
+ ['10.6 – 12.6 s', '', `
+   <div class="abs card blur" style="left:76px;top:200px;width:200px;height:58px;display:flex;align-items:center;justify-content:center;gap:10px"><div style="font-weight:800;font-size:22px">★ 10,939</div></div>
+   <div class="abs c hd" style="top:280px;font-size:30px">But the stars</div>
+   <div class="abs c hd" style="top:316px;font-size:30px">aren't the <span class="blue">point.</span></div>`,
+   'Head fake', '“But the stars aren\'t the interesting part.”',
+   'The frozen star card falls out of focus behind; the line slides in word by word over it.',
+   'Music drops out for a beat (the only silence in the reel).',
+   'The full stop after “point” grows into a white laptop screen.'],
+ ['12.6 – 15.0 s', '', `
+   <div class="abs card" style="left:56px;top:190px;width:240px;height:160px">
+     <div class="bar" style="width:40%;margin-top:14px"></div><div class="bar"></div><div class="bar" style="width:70%"></div><div class="btn" style="width:80px"></div></div>
+   ${CUR(200,300,'#111','you')}
+   <div class="abs c hd" style="top:380px;font-size:20px">Built for <span class="blue">humans.</span></div>`,
+   'Made for one', '“Every design system is built for humans.”',
+   'One clean UI card in the centre. Your cursor (black, “you” tag) clicks the blue button.',
+   'Cursor glides in with a tactile click on the button.',
+   'Camera keeps pushing; a second cursor enters from the right edge.'],
+ ['15.0 – 18.2 s', '', `
+   <div class="abs card" style="left:56px;top:190px;width:240px;height:160px">
+     <div class="bar" style="width:40%;margin-top:14px"></div><div class="bar"></div><div class="bar" style="width:70%"></div><div class="btn" style="width:80px"></div></div>
+   ${CUR(120,250,'#111','you')} ${CUR(220,290,'#225bff','agent')}
+   <div class="abs c hd" style="top:380px;font-size:20px">…and their <span class="blue">AI agents.</span></div>`,
+   'The twist', '“Astryx is built for humans… and their AI agents.”',
+   'The agent cursor (Astryx blue, “agent” tag) arrives and sits next to yours on the same card.',
+   'Pop on the agent cursor arrival; both cursors nod (tiny bounce) at each other.',
+   'The card splits down the middle into two matching cards.'],
+ ['18.2 – 23.4 s', '', `
+   <div class="abs card" style="left:22px;top:150px;width:150px;height:110px"><div class="bar" style="width:40%;margin-top:12px"></div><div class="bar"></div><div class="btn" style="width:60px"></div></div>
+   <div class="abs card" style="left:180px;top:150px;width:150px;height:110px"><div class="bar" style="width:40%;margin-top:12px"></div><div class="bar"></div><div class="btn" style="width:60px"></div></div>
+   ${CUR(110,220,'#111','you')} ${CUR(270,220,'#225bff','agent')}
+   <div class="abs card blur" style="left:96px;top:300px;width:160px;height:80px"><div class="code" style="padding:8px">&lt;Button variant="primary"&gt;<br>docs · components · CLI</div></div>
+   <div class="abs c hd" style="top:400px;font-size:17px">Same docs. <span class="blue">Same result.</span></div>`,
+   'Same reference', '“The docs, the components, the command line, all designed so your coding agent builds the same way you do.”',
+   'Split screen: you and the agent build the same card side by side from one docs page (soft, behind). Labels “docs”, “components”, “CLI” light up as they are said.',
+   'Both cursors move in sync; soft clicks on each label.',
+   'The two cards slide together and become a prompt box.'],
+ ['23.4 – 29.0 s', '', `
+   <div class="abs card" style="left:46px;top:150px;width:260px;height:40px;display:flex;align-items:center;padding:0 12px;font-size:12px;font-weight:600">build me a dashboard<span class="blue">|</span></div>
+   <div class="comp" style="left:46px;top:206px;width:120px;height:70px"><div class="bar" style="margin-top:10px"></div><div class="bar" style="width:60%"></div></div>
+   <div class="comp" style="left:176px;top:206px;width:130px;height:70px"><div class="bar" style="margin-top:10px;width:50%"></div><div class="btn"></div></div>
+   <div class="comp" style="left:46px;top:286px;width:260px;height:80px"></div>
+   ${CUR(270,330,'#225bff','agent')}
+   <div class="abs c hd" style="top:390px;font-size:24px">150+ <span class="lt" style="font-size:16px">components</span></div>`,
+   'The payoff', '“So you ask your agent for a dashboard, and it reaches for the same 150-plus components Meta\'s own teams use.”',
+   'A prompt types itself; components fly in from depth and snap into a dashboard under the agent cursor. “150+” counts up.',
+   'A whoosh per component group; snap on each landing.',
+   'The finished dashboard stays put while the world around it changes colour.'],
+ ['29.0 – 31.6 s', '', `
+   <div class="abs" style="left:46px;top:150px;width:260px;height:216px;border-radius:12px;overflow:hidden;display:grid;grid-template-columns:repeat(3,1fr)">
+     <div style="background:#f5f5f4"></div><div style="background:#f6e7a8"></div><div style="background:#5b3b2c"></div>
+     <div style="background:#b7cf9a"></div><div style="background:#cfc7bc"></div><div style="background:#1a1420"></div></div>
+   <div class="abs c hd" style="top:390px;font-size:18px">7 themes · dark mode · templates</div>`,
+   'Fast montage', '“Seven themes. Dark mode. Templates.”',
+   'The same dashboard re-skins on the beat: neutral → butter → chocolate → matcha → stone → gothic → y2k, then flips to dark mode, then shows the template grid. (Frame shows the 6 skins as one grid for the board.)',
+   'One tick per theme, locked to the music.',
+   'Dark mode swallows the screen; a single line of copy rises out of it.'],
+ ['31.6 – 33.4 s', 'dark', `
+   <div class="abs c hd" style="top:270px;font-size:26px;color:#fff">Designers,</div>
+   <div class="abs c hd" style="top:305px;font-size:26px;color:#fff">this part's <span style="color:#6d8fff">for you.</span></div>`,
+   'Re-hook', '“But here\'s the part designers will love.”',
+   'Dark beat, centred text only. Gives the eye a rest before the next run.',
+   'Words slide in; reverse riser into the next shot.',
+   'A single blue button falls out of the dark onto a cream card.'],
+ ['33.4 – 37.6 s', '', `
+   <div class="abs card" style="left:96px;top:220px;width:160px;height:90px;display:flex;align-items:center;justify-content:center"><div style="width:110px;height:30px;border-radius:8px;background:#225bff"></div></div>
+   <div class="pill card" style="left:30px;top:170px">Tailwind</div><div class="pill card" style="left:140px;top:150px">CSS modules</div><div class="pill card" style="left:250px;top:170px">plain CSS</div>
+   <div class="abs c hd" style="top:350px;font-size:22px">No styling <span class="blue">lock-in.</span></div>`,
+   'Your styles', '“No styling lock-in. Keep Tailwind, CSS modules, or plain CSS.”',
+   'Three styling tags snap onto one Astryx button one after another; the button restyles each time.',
+   'Three clicks, one per tag.',
+   'The button cracks open along its middle.'],
+ ['37.6 – 44.6 s', '', `
+   <div class="abs card" style="left:96px;top:160px;width:160px;height:56px;display:flex;align-items:center;justify-content:center"><div style="width:110px;height:26px;border-radius:8px;background:#225bff"></div></div>
+   <div class="abs card" style="left:66px;top:232px;width:220px;height:120px;padding:8px"><div class="code">📁 src/components<br>&nbsp;&nbsp;└ Button.tsx<br>&nbsp;&nbsp;&nbsp;&nbsp;export function Button(…) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return &lt;button …&gt;</div></div>
+   <div class="abs c hd" style="top:380px;font-size:28px">You <span class="blue">own it.</span></div>`,
+   'Swizzle', '“And if a component isn\'t quite right, swizzle it: Astryx ejects the full source into your project. You own it.”',
+   'The button opens and its source code spills down into a file tree inside your project. Your cursor grabs the file.',
+   'Snip as it opens; soft hit on “You own it.”',
+   'The file folds into a licence badge.'],
+ ['44.6 – 50.0 s', '', `
+   <div class="pill card" style="left:70px;top:190px">MIT licence</div><div class="pill" style="left:200px;top:190px;background:#225bff;color:#fff">beta</div>
+   ${Array.from({length:14},(_, i)=>`<div class="abs" style="left:${60+(i%7)*34}px;top:${250+Math.floor(i/7)*36}px;width:30px;height:30px;border-radius:50%;background:hsl(${i*27},35%,72%);border:2px solid #fff"></div>`).join('')}
+   <div class="abs c hd" style="top:350px;font-size:44px">142</div>
+   <div class="abs c hd lt" style="top:396px;font-size:15px">people already building it</div>`,
+   'Proof', '“It\'s MIT licensed, still in beta, and a hundred and forty-two people are already building it.”',
+   'Badge and beta chip slide in; contributor avatars (plain colour circles, no real faces) pile up; “142” counts.',
+   'Soft pop per avatar row.',
+   'Avatars condense into one profile circle.'],
+ ['50.0 – 52.4 s', '', `
+   <div class="abs c" style="top:200px;width:96px;height:96px;border-radius:50%;background:#111;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:30px">ab</div>
+   <div class="abs c hd" style="top:316px;font-size:22px">@autonomous.buddy</div>
+   <div class="abs c" style="top:352px;width:120px;height:34px;border-radius:999px;background:#225bff;color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center">Follow</div>
+   ${CUR(220,370,'#111','')}
+   <div class="abs c" style="top:400px;font-size:12px;color:#8a857a;white-space:nowrap">one repo like this every week</div>`,
+   'CTA', '“Follow for one repo like this every week.”',
+   'Your handle centred, a Follow button; your cursor clicks it.',
+   'Click + soft confirm when the button fills.',
+   'The camera pulls back from the button and finds the agent\'s dashboard again.'],
+ ['52.4 – 58.0 s', '', `${tiles(40,13)}
+   <div class="abs card" style="left:136px;top:250px;width:80px;height:60px"></div>
+   ${CUR(200,290,'#225bff','agent')}
+   <div class="abs c hd" style="top:340px;font-size:18px">built the way</div>
+   <div class="abs c hd" style="top:364px;font-size:30px">Meta builds.</div>`,
+   'Loop', '“Because the next app your agent builds… might be built the way Meta builds.”',
+   'Pull back: the agent\'s dashboard becomes one tile among thousands, the same tile field from shot 1.',
+   'Riser into the cut; last frame matches the first frame so the replay is seamless.',
+   'Loops into shot 1 (“Meta just gave away…”).'],
+];
+const g = document.getElementById('g');
+S.forEach((s,i)=>{ const [t,cls,html,b,vo,d,mv,tr]=s;
+  g.insertAdjacentHTML('beforeend', `<div><div class="frame ${cls}"><div class="safe"></div>${html}<div class="hair"></div><div class="hair2"></div><div class="num">${i+1}</div></div>
+  <div class="t">${t}</div><div class="b">${b}</div><div class="vo">${vo}</div><div class="d">${d}</div><div class="mv">▸ ${mv}</div><div class="tr">↳ ${tr}</div></div>`); });
+</script></body></html>

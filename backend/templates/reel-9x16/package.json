@@ -1,0 +1,12 @@
+{
+  "name": "__SLUG__",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.9.53 preview",
+    "check": "npx --yes hyperframes@0.9.53 check",
+    "snapshot": "npx --yes hyperframes@0.9.53 snapshot -o snaps",
+    "render": "npx --yes hyperframes@0.9.53 render -o renders/__SLUG__.mp4",
+    "finish": "node ../../backend/scripts/finish-audio.mjs renders/__SLUG__.mp4"
+  }
+}

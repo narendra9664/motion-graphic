@@ -1,0 +1,116 @@
+<template>
+  <style>
+    #ow-root { position: absolute; inset: 0; }
+    #ow-dark { position: absolute; inset: 0; background: #0d0e12; clip-path: circle(0% at 540px 920px); }
+    #ow-h1 { top: 800px; font-size: 100px; color: #fff; }
+    #ow-h2 { top: 920px; font-size: 100px; color: #fff; }
+    #ow-card { left: 250px; top: 740px; width: 580px; height: 320px; opacity: 0; }
+    #ow-btn { position: absolute; left: 360px; top: 845px; width: 360px; height: 110px; border-radius: 28px; background: var(--blue); color: #fff; font-size: 42px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; opacity: 0; border: 0 solid var(--blue); }
+    #ow-tags { position: absolute; left: 0; width: 1080px; top: 560px; display: flex; justify-content: center; gap: 24px; }
+    #ow-tags .pill { position: relative; opacity: 0; }
+    #ow-tags .pill i { width: 22px; height: 22px; border-radius: 6px; display: block; }
+    #ow-lock { top: 1130px; font-size: 72px; }
+    #ow-q { top: 1130px; font-size: 84px; }
+    #ow-swz { position: absolute; left: 340px; top: 580px; width: 400px; justify-content: center; opacity: 0; background: #121212; color: #fff; }
+    .bh { position: absolute; left: 360px; width: 360px; overflow: hidden; opacity: 0; }
+    .bh div { position: absolute; left: 0; width: 360px; height: 110px; border-radius: 28px; background: var(--blue); }
+    #ow-bt { top: 845px; height: 55px; } #ow-bt div { top: 0; }
+    #ow-bb { top: 900px; height: 55px; } #ow-bb div { top: -55px; }
+    #ow-code { left: 110px; top: 690px; width: 860px; height: 450px; padding: 44px 50px; opacity: 0; clip-path: inset(50% 0% 50% 0% round 34px); }
+    .cl { font-size: 31px; line-height: 1.6; white-space: pre; color: #3a3a3c; opacity: 0; }
+    .cl b { color: var(--blue); font-weight: 700; } .cl em { color: #b4532a; font-style: normal; } .cl u { color: var(--mute); text-decoration: none; }
+    #ow-src { top: 1170px; font-size: 58px; }
+    #ow-own { top: 1160px; font-size: 104px; }
+  </style>
+  <div id="ow-root" data-composition-id="own" data-width="1080" data-height="1920" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="ow-card" class="card"></div>
+    <div id="ow-btn">Button</div>
+    <div id="ow-tags">
+      <div class="pill" id="ow-p1"><i style="background:#06b6d4"></i>Tailwind</div>
+      <div class="pill" id="ow-p2"><i style="background:#121212"></i>CSS modules</div>
+      <div class="pill" id="ow-p3"><i style="background:#ffffff;border:3px solid #225bff"></i>plain CSS</div>
+    </div>
+    <div id="ow-lock" class="hd"><span class="w">No </span><span class="w">styling </span><span class="w bl">lock-in.</span></div>
+    <div id="ow-q" class="hd"><span class="w lt">Not </span><span class="w lt">quite </span><span class="w">right?</span></div>
+    <div id="ow-swz" class="pill mono">swizzle it</div>
+    <div id="ow-bt" class="bh" data-layout-allow-occlusion><div></div></div>
+    <div id="ow-bb" class="bh"><div></div></div>
+    <div id="ow-code" class="card">
+      <div class="cl"><u>your-project/src/components/</u></div>
+      <div class="cl">  <b>Button.tsx</b>   <u>&larr; full source</u></div>
+      <div class="cl"> </div>
+      <div class="cl"><em>export function</em> <b>Button</b>({ children }) {</div>
+      <div class="cl">  <em>return</em> &lt;button className={styles.root}&gt;</div>
+      <div class="cl">    {children}</div>
+      <div class="cl">  &lt;/button&gt;</div>
+    </div>
+    <div id="ow-src" class="hd"><span class="w lt">full </span><span class="w lt">source, </span><span class="w">your </span><span class="w">project.</span></div>
+    <div id="ow-own" class="hd"><span class="w">You </span><span class="w bl">own </span><span class="w bl">it.</span></div>
+    <div id="ow-dark"><div id="ow-h1" class="hd"><span class="w">Here's </span><span class="w">the </span><span class="w">part</span></div>
+      <div id="ow-h2" class="hd"><span class="w">designers </span><span class="w">will </span><span class="w" style="color:#7d9bff">love.</span></div></div>
+    <div id="ow-you" class="cur" data-layout-allow-safe-zone><svg viewBox="0 0 22 26"><path d="M2 2 L2 21 L7 16.5 L10.5 24 L14 22.5 L10.6 15.2 L17 15 Z" fill="#121212" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><div class="tag" style="background:#121212">you</div></div>
+  </div>
+  <script>
+    (function () {
+      const T0 = 32.9, g = (t) => t - T0;
+      const tl = gsap.timeline({ paused: true });
+      const slide = (sel, t, st) => tl.fromTo(sel, { opacity: 0, y: 50, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", stagger: st || 0 }, g(t));
+      const out = (sel, t) => tl.to(sel, { opacity: 0, y: -70, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, g(t));
+      gsap.set("#ow-you", { x: 1250, y: 1500 });
+
+      // 10. dark beat: "But here's the part designers will love."
+      tl.to("#ow-dark", { clipPath: "circle(75% at 540px 920px)", duration: 0.45, ease: "power3.in" }, g(32.9));
+      slide("#ow-h1 .w", 33.42, 0.15);
+      slide("#ow-h2 .w", 33.95, 0.3);
+      // the dark collapses into one blue button
+      out(["#ow-h1", "#ow-h2"], 34.95);
+      tl.to("#ow-dark", { clipPath: "circle(3% at 540px 900px)", backgroundColor: "#225bff", duration: 0.4, ease: "power3.inOut" }, g(35.0));
+      tl.set("#ow-btn", { opacity: 1 }, g(35.38)); tl.set("#ow-dark", { opacity: 0 }, g(35.4));
+      tl.fromTo("#ow-btn", { width: 110, x: 125, borderRadius: 55 }, { width: 360, x: 0, borderRadius: 28, duration: 0.35, ease: "back.out(1.5)", immediateRender: false }, g(35.38));
+      tl.fromTo("#ow-card", { opacity: 0, scale: 1.25, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }, g(35.42));
+      // 11. "No styling lock-in. Keep Tailwind, CSS modules, or plain CSS."
+      slide("#ow-lock .w", 35.35, 0.3);
+      const styles = [
+        ["#ow-p1", 37.25, { borderRadius: 55, backgroundColor: "#06b6d4", color: "#ffffff", borderWidth: 0 }],
+        ["#ow-p2", 38.08, { borderRadius: 12, backgroundColor: "#121212", color: "#ffffff", borderWidth: 0 }],
+        ["#ow-p3", 39.26, { borderRadius: 0, backgroundColor: "#ffffff", color: "#225bff", borderWidth: 5 }]];
+      styles.forEach(([p, t, st]) => {
+        tl.fromTo(p, { opacity: 0, y: -420, rotation: -8 }, { opacity: 1, y: 0, rotation: 0, duration: 0.32, ease: "power3.in" }, g(t) - 0.3);
+        tl.to("#ow-btn", { ...st, duration: 0.12, ease: "power2.out" }, g(t) + 0.02);
+        tl.fromTo("#ow-btn", { scale: 1 }, { scale: 1.08, duration: 0.09, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, g(t) + 0.02);
+      });
+
+      // 12. "And if a component isn't quite right, swizzle it..."
+      out(["#ow-lock", "#ow-tags"], 40.45);
+      tl.to("#ow-btn", { borderRadius: 28, backgroundColor: "#225bff", color: "#ffffff", borderWidth: 0, duration: 0.2 }, g(40.6));
+      slide("#ow-q .w", 40.94, 0.25);
+      tl.to("#ow-btn", { rotation: 4, duration: 0.07, yoyo: true, repeat: 5, ease: "sine.inOut" }, g(41.5));
+      tl.fromTo("#ow-swz", { opacity: 0, y: 40, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.35, ease: "power3.out" }, g(42.45));
+      out("#ow-q", 42.45);
+      // the button cracks open and its source spills out into the project
+      tl.set(["#ow-bt", "#ow-bb"], { opacity: 1 }, g(42.9)); tl.set("#ow-btn", { opacity: 0 }, g(42.92));
+      tl.to("#ow-bt", { y: -230, rotation: -4, filter: "blur(6px)", opacity: 0, duration: 0.6, ease: "power3.in" }, g(42.95));
+      tl.to("#ow-bb", { y: 330, rotation: 4, filter: "blur(6px)", opacity: 0, duration: 0.6, ease: "power3.in" }, g(42.95));
+      tl.to("#ow-card", { scaleX: 1.48, scaleY: 1.4, opacity: 0, duration: 0.4, ease: "power3.in" }, g(42.95));
+      tl.to("#ow-swz", { y: -80, duration: 0.4, ease: "power3.inOut" }, g(43.0));
+      tl.set("#ow-code", { opacity: 1 }, g(43.2));
+      tl.fromTo("#ow-code", { clipPath: "inset(50% 0% 50% 0% round 34px)" }, { clipPath: "inset(0% 0% 0% 0% round 34px)", duration: 0.45, ease: "power3.out", immediateRender: false }, g(43.2));
+      tl.fromTo("#ow-code .cl", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.25, stagger: 0.24, ease: "power3.out", immediateRender: false }, g(44.0));
+      slide("#ow-src .w", 44.55, 0.25);
+      // "You own it." your cursor takes the file
+      tl.to("#ow-you", { x: 590, y: 800, duration: 0.6, ease: "power3.inOut" }, g(45.75));
+      tl.fromTo("#ow-you svg", { scale: 1 }, { scale: 0.85, duration: 0.08, yoyo: true, repeat: 1, transformOrigin: "0 0", immediateRender: false }, g(46.45));
+      tl.to(["#ow-code", "#ow-you"], { y: "-=24", duration: 0.35, ease: "power3.out" }, g(46.5));
+      out("#ow-src", 46.3);
+      slide("#ow-own .w", 46.48, 0.25);
+      // the file folds down into a licence badge
+      out(["#ow-own", "#ow-swz", "#ow-you"], 47.22);
+      tl.to("#ow-code .cl", { opacity: 0, duration: 0.1 }, g(47.12));
+      tl.to("#ow-code", { clipPath: "inset(40% 31% 40% 31% round 60px)", y: -340, duration: 0.32, ease: "power3.inOut" }, g(47.15));
+      tl.set("#ow-code", { opacity: 0 }, g(47.5));
+      tl.set({}, {}, g(47.6));
+      window.__timelines["own"] = tl;
+    })();
+  </script>
+</template>

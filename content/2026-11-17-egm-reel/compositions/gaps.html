@@ -1,0 +1,129 @@
+<template>
+  <style>
+    #ga-root { position: absolute; inset: 0; }
+    #ga-page { left: 160px; top: 440px; width: 760px; height: 520px; opacity: 0; overflow: hidden; z-index: 5; }
+    #ga-c1, #ga-c2 { position: absolute; inset: 0; padding: 50px 60px; }
+    .pt { font-size: 50px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 26px; }
+    .pb { font-size: 42px; font-weight: 500; line-height: 1.6; white-space: nowrap; }
+    .pb span { display: inline-block; white-space: pre; border-radius: 8px; }
+    #ga-h { display: inline-block; width: 86px; height: 52px; vertical-align: middle; border: 4px dashed var(--orange2); border-radius: 10px; margin-left: 10px; opacity: 0; }
+    #ga-ok { top: 1010px; font-size: 54px; }
+    .fsh { position: absolute; opacity: 0; z-index: 6; }
+    #ga-fa { left: 10px; top: 990px; width: 250px; } #ga-fa img { transform: scaleX(-1); }
+    #ga-fb { left: 810px; top: 250px; width: 250px; }
+    #ga-fc { left: 820px; top: 990px; width: 240px; }
+    .bub { opacity: 0; z-index: 7; }
+    #ga-el { left: 300px; top: 640px; width: 480px; opacity: 0; z-index: 3; }
+    .mp { opacity: 0; z-index: 4; }
+    #ga-sw { position: absolute; left: 690px; top: 700px; width: 44px; opacity: 0; z-index: 6; }
+    #ga-t10 { top: 1140px; font-size: 60px; }
+    #ga-c2 { opacity: 0; }
+    .row { display: flex; align-items: center; gap: 22px; font-size: 40px; font-weight: 600; height: 80px; }
+    .cb { width: 46px; height: 46px; border-radius: 12px; border: 4px solid #c9ccd3; position: relative; flex: none; }
+    .cb svg { position: absolute; inset: -4px; opacity: 0; }
+    #ga-ap { margin-top: 22px; height: 96px; border-radius: 22px; background: var(--blue); color: #fff; font-size: 40px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    #ga-code { margin-top: 26px; height: 70px; border-radius: 999px; background: #eceef2; color: #7d828c; font-size: 30px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    #ga-t11 { top: 1110px; font-size: 62px; }
+  </style>
+  <div id="ga-root" data-composition-id="gaps" data-width="1080" data-height="1920" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="ga-el" class="chr"><img src="assets/img/elephant.png" alt=""></div>
+    <div class="pill b mp" id="ga-m1" style="left:290px;top:600px">"the usual hours"</div>
+    <div class="pill b mp" id="ga-m2" style="left:330px;top:640px">"the Friday rule"</div>
+    <svg id="ga-sw" viewBox="0 0 40 56"><path d="M20 2 C26 16 36 26 36 38 A16 16 0 0 1 4 38 C4 26 14 16 20 2Z" fill="#8fd0ff" stroke="#fff" stroke-width="3"/></svg>
+    <div id="ga-page" class="paper">
+      <div id="ga-c1"><div class="pt">Study space plan</div>
+        <div class="pb"><span id="ga-v">Volunteers </span><span>staff </span><span>the </span><span>desk.</span><span id="ga-h"></span></div>
+        <div class="pb"><span>We </span><span>keep </span><span>the </span><span id="ga-f">Friday rule</span><span>.</span></div></div>
+      <div id="ga-c2"><div class="pt">Findings</div>
+        <div class="row"><div class="cb" id="ga-cb1"><svg viewBox="0 0 54 54"><rect x="0" y="0" width="54" height="54" rx="12" fill="#1b6ef3"/><polyline points="14,28 23,37 40,18" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Who staffs the desk?</div>
+        <div class="row"><div class="cb" id="ga-cb2"><svg viewBox="0 0 54 54"><rect x="0" y="0" width="54" height="54" rx="12" fill="#1b6ef3"/><polyline points="14,28 23,37 40,18" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Opening hours missing</div>
+        <div class="row" style="color:#6b7079"><div class="cb"></div>Friday rule undefined</div>
+        <div id="ga-ap"><span id="ga-apt">Approve design</span></div>
+        <div id="ga-code"><span id="ga-ct">agent: waiting for your approval</span></div></div>
+    </div>
+    <div id="ga-ok" class="hd lt"><span class="w">looks </span><span class="w">fine, </span><span class="w">right?</span></div>
+    <div id="ga-fa" class="fsh"><img src="assets/img/goldfish.png" alt="" style="width:100%"></div>
+    <div id="ga-fb" class="fsh"><img src="assets/img/goldfish.png" alt="" style="width:100%"></div>
+    <div id="ga-fc" class="fsh"><img src="assets/img/goldfish.png" alt="" style="width:100%"></div>
+    <div class="bub" id="ga-b1" style="left:250px;top:1010px">which volunteers?</div>
+    <div class="bub" id="ga-b2" style="left:420px;top:300px">what hours?</div>
+    <div class="bub" id="ga-b3" style="left:360px;top:1135px">what Friday rule?</div>
+    <div id="ga-t10" class="hd"><span class="w">filled </span><span class="w">in </span><span class="w bl">from </span><span class="w bl">memory.</span></div>
+    <div id="ga-t11" class="hd"><span class="w">You </span><span class="w">stay </span><span class="w bl">in </span><span class="w bl">charge.</span></div>
+    <div id="ga-cur" class="cur"><svg viewBox="0 0 22 26"><path d="M2 2 L2 21 L7 16.5 L10.5 24 L14 22.5 L10.6 15.2 L17 15 Z" fill="#ffffff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+  </div>
+  <script>
+    (function () {
+      const T0 = 28.8, g = (t) => t - T0;
+      const tl = gsap.timeline({ paused: true });
+      const slide = (sel, t, st) => tl.fromTo(sel, { opacity: 0, y: 50, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", stagger: st || 0 }, g(t));
+      const out = (sel, t) => tl.to(sel, { opacity: 0, y: -70, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, g(t));
+      const pop = (sel, t) => tl.fromTo(sel, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, g(t));
+      const hop = (sel, t) => tl.fromTo(sel, { y: 0 }, { y: -40, duration: 0.14, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, g(t));
+      gsap.set("#ga-cur", { x: 1150, y: 1500 });
+
+      // 8. the page rises from the bowl: "Volunteers staff the desk. We keep the Friday rule."
+      tl.set("#ga-page", { opacity: 1 }, g(28.92));
+      tl.fromTo("#ga-page", { scale: 0.45 }, { scale: 1, duration: 0.45, ease: "power3.out", immediateRender: false }, g(28.92));
+      const words = document.querySelectorAll("#ga-c1 .pb span:not(#ga-h)");
+      [30.3, 31.0, 31.26, 31.43, 31.87, 32.02, 32.25, 32.36, 32.75].forEach((t, i) => tl.fromTo(words[i], { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, g(t)));
+      slide("#ga-ok .w", 33.15, 0.2);
+      tl.fromTo("#ga-page", { y: 0 }, { y: 16, duration: 0.15, yoyo: true, repeat: 3, ease: "sine.inOut", immediateRender: false }, g(33.66));
+
+      // 9. the goldfish ask: which volunteers? what hours? what Friday rule?
+      out("#ga-ok", 34.2);
+      [["#ga-fa", 34.35, -1], ["#ga-fb", 34.5, 1], ["#ga-fc", 34.65, 1]].forEach(([f, t, d]) => {
+        tl.fromTo(f, { opacity: 0, x: 500 * d }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, g(t));
+        tl.fromTo(f + " img", { y: 0 }, { y: -12, duration: 0.6, yoyo: true, repeat: 6, ease: "sine.inOut" }, g(t) + 0.5);
+      });
+      hop("#ga-fa", 35.48); pop("#ga-b1", 35.5);
+      tl.to("#ga-v", { backgroundColor: "rgba(255,138,31,0.28)", boxShadow: "inset 0 -5px 0 #ff8a1f", duration: 0.2 }, g(35.62));
+      hop("#ga-fb", 36.6); pop("#ga-b2", 36.62);
+      tl.fromTo("#ga-h", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, g(36.7));
+      hop("#ga-fc", 37.43); pop("#ga-b3", 37.45);
+      tl.to("#ga-f", { backgroundColor: "rgba(255,138,31,0.28)", boxShadow: "inset 0 -5px 0 #ff8a1f", duration: 0.2 }, g(37.6));
+
+      // 10. pull back: the elephant had been filling those gaps from memory
+      tl.to(["#ga-b1", "#ga-b2", "#ga-b3"], { opacity: 0, scale: 0.6, duration: 0.25, ease: "power2.in" }, g(38.5));
+      tl.to("#ga-fa", { x: -500, duration: 0.45, ease: "power3.in" }, g(38.55));
+      tl.to(["#ga-fb", "#ga-fc"], { x: 500, duration: 0.45, ease: "power3.in" }, g(38.55));
+      tl.to("#ga-page", { scale: 0.62, y: -230, duration: 0.5, ease: "power3.inOut" }, g(38.6));
+      tl.fromTo("#ga-el", { opacity: 0, y: 500 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, g(38.75));
+      tl.fromTo("#ga-m1", { opacity: 0 }, { opacity: 1, x: -250, y: 40, rotation: -8, duration: 0.45, ease: "power3.out" }, g(39.1));
+      tl.fromTo("#ga-m2", { opacity: 0 }, { opacity: 1, x: 300, y: 250, rotation: 6, duration: 0.45, ease: "power3.out" }, g(39.52));
+      tl.to("#ga-el img", { scaleY: 0.93, rotation: -4, y: 22, transformOrigin: "50% 100%", duration: 0.35, ease: "power2.out" }, g(40.0));
+      tl.fromTo("#ga-sw", { opacity: 0, y: -20 }, { opacity: 1, y: 30, duration: 0.6, ease: "power1.in" }, g(40.34));
+      tl.to("#ga-sw", { opacity: 0, duration: 0.2 }, g(41.0));
+      slide("#ga-t10 .w", 40.34, 0.2);
+
+      // 11. the gaps become a findings list: "And you stay in charge..."
+      out(["#ga-t10", "#ga-m1", "#ga-m2"], 41.45);
+      tl.to("#ga-el", { y: 600, opacity: 0, duration: 0.45, ease: "power3.in" }, g(41.45));
+      tl.to("#ga-page", { scale: 1, y: -40, height: 640, duration: 0.5, ease: "power3.inOut" }, g(41.55));
+      tl.to("#ga-c1", { opacity: 0, y: -40, duration: 0.2 }, g(41.6));
+      tl.fromTo("#ga-c2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, g(41.75));
+      slide("#ga-t11 .w", 42.1, 0.25);
+      tl.to("#ga-cur", { x: 250, y: 600, duration: 0.6, ease: "power3.inOut" }, g(43.1));
+      tl.to("#ga-cb1 svg", { opacity: 1, duration: 0.1 }, g(43.77));
+      tl.fromTo("#ga-cur svg", { scale: 1 }, { scale: 0.85, duration: 0.08, yoyo: true, repeat: 1, transformOrigin: "0 0", immediateRender: false }, g(43.75));
+      tl.to("#ga-cur", { x: 250, y: 680, duration: 0.3, ease: "power3.inOut" }, g(43.9));
+      tl.to("#ga-cb2 svg", { opacity: 1, duration: 0.1 }, g(44.22));
+      tl.fromTo("#ga-cur svg", { scale: 1 }, { scale: 0.85, duration: 0.08, yoyo: true, repeat: 1, transformOrigin: "0 0", immediateRender: false }, g(44.2));
+      tl.to("#ga-cur", { x: 560, y: 885, duration: 0.45, ease: "power3.inOut" }, g(44.6));
+      tl.fromTo("#ga-ap", { scale: 1 }, { scale: 0.95, duration: 0.09, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, g(45.22));
+      tl.to("#ga-ap", { backgroundColor: "#1fbf75", duration: 0.15 }, g(45.3));
+      { const o = { v: 0 }; const a = document.querySelector("#ga-apt"), c = document.querySelector("#ga-ct");
+        tl.to(o, { v: 1, duration: 0.02, onUpdate: () => { a.textContent = o.v > 0.5 ? "Approved ✓" : "Approve design"; } }, g(45.3));
+        const o2 = { v: 0 }; tl.to(o2, { v: 1, duration: 0.02, onUpdate: () => { c.textContent = o2.v > 0.5 ? "agent: building from the approved design" : "agent: waiting for your approval"; } }, g(46.42)); }
+      tl.to("#ga-code", { backgroundColor: "#1b6ef3", color: "#ffffff", duration: 0.2 }, g(46.42));
+      tl.to("#ga-cur", { x: 900, y: 1300, opacity: 0, duration: 0.5, ease: "power3.in" }, g(46.6));
+      // the approved page folds down into a plugin chip
+      out("#ga-t11", 47.35);
+      tl.to("#ga-c2", { opacity: 0, duration: 0.12 }, g(47.45));
+      tl.to("#ga-page", { width: 420, height: 110, x: 170, y: -20, borderRadius: 55, duration: 0.35, ease: "power3.inOut" }, g(47.5));
+      tl.to("#ga-page", { opacity: 0, duration: 0.1 }, g(47.85));
+      tl.set({}, {}, g(48.0));
+      window.__timelines["gaps"] = tl;
+    })();
+  </script>
+</template>

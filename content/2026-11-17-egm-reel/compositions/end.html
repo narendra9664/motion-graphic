@@ -1,0 +1,115 @@
+<template>
+  <style>
+    #en-root { position: absolute; inset: 0; }
+    #en-chip { position: absolute; left: 330px; top: 420px; width: 420px; height: 110px; border-radius: 55px; background: #fff; color: #1a1b1f; font-size: 42px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; gap: 18px; opacity: 0; box-shadow: 0 30px 60px rgba(0,0,0,0.45); }
+    #en-chip img { height: 58px; }
+    #en-h { top: 300px; font-size: 56px; }
+    .tl { position: absolute; top: 700px; width: 180px; height: 180px; border-radius: 46px; background: #1b1d23; border: 3px solid #2a2d35; opacity: 0; display: flex; align-items: center; justify-content: center; }
+    .tl img { width: 104px; height: 104px; }
+    .tl b { position: absolute; right: -12px; top: -12px; width: 52px; height: 52px; border-radius: 50%; background: var(--blue); opacity: 0; }
+    .tl b svg { position: absolute; inset: 0; }
+    .lb { position: absolute; top: 905px; width: 220px; text-align: center; font-size: 30px; font-weight: 700; color: var(--mute); opacity: 0; white-space: nowrap; }
+    #en-licw { position: absolute; left: 0; width: 1080px; top: 1030px; display: flex; justify-content: center; }
+    #en-lic { position: relative; background: #fff; color: #1a1b1f; opacity: 0; }
+    #en-cta { position: absolute; inset: 0; transform-origin: 540px 760px; }
+    #en-av { position: absolute; left: 390px; top: 470px; width: 300px; height: 300px; border-radius: 50%; overflow: hidden; border: 5px solid #2a2d35; opacity: 0; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+    #en-av img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); }
+    #en-hand { top: 820px; font-size: 84px; }
+    #en-fol { position: absolute; left: 380px; top: 950px; width: 320px; height: 104px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 42px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; opacity: 0; }
+    #en-sub { top: 1090px; font-size: 46px; }
+    #en-gf { left: 560px; top: 560px; width: 460px; opacity: 0; }
+    .sf { font-family: "EB Garamond", Georgia, serif; font-weight: 400; letter-spacing: -0.01em; color: #e9ebf0; }
+    .sf i { font-style: italic; color: #7fb0ff; }
+    .an { font-family: "Anton", "Inter", sans-serif; font-weight: 400; letter-spacing: 0.01em; line-height: 1; }
+    #en-bs { top: 330px; font-size: 46px; }
+    #en-sm1 { top: 430px; font-size: 92px; }
+    #en-sm2 { top: 520px; font-size: 92px; }
+    #en-fgw { top: 880px; font-size: 196px; }
+    .ch { display: inline-block; color: var(--orange2); }
+    .icar { display: inline-block; width: 16px; height: 160px; margin-left: 10px; border-radius: 4px; background: var(--orange2); vertical-align: -6px; box-shadow: 0 0 30px rgba(255,138,31,0.6); }
+    #en-car { position: absolute; left: 532px; top: 900px; width: 16px; height: 160px; border-radius: 4px; background: var(--orange2); opacity: 0; box-shadow: 0 0 30px rgba(255,138,31,0.6); }
+  </style>
+  <div id="en-root" data-composition-id="end" data-width="1080" data-height="1920" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="en-h" class="hd lt"><span class="w">runs </span><span class="w">as </span><span class="w">a </span><span class="w">plugin </span><span class="w">in</span></div>
+    <div id="en-chip"><img src="assets/img/egm-mark.png" alt="">EGM plugin</div>
+    <div class="tl" id="en-t1" style="left:120px"><img src="assets/img/claude.png" alt=""><b><svg viewBox="0 0 52 52"><polyline points="15,27 23,35 38,18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></b></div>
+    <div class="tl" id="en-t2" style="left:340px"><img src="assets/img/codex.png" alt=""><b><svg viewBox="0 0 52 52"><polyline points="15,27 23,35 38,18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></b></div>
+    <div class="tl" id="en-t3" style="left:560px"><img src="assets/img/openai-chatgpt-white.png" alt=""><b><svg viewBox="0 0 52 52"><polyline points="15,27 23,35 38,18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></b></div>
+    <div class="tl" id="en-t4" style="left:780px"><img src="assets/img/antigravity.png" alt=""><b><svg viewBox="0 0 52 52"><polyline points="15,27 23,35 38,18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></b></div>
+    <div class="lb" style="left:100px">Claude Code</div><div class="lb" style="left:320px">Codex</div><div class="lb" style="left:540px">ChatGPT</div><div class="lb" style="left:760px">Antigravity</div>
+    <div id="en-licw"><div class="pill" id="en-lic">Free · open source · Apache 2.0</div></div>
+
+    <div id="en-cta">
+      <div id="en-av"><img src="assets/img/avatar.png" alt=""></div>
+      <div id="en-hand" class="hd"><span class="w">@autonomous.buddy</span></div>
+      <div id="en-fol"><span id="en-ft">Follow</span></div>
+      <div id="en-sub" class="hd lt"><span class="w">one </span><span class="w">repo </span><span class="w">like </span><span class="w">this, </span><span class="w">every </span><span class="w">week</span></div>
+    </div>
+    <div id="en-gf" class="chr"><img src="assets/img/goldfish.png" alt=""></div>
+    <div id="en-bs" class="hd lt"><span class="w">Because </span><span class="w">sometimes,</span></div>
+    <div id="en-sm1" class="hd sf"><span class="w">the </span><span class="w"><i>smartest </i></span><span class="w">thing</span></div>
+    <div id="en-sm2" class="hd sf"><span class="w">an </span><span class="w">AI </span><span class="w">can </span><span class="w">do…</span></div>
+    <div id="en-fgw" class="hd an"><span class="w"><span class="ch">F</span><span class="ch">O</span><span class="ch">R</span><span class="ch">G</span><span class="ch">E</span><span class="ch">T</span><span class="icar"></span></span></div>
+    <div id="en-car"></div>
+    <div id="en-cur" class="cur"><svg viewBox="0 0 22 26"><path d="M2 2 L2 21 L7 16.5 L10.5 24 L14 22.5 L10.6 15.2 L17 15 Z" fill="#ffffff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+  </div>
+  <script>
+    (function () {
+      const T0 = 47.6, g = (t) => t - T0;
+      const tl = gsap.timeline({ paused: true });
+      const slide = (sel, t, st) => tl.fromTo(sel, { opacity: 0, y: 50, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", stagger: st || 0 }, g(t));
+      const out = (sel, t) => tl.to(sel, { opacity: 0, y: -70, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, g(t));
+      gsap.set("#en-cur", { x: 1150, y: 1500 });
+
+      // 12. "It runs as a plugin in Claude Code, Codex, ChatGPT and Antigravity. Free and open source."
+      tl.set("#en-chip", { opacity: 1 }, g(47.82));
+      tl.fromTo("#en-chip", { scale: 0.92 }, { scale: 1, duration: 0.3, ease: "back.out(2)", immediateRender: false }, g(47.82));
+      slide("#en-h .w", 48.15, 0.1);
+      tl.fromTo(".tl", { opacity: 0, y: 60 }, { opacity: 0.3, y: 0, duration: 0.4, stagger: 0.08, ease: "power3.out" }, g(48.4));
+      tl.fromTo(".lb", { opacity: 0 }, { opacity: 0.45, duration: 0.4, stagger: 0.08 }, g(48.5));
+      [["#en-t1", 49.07, 0], ["#en-t2", 49.8, 1], ["#en-t3", 50.55, 2], ["#en-t4", 51.63, 3]].forEach(([t, at, i]) => {
+        tl.to(t, { opacity: 1, borderColor: "#1b6ef3", duration: 0.15 }, g(at));
+        tl.fromTo(t, { scale: 1 }, { scale: 1.1, duration: 0.1, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, g(at));
+        tl.fromTo(t + " b", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, g(at) + 0.05);
+        tl.to(document.querySelectorAll(".lb")[i], { opacity: 1, color: "#ffffff", duration: 0.15 }, g(at));
+        tl.fromTo("#en-chip", { x: 0 }, { x: [-240, -80, 80, 240][i] * 0.12, duration: 0.2, ease: "power2.out", immediateRender: false }, g(at));
+      });
+      tl.fromTo("#en-lic", { opacity: 0, y: 40, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, g(52.74));
+
+      // 13. everything condenses into the profile picture
+      out(["#en-h", "#en-lic", ".lb"], 53.95);
+      [["#en-t1", 330, -170], ["#en-t2", 110, -170], ["#en-t3", -110, -170], ["#en-t4", -330, -170], ["#en-chip", 0, 145]].forEach(([s, x, y], i) => tl.to(s, { x, y, scale: 0.2, opacity: 0, duration: 0.38, ease: "power3.in" }, g(54.0) + i * 0.02));
+      tl.set("#en-av", { opacity: 1 }, g(54.36));
+      tl.fromTo("#en-av", { scale: 0.3 }, { scale: 1, duration: 0.45, ease: "back.out(1.6)", immediateRender: false }, g(54.36));
+      slide("#en-hand .w", 54.4);
+      tl.fromTo("#en-fol", { opacity: 0, y: 50, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, g(54.62));
+      slide("#en-sub .w", 54.8, 0.18);
+      tl.to("#en-cur", { x: 650, y: 1012, duration: 0.6, ease: "power3.inOut" }, g(55.05));
+      tl.fromTo("#en-fol", { scale: 1 }, { scale: 0.93, duration: 0.09, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, g(55.74));
+      tl.to("#en-fol", { backgroundColor: "#2a2d35", duration: 0.15 }, g(55.8));
+      { const o = { v: 0 }; const el = document.querySelector("#en-ft");
+        tl.to(o, { v: 1, duration: 0.02, onUpdate: () => { el.textContent = o.v > 0.5 ? "Following ✓" : "Follow"; } }, g(55.8)); }
+      // the goldfish peeks in from the edge
+      tl.set("#en-gf", { opacity: 1 }, g(55.85));
+      tl.fromTo("#en-gf", { x: 760, y: 620, scale: 0.5 }, { x: 470, y: 620, scale: 0.5, duration: 0.45, ease: "power3.out", immediateRender: false }, g(55.85));
+
+      // 14. loop: the split type returns; "forget" deletes itself down to the caret, which is frame 0 of the reel
+      out("#en-cur", 56.25);
+      tl.to("#en-cta", { scale: 0.2, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, g(56.3));
+      tl.to("#en-gf", { x: 900, opacity: 0, duration: 0.4, ease: "power3.in" }, g(56.3));
+      const w1 = document.querySelectorAll("#en-sm1 .w"), w2 = document.querySelectorAll("#en-sm2 .w");
+      [57.5, 57.69, 58.1].forEach((t, i) => slide(w1[i], t));
+      slide("#en-bs .w", 56.45, 0.5);
+      [58.21, 58.34, 58.55, 58.76].forEach((t, i) => slide(w2[i], t));
+      tl.fromTo("#en-fgw .w", { opacity: 0, y: 60, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, g(59.6));
+      Array.from(document.querySelectorAll("#en-fgw .ch")).reverse().forEach((c, i) => { const t = g(60.0) + i * 0.035; tl.to(c, { opacity: 0, duration: 0.03 }, t); tl.set(c, { display: "none" }, t + 0.033); });
+      out(["#en-bs", "#en-sm1", "#en-sm2"], 60.08);
+      tl.set("#en-fgw .icar", { opacity: 0 }, g(60.24));
+      tl.set("#en-car", { opacity: 1 }, g(60.24));
+      tl.set({}, {}, g(60.6));
+      window.__timelines["end"] = tl;
+    })();
+  </script>
+</template>

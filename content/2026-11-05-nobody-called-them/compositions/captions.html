@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<link rel="stylesheet" href="../assets/fonts.css" />
+<link rel="stylesheet" href="../assets/brand.css" />
+<script src="../assets/gsap.min.js"></script>
+<style>
+  /* captions — burned-in phrase captions at the bottom of the safe band (y 1150 – ~1315).
+     Word-level color morph from dim -> ink (light scenes) or soft-white -> white (ink pain scene),
+     timed to vo-timing.json + 0.5s audio offset (film time). CTA scene carries its own VO text,
+     so captions stop at 27.12 (end of "Follow up."). */
+  #caps-root {
+    font-family: "inter-variable", sans-serif;
+  }
+  #caps-root .cap {
+    position: absolute;
+    left: 90px;
+    top: 1150px;
+    max-width: 905px;
+    padding: 20px 30px 22px;
+    border-radius: 18px;
+    font-weight: 600;
+    font-size: 46px;
+    line-height: 1.26;
+    letter-spacing: 0.002em;
+    opacity: 0;
+    visibility: hidden;
+    background: var(--ground);
+    border: 1.5px solid var(--hair);
+    box-shadow: 0 18px 40px rgba(17, 17, 17, 0.10);
+  }
+  #caps-root .cap .w { color: #6E6E66; }
+  #caps-root .cap.dark {
+    background: var(--ink);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 18px 40px rgba(17, 17, 17, 0.30);
+  }
+  #caps-root .cap.dark .w { color: #B9B9B0; }
+</style>
+</head>
+<body>
+<div id="caps-root" data-composition-id="captions" data-start="0" data-duration="34.5" data-width="1080" data-height="1920">
+
+  <div class="cap light" id="cap-0">
+    <span class="w">Your</span> <span class="w">hottest</span> <span class="w">buyer</span> <span class="w">visited</span> <span class="w">your</span> <span class="w">listings</span>
+  </div>
+  <div class="cap light" id="cap-1">
+    <span class="w">six</span> <span class="w">times</span> <span class="w">this</span> <span class="w">week.</span>
+  </div>
+  <div class="cap dark" id="cap-2">
+    <span class="w">Nobody</span> <span class="w">called</span> <span class="w">them.</span>
+  </div>
+  <div class="cap light" id="cap-3">
+    <span class="w">FrontDesk</span> <span class="w">AI</span> <span class="w">watches</span> <span class="w">how</span> <span class="w">buyers</span>
+  </div>
+  <div class="cap light" id="cap-4">
+    <span class="w">move</span> <span class="w">through</span> <span class="w">your</span> <span class="w">website</span> <span class="w">and</span> <span class="w">campaigns,</span>
+  </div>
+  <div class="cap light" id="cap-5">
+    <span class="w">scores</span> <span class="w">their</span> <span class="w">intent</span> <span class="w">in</span> <span class="w">real</span> <span class="w">time,</span>
+  </div>
+  <div class="cap light" id="cap-6">
+    <span class="w">and</span> <span class="w">follows</span> <span class="w">up</span> <span class="w">personally</span>
+  </div>
+  <div class="cap light" id="cap-7">
+    <span class="w">the</span> <span class="w">moment</span> <span class="w">they're</span> <span class="w">ready.</span>
+  </div>
+  <div class="cap light" id="cap-8">
+    <span class="w">At</span> <span class="w">11:42</span> <span class="w">PM</span> <span class="w">it</span> <span class="w">messaged</span> <span class="w">Rahul.</span>
+  </div>
+  <div class="cap light" id="cap-9">
+    <span class="w">This</span> <span class="w">Saturday,</span> <span class="w">he</span> <span class="w">views</span> <span class="w">the</span> <span class="w">Sky</span> <span class="w">Penthouse</span> <span class="w">with</span> <span class="w">Meera.</span>
+  </div>
+  <div class="cap light" id="cap-10">
+    <span class="w">Your</span> <span class="w">agents</span> <span class="w">only</span> <span class="w">call</span> <span class="w">the</span> <span class="w">buyers</span> <span class="w">worth</span> <span class="w">calling.</span>
+  </div>
+  <div class="cap light" id="cap-11">
+    <span class="w">Track.</span> <span class="w">Rank.</span> <span class="w">Follow</span> <span class="w">up.</span>
+  </div>
+</div>
+
+<script>
+  document.fonts.ready.then(() => {
+    const tl = gsap.timeline({ paused: true });
+
+    // phrase windows + per-word film times (vo + 0.5), from vo-timing.json
+    const phrases = [
+      { id: "cap-0", start: 0.64, end: 2.83, words: [0.64, 0.87, 1.26, 1.65, 2.07, 2.26] },
+      { id: "cap-1", start: 2.83, end: 4.49, words: [2.83, 3.13, 3.5, 3.72] },
+      { id: "cap-2", start: 4.49, end: 6.03, words: [4.49, 4.92, 5.21] },
+      { id: "cap-3", start: 6.03, end: 8.21, words: [6.03, 6.68, 7.18, 7.59, 7.78] },
+      { id: "cap-4", start: 8.21, end: 10.6, words: [8.21, 8.51, 8.77, 8.93, 9.43, 9.57] },
+      { id: "cap-5", start: 10.6, end: 12.64, words: [10.6, 11.03, 11.24, 11.66, 11.8, 12.07] },
+      { id: "cap-6", start: 12.64, end: 13.94, words: [12.64, 12.85, 13.2, 13.36] },
+      { id: "cap-7", start: 13.94, end: 15.48, words: [13.94, 14.08, 14.38, 14.61] },
+      { id: "cap-8", start: 15.48, end: 18.81, words: [15.48, 15.69, 16.6, 17.11, 17.32, 17.74] },
+      { id: "cap-9", start: 18.81, end: 22.16, words: [18.81, 19.06, 19.71, 19.86, 20.19, 20.3, 20.64, 21.14, 21.33] },
+      { id: "cap-10", start: 22.16, end: 24.98, words: [22.16, 22.43, 22.84, 23.13, 23.38, 23.51, 23.93, 24.24] },
+      { id: "cap-11", start: 24.98, end: 27.12, words: [24.98, 25.58, 26.12, 26.5] },
+    ];
+
+    phrases.forEach((p) => {
+      const el = document.getElementById(p.id);
+      if (!el) return;
+      tl.set(el, { autoAlpha: 1 }, p.start);
+      tl.set(el, { autoAlpha: 0 }, p.end);
+      const words = el.querySelectorAll(".w");
+      words.forEach((w, i) => {
+        const t = p.words[i];
+        if (t === undefined) return;
+        tl.to(w, wrapColor(p), t);
+      });
+    });
+
+    function wrapColor(p) {
+      const to = p.id === "cap-2" ? "#FFFFFF" : "#111111";
+      return { color: to, duration: 0.18, ease: "none" };
+    }
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["captions"] = tl;
+  });
+</script>
+</body>
+</html>

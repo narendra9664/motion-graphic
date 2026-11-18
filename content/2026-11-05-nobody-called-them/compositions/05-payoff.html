@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<link rel="stylesheet" href="../assets/fonts.css" />
+<link rel="stylesheet" href="../assets/brand.css" />
+<script src="../assets/gsap.min.js"></script>
+<style>
+  /* 05-payoff — agents guess vs they know + mantra chips.
+     Film window: 22.16 – 27.12 (local = film - 22.16)
+     VO anchors (local): "AGENTS GUESS" beat 0.2 · "worth calling" 1.58-2.82 (THEY KNOW lands 1.7) ·
+     Track. 2.82 · Rank. 3.42 · Follow up. 3.96-4.6 */
+  #payoff-root { font-family: "inter-variable", sans-serif; color: var(--ink); }
+
+  #guess {
+    left: 90px;
+    top: 620px;
+  }
+  .guess-inner {
+    font-family: "anton", sans-serif;
+    font-size: 84px;
+    color: var(--dim);
+    letter-spacing: 0.01em;
+    position: relative;
+    display: inline-block;
+  }
+  .strike {
+    position: absolute;
+    left: -6px;
+    right: -6px;
+    top: 42%;
+    height: 10px;
+    background: var(--gold);
+    border-radius: 6px;
+  }
+
+  #know {
+    left: 90px;
+    top: 760px;
+    width: 900px;
+  }
+  .know-inner {
+    font-family: "anton", sans-serif;
+    font-size: 150px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .know-rule {
+    height: 14px;
+    width: 100%;
+    background: var(--gold);
+    border-radius: 8px;
+    margin-top: 18px;
+    box-shadow: 0 12px 30px rgba(255, 215, 0, 0.30);
+  }
+
+  #mantra {
+    left: 90px;
+    top: 1020px;
+  }
+  .chips { display: flex; gap: 20px; }
+  .chip {
+    padding: 20px 30px;
+    border-radius: 16px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: "anton", sans-serif;
+    font-size: 40px;
+    letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .chip .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--gold); }
+
+  #bg { inset: 0; }
+</style>
+</head>
+<body>
+<div id="payoff-root" data-composition-id="payoff" data-start="0" data-duration="4.96" data-width="1080" data-height="1920">
+  <div id="bg" class="clip" data-start="0" data-duration="4.96" data-track-index="0"><div style="position:absolute;inset:0;background:var(--ground);"></div></div>
+
+  <div id="guess" class="clip" data-start="0" data-duration="4.96" data-track-index="1">
+    <div class="guess-inner">AGENTS GUESS.<span class="strike" id="strike"></span></div>
+  </div>
+
+  <div id="know" class="clip" data-start="0" data-duration="4.96" data-track-index="2">
+    <div class="know-inner">THEY <span style="color: var(--blue)">KNOW</span>.</div>
+    <div class="know-rule" id="rule"></div>
+  </div>
+
+  <div id="mantra" class="clip" data-start="0" data-duration="4.96" data-track-index="3">
+    <div class="chips">
+      <span class="chip" id="c-track"><span class="dot"></span>TRACK</span>
+      <span class="chip" id="c-rank"><span class="dot"></span>RANK</span>
+      <span class="chip" id="c-follow"><span class="dot"></span>FOLLOW UP</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.fonts.ready.then(() => {
+    const tl = gsap.timeline({ paused: true });
+
+    // "Your agents only call…" (0.0) — the struck line first
+    tl.fromTo(".guess-inner", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.38, ease: "power3.out" }, 0.2);
+    tl.fromTo("#strike", { scaleX: 0, transformOrigin: "0 50%" }, { scaleX: 1, duration: 0.3, ease: "power2.inOut" }, 0.55);
+    tl.to(".guess-inner", { opacity: 0.45, duration: 0.3, ease: "power1.inOut" }, 0.9);
+
+    // "THEY KNOW." lands with "worth calling" (film 23.9 = local 1.74)
+    tl.fromTo(".know-inner", { autoAlpha: 0, y: 80, skewX: -5 }, { autoAlpha: 1, y: 0, skewX: 0, duration: 0.5, ease: "power4.out" }, 1.74);
+    tl.fromTo("#rule", { scaleX: 0, transformOrigin: "0 50%" }, { scaleX: 1, duration: 0.4, ease: "power3.inOut" }, 2.1);
+
+    // mantra chips exactly on the VO words (Track 2.82 / Rank 3.42 / Follow up 3.96)
+    [["#c-track", 2.82], ["#c-rank", 3.42], ["#c-follow", 3.96]].forEach(([sel, t]) => {
+      tl.fromTo(sel, { autoAlpha: 0, y: 40, scale: 0.9 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.36, ease: "back.out(1.7)" }, t);
+    });
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["payoff"] = tl;
+  });
+</script>
+</body>
+</html>

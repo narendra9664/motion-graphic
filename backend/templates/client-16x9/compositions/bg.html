@@ -1,0 +1,20 @@
+<template>
+  <style>
+    #bg-root { position: absolute; inset: 0; overflow: hidden; background: var(--ground); }
+    .glow { position: absolute; border-radius: 50%; filter: blur(140px); }
+  </style>
+  <div id="bg-root" data-composition-id="bg" data-width="1920" data-height="1080" data-layout-ignore>
+    <div class="glow" id="bg-a" style="left:-20%;top:10%;width:70%;height:50%;background:var(--accent);opacity:0.3"></div>
+    <div class="glow" id="bg-b" style="left:45%;top:55%;width:70%;height:50%;background:var(--accent2);opacity:0.25"></div>
+  </div>
+  <script>
+    (function () {
+      // House rule: the background never stands still. Loops return to their start so the reel can loop.
+      const D = __DUR__, tl = gsap.timeline({ paused: true });
+      tl.fromTo("#bg-a", { x: 0, y: 0 }, { x: 260, y: 220, duration: D / 4, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0);
+      tl.fromTo("#bg-b", { x: 0, y: 0 }, { x: -280, y: -240, duration: D / 6, ease: "sine.inOut", yoyo: true, repeat: 5 }, 0);
+      tl.set({}, {}, D);
+      window.__timelines["bg"] = tl;
+    })();
+  </script>
+</template>

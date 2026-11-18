@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<link rel="stylesheet" href="../assets/fonts.css" />
+<link rel="stylesheet" href="../assets/brand.css" />
+<script src="../assets/gsap.min.js"></script>
+<style>
+  /* 02-pain — ink ground, white Anton slam. Film window: 4.49 – 6.03 (local = film - 4.49) */
+  #pain-root { font-family: "inter-variable", sans-serif; color: var(--ink); }
+  #bg { inset: 0; background: var(--ink); }
+
+  #line {
+    left: 90px;
+    top: 820px;
+    width: 900px;
+  }
+  .line-inner {
+    font-family: "anton", sans-serif;
+    font-size: 150px;
+    line-height: 1.04;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+  .line-inner .quiet { color: #B9B9B0; }
+
+  #ring-badge {
+    right: 90px;
+    top: 640px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #ring-badge svg { width: 54px; height: 54px; stroke: #B9B9B0; }
+</style>
+</head>
+<body>
+<div id="pain-root" data-composition-id="pain" data-start="0" data-duration="1.54" data-width="1080" data-height="1920">
+  <div id="bg" class="clip" data-start="0" data-duration="1.54" data-track-index="0"></div>
+
+  <div id="ring-badge" class="clip" data-start="0" data-duration="1.54" data-track-index="1">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+      <path d="M6.6 3.8c.5-.5 1.3-.5 1.8 0l2 2c.5.5.5 1.3 0 1.8l-1 1c-.3.3-.3.7-.1 1a10 10 0 0 0 4.9 4.9c.4.2.8.1 1-.1l1-1c.5-.5 1.3-.5 1.8 0l2 2c.5.5.5 1.3 0 1.8l-1.2 1.2c-1 1-2.5 1.3-3.8.8-3.3-1.3-6.4-3.4-8.8-5.8-2.4-2.4-4.5-5.5-5.8-8.8-.5-1.3-.2-2.8.8-3.8z" />
+      <line x1="3" y1="21" x2="21" y2="3" />
+    </svg>
+  </div>
+
+  <h1 id="line" class="clip" data-start="0" data-duration="1.54" data-track-index="2">
+    <div class="line-inner">NOBODY <span class="quiet">CALLED</span> THEM.</div>
+  </h1>
+</div>
+
+<script>
+  document.fonts.ready.then(() => {
+    const tl = gsap.timeline({ paused: true });
+
+    // slam lands with the whoosh's end (film 5.5 → local ~1.0 is the hold; the text is already in at local 0.05)
+    tl.fromTo(".line-inner", { autoAlpha: 0, x: -60, skewX: -6 },
+      { autoAlpha: 1, x: 0, skewX: 0, duration: 0.32, ease: "power4.out" }, 0.05);
+
+    // unanswered badge: a die/beat after the words land (tween the icon, not the clip root)
+    tl.fromTo("#ring-badge svg", { autoAlpha: 0, scale: 0.7, transformOrigin: "50% 50%" }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: "back.out(1.8)" }, 0.35);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["pain"] = tl;
+  });
+</script>
+</body>
+</html>

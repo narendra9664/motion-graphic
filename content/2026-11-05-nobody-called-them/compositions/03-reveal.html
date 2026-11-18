@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<link rel="stylesheet" href="../assets/fonts.css" />
+<link rel="stylesheet" href="../assets/brand.css" />
+<script src="../assets/gsap.min.js"></script>
+<style>
+  /* 03-reveal — watch path -> ranked queue -> follow ping. Film window: 6.03 – 15.68 (local = film - 6.03)
+     VO anchors (local): "FrontDesk AI" 0-1.15 · watched path 1.56-3.4 · campaigns 4.07 ·
+     "scores their intent in real time" 4.57-6.11 · "follows up personally" 6.61-7.94
+     Both cards clear the caption belt (1150-1315): watch 320-690, queue 720-1104;
+     the follow ping is a floating badge on the queue card's corner. */
+  #reveal-root { font-family: "inter-variable", sans-serif; color: var(--ink); }
+
+  #ovl { left: 90px; top: 250px; }
+
+  /* WATCH panel (clip wrapper only paints nothing; the card box is a child so GSAP can own its transform) */
+  #watch {
+    left: 90px;
+    top: 320px;
+    width: 900px;
+    height: 370px;
+  }
+  .watch-box { width: 100%; height: 100%; }
+  .watch-head { padding: 28px 36px 0; display: flex; align-items: center; gap: 14px; }
+  .watch-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(17,17,17,0.15); }
+  .watch-title { font-weight: 600; font-size: 28px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--dim); }
+  .path {
+    position: relative;
+    margin: 38px 36px 0;
+    height: 96px;
+  }
+  .stop {
+    position: absolute;
+    top: 4px;
+    width: 112px;
+    height: 88px;
+    border-radius: 18px;
+    border: 1.5px solid var(--hair);
+    background: var(--ground-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--dim);
+    z-index: 2;
+  }
+  .trace {
+    position: absolute;
+    top: 96px;
+    left: 96px;
+    width: 470px;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--blue), rgba(0,128,255,0.15));
+    z-index: 1;
+  }
+  .watch-foot { margin: 28px 36px 0; font-weight: 600; font-size: 28px; color: var(--ink); }
+  .watch-foot b { font-weight: 700; }
+
+  /* QUEUE panel */
+  #queue {
+    left: 90px;
+    top: 720px;
+    width: 900px;
+    height: 384px;
+  }
+  .q-head { padding: 26px 36px 6px; font-weight: 600; font-size: 28px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--dim); }
+  .rows { position: relative; height: 296px; margin: 4px 34px 0; }
+  .row {
+    position: absolute;
+    left: 0;
+    width: 808px;
+    height: 92px;
+    background: var(--paper);
+    border: 1.5px solid var(--hair);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 18px;
+  }
+  .rk {
+    width: 48px;
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+  }
+  .who { font-weight: 700; font-size: 30px; }
+  .what { font-weight: 500; font-size: 28px; color: var(--dim); margin-left: 6px; }
+  .score {
+    margin-left: auto;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 28px;
+    color: #fff;
+    background: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .score.gold { background: var(--ink); color: var(--gold); }
+  .row.hot { border-color: rgba(255,215,0,0); }
+
+  /* FOLLOW ping badge — floats over the queue card corner, icon only (caption carries the words) */
+  #ping-badge {
+    right: 56px;
+    top: 676px;
+    width: 88px;
+    height: 88px;
+  }
+  .fwa {
+    position: relative;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 16px 36px rgba(37, 211, 102, 0.35);
+  }
+  .fwa svg { width: 44px; height: 44px; fill: #fff; }
+  .ping {
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 3px solid var(--teal);
+    opacity: 0;
+  }
+
+  #bg { inset: 0; }
+</style>
+</head>
+<body>
+<div id="reveal-root" data-composition-id="reveal" data-start="0" data-duration="9.65" data-width="1080" data-height="1920">
+  <div id="bg" class="clip" data-start="0" data-duration="9.65" data-track-index="0"><div style="position:absolute;inset:0;background:var(--ground);"></div><div style="position:absolute;inset:0;background:radial-gradient(700px 700px at 50% 26%, rgba(0,128,255,0.06), transparent 70%);"></div></div>
+
+  <div id="ovl" class="clip" data-start="0" data-duration="9.65" data-track-index="1">
+    <div class="overline ovl-inner">FRONTDESK AI</div>
+  </div>
+
+  <!-- WATCH: honest behaviour card -->
+  <div id="watch" class="clip" data-start="0" data-duration="9.65" data-track-index="2">
+    <div class="watch-box card">
+      <div class="watch-head"><span class="watch-dot"></span><span class="watch-title">Watches every move &middot; Veloria Residences</span></div>
+      <div class="path">
+        <div class="stop" style="left:0;">VISIT</div>
+        <div class="stop" style="left:140px;">PLANS</div>
+        <div class="stop" style="left:280px;">PRICE</div>
+        <div class="stop" style="left:420px;">CALL?</div>
+        <div class="trace"></div>
+      </div>
+      <div class="watch-foot"><b>Website &middot; paid social &middot; email &middot; WhatsApp</b></div>
+    </div>
+  </div>
+
+  <!-- QUEUE: real ranked names from the brand demo -->
+  <div id="queue" class="clip card" data-start="0" data-duration="9.65" data-track-index="3">
+    <div class="q-head">Ranked by intent &middot; real time</div>
+    <div class="rows">
+      <div class="row hot" id="row-0" style="top:0;">
+        <span class="rk">1</span><span class="who">Rahul Mehta</span><span class="what">Sky Penthouse A-4</span>
+        <span class="score gold" id="sc-0">94</span>
+      </div>
+      <div class="row" id="row-1" style="top:104px;">
+        <span class="rk">2</span><span class="who">Ananya Rao</span><span class="what">price list x3</span>
+        <span class="score" id="sc-1">88</span>
+      </div>
+      <div class="row" id="row-2" style="top:208px;">
+        <span class="rk">3</span><span class="who">Daniel Fernandes</span><span class="what">campaign click</span>
+        <span class="score" id="sc-2">81</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOLLOW ping badge (icon only, floats over queue corner) -->
+  <div id="ping-badge" class="clip" data-start="0" data-duration="9.65" data-track-index="4">
+    <span class="fwa" id="fwa">
+      <span class="ping" id="ping"></span>
+      <svg viewBox="0 0 24 24"><path d="M12 2a7.7 7.7 0 0 0-6.6 11.5L4 22l5.1-1.3A7.7 7.7 0 1 0 12 2zm3.4 10.6l-1.3.9c-1-.5-2.6-2-3.2-3.2l.9-1.3a.7.7 0 0 0-.1-.9l-1-1a.7.7 0 0 0-1 .05L9.4 8.4a1 1 0 0 0-.1 1.1 12 12 0 0 0 5 5 1 1 0 0 0 1.2-.1l1.4-1.2a.7.7 0 0 0 .05-1l-1-1a.7.7 0 0 0-.55-.05z"/></svg>
+    </span>
+  </div>
+</div>
+
+<script>
+  document.fonts.ready.then(() => {
+    const tl = gsap.timeline({ paused: true });
+
+    tl.fromTo("#ovl .ovl-inner", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.35);
+
+    // WATCH panel in with "FrontDesk AI watches…" (0.0-1.15)
+    tl.fromTo("#watch .watch-box", { autoAlpha: 0, y: 70, scale: 0.97 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: "power4.out" }, 0.15);
+
+    // "how buyers move through your website" = the path lights 1.21 → 3.02
+    tl.fromTo(".trace", { scaleX: 0, transformOrigin: "0 50%" }, { scaleX: 1, duration: 1.1, ease: "power1.inOut" }, 1.56);
+    const stops = document.querySelectorAll(".stop");
+    [1.6, 1.95, 2.3, 2.68].forEach((t, i) => {
+      tl.fromTo(stops[i], { scale: 0.9 }, { scale: 1, duration: 0.26, ease: "back.out(2)" }, t);
+    });
+    // campaigns pulse (VO "campaigns" 4.07 = local 4.07)
+    tl.fromTo(".watch-dot", { scale: 0.6 }, { scale: 1.35, duration: 0.28, ease: "power2.out", yoyo: true, repeat: 1 }, 4.07);
+
+    // QUEUE name rows enter while VO continues (3.5-4.3)
+    tl.fromTo("#row-2", { autoAlpha: 0, y: 34 }, { autoAlpha: 1, y: 0, duration: 0.42, ease: "power3.out" }, 3.5);
+    tl.fromTo("#row-1", { autoAlpha: 0, y: 34 }, { autoAlpha: 1, y: 0, duration: 0.42, ease: "power3.out" }, 3.72);
+    tl.fromTo("#row-0", { autoAlpha: 0, y: 34 }, { autoAlpha: 1, y: 0, duration: 0.42, ease: "power3.out" }, 3.94);
+
+    // "scores their intent in real time" (4.57) — the queue SETTLES: gold ring locks on 94 (pop sfx at film 10.62 = local 4.59)
+    tl.fromTo("#sc-0", { scale: 0.55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.42, ease: "back.out(2.2)" }, 4.59);
+    tl.fromTo("#sc-1", { scale: 0.55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.36, ease: "back.out(2.0)" }, 4.74);
+    tl.fromTo("#sc-2", { scale: 0.55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.36, ease: "back.out(2.0)" }, 4.88);
+    tl.fromTo(".row.hot", { borderColor: "rgba(255,215,0,0)" }, { borderColor: "rgba(255,215,0,0.75)", duration: 0.3, ease: "power1.out" }, 4.8);
+
+    // ping badge appears quietly with the queue, then rings on "follows up personally" (film 12.64 = local 6.61)
+    tl.fromTo("#fwa", { autoAlpha: 0, scale: 0.7 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: "back.out(1.7)" }, 3.4);
+    tl.fromTo("#ping", { autoAlpha: 0.9, scale: 0.7 }, { autoAlpha: 0, scale: 1.6, duration: 0.7, ease: "power2.out" }, 6.61);
+    tl.to("#ping", { autoAlpha: 0.9, scale: 0.7, duration: 0.01 }, 7.35);
+    tl.to("#ping", { autoAlpha: 0, scale: 1.6, duration: 0.7, ease: "power2.out" }, 7.45);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["reveal"] = tl;
+  });
+</script>
+</body>
+</html>

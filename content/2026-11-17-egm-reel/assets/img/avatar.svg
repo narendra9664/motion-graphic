@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 736 714" width="736" height="714">
+  <!-- rebuilt from the user's profile picture: three rounded gradient bars forming a triangle -->
+  <defs>
+    <linearGradient id="gL" gradientUnits="userSpaceOnUse" x1="372" y1="195" x2="212" y2="470"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="gB" gradientUnits="userSpaceOnUse" x1="212" y1="462" x2="520" y2="462"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="gR" gradientUnits="userSpaceOnUse" x1="520" y1="462" x2="372" y2="205"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="736" height="714" fill="#000"/>
+  <g stroke-linecap="round" stroke-width="160" fill="none">
+    <line x1="520" y1="462" x2="372" y2="205" stroke="url(#gR)"/>
+    <line x1="212" y1="462" x2="520" y2="462" stroke="url(#gB)"/>
+    <line x1="372" y1="205" x2="212" y2="470" stroke="url(#gL)"/>
+  </g>
+</svg>

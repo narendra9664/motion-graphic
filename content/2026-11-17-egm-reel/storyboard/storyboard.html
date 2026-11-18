@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>EGM reel storyboard</title>
+<style>
+  * { box-sizing: border-box; } html, body { margin: 0; background: #0B0B10; color: #f2f2f4; font-family: Figtree, Inter, "Segoe UI", system-ui, sans-serif; }
+  .board { width: 1920px; padding: 40px 34px; }
+  h1 { margin: 0 0 6px; font-size: 42px; font-weight: 700; letter-spacing: -1.2px; } h1 span { color: #8a8a94; font-weight: 400; }
+  .sub { font-size: 18px; color: #b9b9c1; margin-bottom: 28px; max-width: 1840px; line-height: 1.45; }
+  .grid { display: grid; grid-template-columns: repeat(5, 352px); gap: 34px 22px; }
+  .frame { position: relative; width: 352px; height: 626px; border-radius: 14px; overflow: hidden; color: #fff;
+    background: radial-gradient(70% 45% at 18% 30%, rgba(27,110,243,.22), transparent 70%), radial-gradient(70% 45% at 85% 75%, rgba(232,110,0,.18), transparent 70%), #0f1013; }
+  .num { position: absolute; left: 12px; top: 10px; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: #111; font-weight: 700; font-size: 22px; display: flex; align-items: center; justify-content: center; z-index: 5; }
+  .hair { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(255,0,60,0.22); z-index: 4; }
+  .hair2 { position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(255,0,60,0.22); z-index: 4; }
+  .safe { position: absolute; left: 0; right: 0; top: 56px; height: 387px; border-top: 1px dashed rgba(255,255,255,.14); border-bottom: 1px dashed rgba(255,255,255,.14); }
+  .t { font-size: 13px; color: #7d7d87; margin-top: 10px; } .b { font-size: 19px; font-weight: 700; margin: 2px 0 4px; }
+  .vo { margin-top: 6px; font-size: 14.5px; color: #8BA5FD; } .d { font-size: 14.5px; color: #b9b9c1; line-height: 1.45; }
+  .mv { margin-top: 7px; font-size: 13.5px; color: #F5D04E; line-height: 1.4; } .tr { margin-top: 7px; font-size: 13.5px; color: #1FE39A; line-height: 1.4; }
+  .abs { position: absolute; } .c { left: 50%; transform: translateX(-50%); }
+  .hd { font-weight: 800; letter-spacing: -0.04em; text-align: center; white-space: nowrap; line-height: 1.02; }
+  .lt { font-weight: 500; color: #9aa0ab; }
+  .bl { color: #4d8dff; } .or { color: #ff8a1f; }
+  .paper { position: absolute; background: #fff; color: #1a1b1f; border-radius: 10px; box-shadow: 0 18px 40px rgba(0,0,0,.45); padding: 12px 14px; font-size: 10.5px; line-height: 1.5; }
+  .ln { height: 6px; border-radius: 3px; background: #e6e7ea; margin: 7px 0; }
+  .bub { position: absolute; background: #fff; color: #111; border-radius: 12px; padding: 5px 9px; font-size: 10px; font-weight: 700; white-space: nowrap; box-shadow: 0 8px 18px rgba(0,0,0,.35); }
+  .chat { position: absolute; background: #1b1d23; border: 1px solid #2a2d35; border-radius: 12px; padding: 8px 10px; font-size: 10px; color: #cfd3dc; }
+  .gap { background: rgba(255,138,31,.25); border-bottom: 2px solid #ff8a1f; border-radius: 3px; padding: 0 2px; }
+  .pill { position: absolute; height: 26px; padding: 0 11px; border-radius: 999px; background: #fff; color: #111; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .cur { position: absolute; width: 18px; } .cur svg { width: 18px; }
+  .blur { filter: blur(3px); opacity: .5; }
+</style></head><body>
+<div class="board">
+  <h1>Elephant-Goldfish reel <span>· ~60 s · 9:16 · storyboard · Liam · new look</span></h1>
+  <div class="sub">Look: EGM's own colours. Deep navy ground with a soft blue glow (elephant side) and orange glow (goldfish side), white paper cards, rounded geometric sans (Figtree). Two recurring characters: <b>the elephant</b> (remembers everything, writes the plan) and <b>the goldfish</b> (remembers nothing, reads only the page); both react on every beat (blink, tilt, bounce). Official EGM marks only on the brand card. Same house rules: one forward camera, each shot's key object becomes the next shot, action dead centre (red crosshair), soft background, words slide in. Dashed lines = Reels text-safe band. Blue = voiceover, yellow = what moves, green = how it becomes the next shot.</div>
+  <div class="grid" id="g"></div>
+</div>
+<script>
+const CUR = (x,y) => `<div class="cur" style="left:${x}px;top:${y}px"><svg viewBox="0 0 22 26"><path d="M2 2 L2 21 L7 16.5 L10.5 24 L14 22.5 L10.6 15.2 L17 15 Z" fill="#fff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/></svg></div>`;
+const S = [
+ ['0.0 – 4.5 s', `
+   <img class="abs" src="elephant.png" style="left:-10px;top:150px;width:190px">
+   <img class="abs" src="goldfish.png" style="left:190px;top:200px;width:170px;transform:scaleX(1)">
+   <div class="abs c hd lt" style="top:330px;font-size:15px">its superpower:</div>
+   <div class="abs c hd or" style="top:350px;font-size:42px">forgetting.</div>`,
+   'The hook', '“Google just open-sourced an AI reviewer whose superpower is… forgetting.”',
+   'Elephant (left, holding its paper) and goldfish (right) face each other in the centre. “its superpower:” slides in, then “forgetting.” lands in orange on the pause.',
+   'Goldfish swims in from the right on “AI reviewer”; on “forgetting” it blinks and its eyes go blank-happy (a little bob). Elephant raises an eyebrow (tilt).',
+   'The elephant\'s paper flies to the centre and becomes a chat window.'],
+ ['4.5 – 8.0 s', `
+   <div class="chat" style="left:46px;top:150px;width:260px;height:200px">
+     <div style="background:#2a2d35;border-radius:8px;padding:5px 7px;margin-left:60px;margin-bottom:6px">help me plan the study space</div>
+     <div style="color:#9aa0ab">Sure! Here's the plan:</div>
+     <div class="paper" style="position:relative;margin-top:6px;padding:8px"><div class="ln"></div><div class="ln" style="width:70%"></div><div class="ln" style="width:85%"></div></div>
+   </div>
+   <div class="abs" style="left:220px;top:300px;width:76px;height:76px;border-radius:50%;background:#1fbf75;color:#fff;font-size:44px;font-weight:800;display:flex;align-items:center;justify-content:center;transform:rotate(-12deg)">✓</div>
+   <div class="abs c hd" style="top:385px;font-size:20px">the worst one <span class="or">to check it.</span></div>`,
+   'The problem', '“Because the AI that helped you write a plan is the worst one to check it.”',
+   'A chat: you ask, the AI writes a plan into a paper card. Then the same AI stamps its own plan with a big green ✓.',
+   'Stamp lands on “check it” with a squash.',
+   'The ✓ cracks down the middle.'],
+ ['8.0 – 12.0 s', `
+   <div class="paper" style="left:66px;top:150px;width:220px;height:200px"><div class="ln"></div><div class="ln" style="width:70%"></div>
+     <div style="color:#bbb;font-style:italic;font-size:9px;margin:4px 0">(who? which hours?)</div><div class="ln" style="width:85%"></div>
+     <div style="color:#bbb;font-style:italic;font-size:9px;margin:4px 0">(what rule?)</div><div class="ln" style="width:60%"></div></div>
+   <div class="abs" style="left:236px;top:120px;width:60px;height:60px;border-radius:50%;background:#1fbf75;opacity:.5;color:#fff;font-size:36px;display:flex;align-items:center;justify-content:center">✓</div>
+   <div class="abs c hd" style="top:375px;font-size:16px">knows what you <span class="bl">meant</span>…</div>
+   <div class="abs c hd" style="top:398px;font-size:16px">misses what you <span class="or">didn't write.</span></div>`,
+   'The blind spot', '“It already knows what you meant… so it never notices what you didn\'t write.”',
+   'The cracked ✓ drifts back out of focus. Ghost text (the things you meant but never wrote) floats faintly between the plan\'s lines.',
+   'Ghost words fade in on “meant”, then flicker out on “didn\'t write”.',
+   'The plan card flips over; its back is the EGM brand card.'],
+ ['12.0 – 16.9 s', `
+   <img class="abs c" src="egm-mark.png" style="top:150px;width:150px">
+   <div class="abs c hd" style="top:265px;font-size:24px">Elephant-Goldfish<br>Model</div>
+   <div class="pill" style="left:106px;top:345px"><img src="github-white.png" style="width:14px;filter:invert(1)"> ★ 20.5k</div>
+   <div class="abs c" style="top:385px;font-size:10px;color:#9aa0ab;white-space:nowrap">in under a month · not an officially supported Google product</div>`,
+   'The name', '“That\'s the idea behind the Elephant-Goldfish Model. Over twenty thousand stars in under a month.”',
+   'Brand card: the official blue elephant + orange goldfish marks slide together into one mark; title; GitHub star counter runs to 20.5k. Small honest note under it.',
+   'The two halves of the mark slide in from either side and click together on “Model”; counter ticks.',
+   'The blue half grows and turns into the elephant character.'],
+ ['16.9 – 22.8 s', `
+   <img class="abs" src="elephant.png" style="left:86px;top:170px;width:180px">
+   <div class="pill" style="left:20px;top:160px;background:#1b6ef3;color:#fff">your project</div>
+   <div class="pill" style="left:230px;top:200px;background:#1b6ef3;color:#fff">your goals</div>
+   <div class="pill" style="left:30px;top:300px;background:#1b6ef3;color:#fff">every decision</div>
+   <div class="abs c hd" style="top:395px;font-size:20px">The elephant <span class="bl">remembers everything.</span></div>`,
+   'The elephant', '“The elephant remembers everything: your project, your goals, every decision. It drafts the plan with you.”',
+   'The elephant stands centre. Three blue memory cards fly in on each word and orbit it; on “drafts the plan” it starts writing on its paper.',
+   'Cards orbit slowly; elephant nods at each one (small bounce); pencil wiggles while writing.',
+   'The paper lifts out of the elephant\'s hands and drops toward a fishbowl.'],
+ ['22.8 – 24.2 s', `
+   <div class="abs" style="left:76px;top:180px;width:200px;height:200px;border-radius:50%;border:3px solid rgba(255,255,255,.35);background:radial-gradient(circle at 50% 70%,rgba(77,141,255,.25),transparent 70%)"></div>
+   <div class="paper" style="left:136px;top:150px;width:80px;height:90px;transform:rotate(8deg)"><div class="ln"></div><div class="ln"></div></div>
+   <div class="abs c hd" style="top:395px;font-size:24px">Then the <span class="or">goldfish</span> read it.</div>`,
+   'Hand-off', '“Then the goldfish read it.”',
+   'The paper drops into a glass bowl (outline only, no water splash).',
+   'Quick whoosh as the paper falls; the elephant stays behind, out of focus.',
+   'The bowl becomes the stage for three goldfish.'],
+ ['24.2 – 28.9 s', `
+   <img class="abs" src="goldfish.png" style="left:40px;top:180px;width:110px">
+   <img class="abs" src="goldfish.png" style="left:200px;top:160px;width:120px">
+   <img class="abs" src="goldfish.png" style="left:130px;top:280px;width:100px">
+   <div class="chat blur" style="left:30px;top:90px;width:120px;height:60px">chat history…</div>
+   <div class="abs c hd" style="top:395px;font-size:18px">zero memory. <span class="or">Just the page.</span></div>`,
+   'The goldfish', '“Fresh reviewers with zero memory of your conversation. All they get is the page.”',
+   'Three goldfish swim in. The old chat history behind them blurs and dissolves into bubbles (it never reaches them).',
+   'Fish wiggle their tails and blink; bubbles rise on “zero memory”.',
+   'The fish part; a single white page slides up into the centre.'],
+ ['28.9 – 33.1 s', `
+   <div class="paper" style="left:56px;top:170px;width:240px;height:170px;font-size:13px">
+     <div style="font-weight:800;font-size:14px;margin-bottom:8px">Study space plan</div>
+     Volunteers staff the desk.<br>We keep the Friday rule.</div>
+   <div class="abs c hd lt" style="top:380px;font-size:16px">looks fine, right?</div>`,
+   'The example', '“Picture a plan that says: “Volunteers staff the desk. We keep the Friday rule.” You\'d nod.”',
+   'One clean page, two short lines typed in as they are read. Looks complete.',
+   'Your cursor nods the page (tiny bob) on “You\'d nod”.',
+   'Goldfish swim up to the page edges.'],
+ ['33.1 – 38.6 s', `
+   <div class="paper" style="left:56px;top:190px;width:240px;height:130px;font-size:13px">
+     <div style="font-weight:800;font-size:14px;margin-bottom:8px">Study space plan</div>
+     <span class="gap">Volunteers</span> staff the desk.<br>We keep the <span class="gap">Friday rule</span>.</div>
+   <img class="abs" src="goldfish.png" style="left:0px;top:310px;width:80px">
+   <img class="abs" src="goldfish.png" style="left:270px;top:150px;width:80px">
+   <div class="bub" style="left:20px;top:150px">which volunteers?</div>
+   <div class="bub" style="left:120px;top:340px">what hours?</div>
+   <div class="bub" style="left:220px;top:110px">what Friday rule?</div>`,
+   'The gaps', '“A goldfish asks: which volunteers? What hours? What Friday rule?”',
+   'Each question pops out of a goldfish\'s mouth as a bubble, and the matching gap on the page lights up orange.',
+   'Pop per question; each fish does a little hop as it asks.',
+   'The camera pulls back to show the elephant, embarrassed.'],
+ ['38.6 – 41.5 s', `
+   <img class="abs" src="elephant.png" style="left:96px;top:170px;width:160px">
+   <div class="pill" style="left:40px;top:300px;background:#1b6ef3;color:#fff;transform:rotate(-8deg)">“the usual hours”</div>
+   <div class="pill" style="left:200px;top:260px;background:#1b6ef3;color:#fff;transform:rotate(6deg)">“the Friday rule”</div>
+   <div class="abs c hd" style="top:395px;font-size:16px">filled in <span class="bl">from memory.</span></div>`,
+   'Busted', '“Every gap the elephant was quietly filling in from memory.”',
+   'The elephant\'s memory cards slide out from behind the page: they were covering exactly those holes. Elephant blushes (pink cheeks), shrugs.',
+   'Cards slide out; elephant shrinks a little, ears droop, then a sheepish smile.',
+   'The orange gaps line up into a findings checklist.'],
+ ['41.5 – 47.7 s', `
+   <div class="paper" style="left:56px;top:160px;width:240px;height:200px;font-size:12px">
+     <div style="font-weight:800;margin-bottom:8px">Findings</div>
+     ☑ Who staffs the desk?<br>☑ Opening hours missing<br>☐ Friday rule undefined<br>
+     <div style="margin-top:14px;background:#1b6ef3;color:#fff;border-radius:8px;text-align:center;padding:6px;font-weight:800">Approve design</div></div>
+   ${CUR(220,320)}
+   <div class="abs c hd" style="top:395px;font-size:18px">You stay <span class="bl">in charge.</span></div>`,
+   'You decide', '“And you stay in charge: you pick which findings matter, and you approve the design before your agent writes a line of code.”',
+   'Findings list. Your cursor ticks the ones that matter, then clicks Approve. A small “code” bar stays locked until the click.',
+   'Click per tick; the Approve button presses on “approve”.',
+   'The approved page folds into a plugin chip.'],
+ ['47.7 – 54.2 s', `
+   <img class="abs" src="claude.png" style="left:34px;top:200px;width:60px">
+   <img class="abs" src="openai-chatgpt-white.png" style="left:112px;top:200px;width:60px">
+   <img class="abs" src="openai-chatgpt-white.png" style="left:190px;top:200px;width:60px;opacity:.7">
+   <img class="abs" src="antigravity.png" style="left:262px;top:200px;width:60px">
+   <div class="abs" style="left:30px;top:268px;width:300px;display:flex;justify-content:space-between;font-size:9px;color:#9aa0ab"><span>Claude Code</span><span>Codex</span><span>ChatGPT</span><span>Antigravity</span></div>
+   <div class="pill" style="left:96px;top:320px">Free · open source · Apache 2.0</div>`,
+   'Where it runs', '“It runs as a plugin in Claude Code, Codex, ChatGPT and Antigravity. Free and open source.”',
+   'The plugin chip snaps into each app logo as it is named (real logos from the library and Antigravity\'s press kit). Then a licence pill.',
+   'A click as each logo lights up.',
+   'The logos condense into your profile picture.'],
+ ['54.2 – 56.4 s', `
+   <img class="abs c" src="avatar.png" style="top:170px;width:110px;height:110px;border-radius:50%;object-fit:cover">
+   <div class="abs c hd" style="top:296px;font-size:22px">@autonomous.buddy</div>
+   <div class="abs c" style="top:332px;width:110px;height:32px;border-radius:999px;background:#1b6ef3;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center">Follow</div>
+   ${CUR(210,350)}
+   <div class="abs c" style="top:378px;font-size:11px;color:#9aa0ab;white-space:nowrap">one repo like this every week</div>`,
+   'CTA', '“Follow for one repo like this every week.”',
+   'Your real profile mark (the gradient triangle) in a circle, handle, Follow button; your cursor clicks it.',
+   'Click + confirm; the goldfish peeks in from the edge.',
+   'Camera pulls back to the elephant and goldfish.'],
+ ['56.4 – 60.4 s', `
+   <img class="abs" src="elephant.png" style="left:-10px;top:150px;width:190px">
+   <img class="abs" src="goldfish.png" style="left:190px;top:200px;width:170px">
+   <div class="abs c hd lt" style="top:330px;font-size:14px">the smartest thing an AI can do…</div>
+   <div class="abs c hd or" style="top:352px;font-size:40px">forget.</div>`,
+   'Loop', '“Because sometimes the smartest thing an AI can do… is forget.”',
+   'Back to the opening framing: elephant and goldfish face to face; the goldfish blinks and forgets (cute blank look).',
+   'Riser into the cut; the last frame matches the first frame.',
+   'Loops into shot 1 (“Google just open-sourced…”).'],
+];
+const g = document.getElementById('g');
+S.forEach((s,i)=>{ const [t,html,b,vo,d,mv,tr]=s;
+  g.insertAdjacentHTML('beforeend', `<div><div class="frame"><div class="safe"></div>${html}<div class="hair"></div><div class="hair2"></div><div class="num">${i+1}</div></div>
+  <div class="t">${t}</div><div class="b">${b}</div><div class="vo">${vo}</div><div class="d">${d}</div><div class="mv">▸ ${mv}</div><div class="tr">↳ ${tr}</div></div>`); });
+</script></body></html>

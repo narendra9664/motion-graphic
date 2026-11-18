@@ -1,0 +1,70 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #fo-stage { position: absolute; left: 290px; top: 150px; width: 820px; height: 780px; perspective: 1800px; }
+    #fo-card { position: absolute; inset: 0; border-radius: 40px; padding: 36px 40px; transform-style: preserve-3d; }
+    .fo-top { display: flex; align-items: center; gap: 20px; padding-bottom: 26px; border-bottom: 2px solid rgba(14,34,68,0.08); }
+    .fo-av { width: 72px; height: 72px; border-radius: 50%; background: var(--wa); display: flex; align-items: center; justify-content: center; }
+    .fo-av svg { width: 40px; height: 40px; fill: #fff; }
+    .fo-name { font-size: 34px; font-weight: 700; }
+    .fo-st { font-size: 28px; font-weight: 500; color: #128c4a; }
+    #fo-msgs { position: relative; height: 560px; }
+    .fo-b { position: absolute; max-width: 600px; padding: 22px 28px; border-radius: 28px; font-size: 32px; font-weight: 500; line-height: 1.32; color: #0b2b14; }
+    #fo-out { right: 0; top: 40px; width: 600px; min-height: 180px; background: var(--wa-bubble); border-bottom-right-radius: 8px; }
+    #fo-meta { display: block; margin-top: 10px; text-align: right; font-size: 28px; font-weight: 600; color: #4f8a64; }
+    #fo-in { left: 0; top: 330px; background: #fff; border-bottom-left-radius: 8px; box-shadow: 0 8px 20px rgba(14,34,68,0.08); }
+    #fo-in small { display: block; font-size: 28px; color: var(--dim); margin-bottom: 4px; font-weight: 600; }
+    #fo-tile { position: absolute; left: 1210px; top: 330px; width: 560px; height: 380px; border-radius: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .fo-check { width: 110px; height: 110px; border-radius: 50%; background: var(--wa); display: flex; align-items: center; justify-content: center; box-shadow: 0 16px 34px rgba(37,211,102,0.35); }
+    .fo-tt { margin-top: 28px; font-size: 52px; font-weight: 800; letter-spacing: -0.03em; }
+    .fo-ts { margin-top: 8px; font-size: 32px; font-weight: 600; color: var(--dim); }
+  </style>
+  <div id="root" data-composition-id="follow" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <div id="fo-stage">
+      <div id="fo-card" class="glass">
+        <div class="fo-top">
+          <div class="fo-av"><svg viewBox="0 0 24 24"><path d="M12 2a9.8 9.8 0 0 0-8.4 14.9L2.3 21.7l4.9-1.3A9.8 9.8 0 1 0 12 2zm4.3 13.5c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a14 14 0 0 1-6.1-5.4c-.5-.7-.9-1.6-.9-2.5 0-.9.5-1.4.7-1.6.2-.2.4-.3.6-.3h.4c.2 0 .4 0 .5.4l.8 1.8c0 .1.1.3 0 .5l-.3.5-.4.4c-.1.1-.2.3-.1.5.5.8 1 1.4 1.7 2 .6.5 1.3.9 2 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.7.8c.2.1.4.2.4.3.1.1.1.6-.1 1.3z"/></svg></div>
+          <div><div class="fo-name">frontdesk AI &rarr; Rahul Mehta</div><div class="fo-st">WhatsApp &middot; sent automatically</div></div>
+        </div>
+        <div id="fo-msgs">
+          <div class="fo-b" id="fo-out"><span id="fo-type"></span><span id="fo-meta">11:42 PM &#10003;&#10003;</span></div>
+          <div class="fo-b" id="fo-in"><small>Rahul</small>Yes, hold it for me.</div>
+        </div>
+      </div>
+    </div>
+    <div id="fo-tile" class="glass">
+      <div class="fo-check"><svg width="60" height="60" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="fo-tt">Viewing booked</div>
+      <div class="fo-ts">Sat 11:00 AM &middot; with Meera</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#fo-card", { rotationY: 30, rotationX: 8, z: -300, opacity: 0, filter: "blur(12px)" },
+        { rotationY: 9, rotationX: 3, z: 0, opacity: 1, filter: "blur(0px)", duration: 0.85, ease: "expo.out" }, 0.0);
+      tl.set(["#fo-meta", "#fo-in"], { opacity: 0 }, 0);
+      tl.fromTo("#fo-out", { opacity: 0, scale: 0.9, transformOrigin: "100% 100%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "power3.out" }, 0.35);
+
+      // the follow-up writes itself
+      const msg = "Hi Rahul, Sky Penthouse A-4 is live tonight. Should I hold Saturday 11:00 AM for you?";
+      const el = document.querySelector("#fo-type");
+      const o = { n: 0 };
+      tl.to(o, { n: msg.length, duration: 1.05, ease: "none", onUpdate: () => { el.textContent = msg.slice(0, Math.round(o.n)); } }, 0.45);
+      tl.fromTo("#fo-meta", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 1.55);
+
+      // he answers
+      tl.fromTo("#fo-in", { opacity: 0, scale: 0.85, y: 20, transformOrigin: "0% 100%" }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.6)" }, 1.9);
+
+      // the result: booked
+      tl.fromTo("#fo-tile", { opacity: 0, scale: 0.6, x: -120, filter: "blur(12px)" }, { opacity: 1, scale: 1, x: 0, filter: "blur(0px)", duration: 0.55, ease: "back.out(1.3)" }, 2.45);
+      tl.fromTo(".fo-check", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2)" }, 2.6);
+
+      // hand off: the chat recedes, the tile glides to centre and dissolves into the line
+      tl.to("#fo-card", { rotationY: 30, z: -400, opacity: 0, filter: "blur(12px)", duration: 0.4, ease: "power3.in" }, 3.9);
+      tl.to("#fo-tile", { x: -400, scale: 0.75, opacity: 0, filter: "blur(10px)", duration: 0.42, ease: "power3.in" }, 3.93);
+      tl.set({}, {}, 4.35);
+      window.__timelines["follow"] = tl;
+    })();
+  </script>
+</template>

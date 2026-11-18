@@ -1,0 +1,117 @@
+<template>
+  <style>
+    #cl-root { position: absolute; inset: 0; }
+    #cl-field { position: absolute; inset: 0; }
+    #cl-mit { position: absolute; left: 395px; top: 545px; width: 290px; justify-content: center; opacity: 0; }
+    #cl-beta { position: absolute; left: 600px; top: 545px; width: 160px; justify-content: center; background: var(--blue); color: #fff; opacity: 0; }
+    #cl-avs { position: absolute; left: 107px; top: 690px; width: 866px; }
+    .av { position: absolute; width: 110px; height: 110px; border-radius: 50%; border: 6px solid #fff; box-shadow: 0 14px 26px rgba(60,45,15,0.16); opacity: 0; }
+    #cl-n { top: 950px; font-size: 190px; }
+    #cl-ppl { top: 1160px; font-size: 54px; }
+    #cl-cta { position: absolute; inset: 0; transform-origin: 540px 880px; }
+    #cl-prof { position: absolute; left: 430px; top: 560px; width: 220px; height: 220px; border-radius: 50%; background: #121212; color: #fff; font-size: 84px; font-weight: 800; letter-spacing: -0.04em;
+      display: flex; align-items: center; justify-content: center; opacity: 0; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+    #cl-handle { top: 830px; font-size: 80px; }
+    #cl-follow { position: absolute; left: 380px; top: 960px; width: 320px; height: 104px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 42px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; opacity: 0; }
+    #cl-sub { top: 1140px; font-size: 50px; }
+    #cl-tile { position: absolute; left: 480px; top: 820px; width: 120px; height: 120px; border-radius: 30px; background: #fff; opacity: 0; box-shadow: 0 30px 50px rgba(60,45,15,0.18); }
+    #cl-tile i { position: absolute; left: 34px; top: 34px; width: 52px; height: 52px; border-radius: 16px; background: var(--blue); display: block; }
+    #cl-bw { top: 560px; font-size: 64px; }
+    #cl-mb { top: 640px; font-size: 120px; }
+    #cl-meta { position: absolute; left: 400px; top: 420px; width: 280px; height: 280px; opacity: 0; }
+    #cl-zero { top: 760px; font-size: 170px; opacity: 0; }
+  </style>
+  <div id="cl-root" data-composition-id="close" data-width="1080" data-height="1920" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="cl-field"></div>
+    <div id="cl-mit" class="pill">MIT licence</div>
+    <div id="cl-beta" class="pill">beta</div>
+    <div id="cl-avs"></div>
+    <div id="cl-n" class="hd">0</div>
+    <div id="cl-ppl" class="hd lt"><span class="w">people </span><span class="w">already </span><span class="w">building </span><span class="w">it</span></div>
+    <div id="cl-cta">
+      <div id="cl-prof">ab</div>
+      <div id="cl-handle" class="hd"><span class="w">@autonomous.buddy</span></div>
+      <div id="cl-follow"><span id="cl-ft">Follow</span></div>
+      <div id="cl-sub" class="hd lt"><span class="w">one </span><span class="w">repo </span><span class="w">like </span><span class="w">this, </span><span class="w">every </span><span class="w">week</span></div>
+    </div>
+    <div id="cl-tile"><i></i></div>
+    <div id="cl-bw" class="hd lt"><span class="w">built </span><span class="w">the </span><span class="w">way</span></div>
+    <div id="cl-mb" class="hd"><span class="w">Meta </span><span class="w">builds.</span></div>
+    <img id="cl-meta" src="assets/img/meta.png" alt="">
+    <div id="cl-zero" class="hd" data-layout-ignore>0</div>
+    <div id="cl-you" class="cur" data-layout-allow-safe-zone><svg viewBox="0 0 22 26"><path d="M2 2 L2 21 L7 16.5 L10.5 24 L14 22.5 L10.6 15.2 L17 15 Z" fill="#121212" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><div class="tag" style="background:#121212">you</div></div>
+    <div id="cl-bot" class="cur" data-layout-allow-safe-zone><svg viewBox="0 0 22 26"><path d="M2 2 L2 21 L7 16.5 L10.5 24 L14 22.5 L10.6 15.2 L17 15 Z" fill="#225bff" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><div class="tag" style="background:#225bff">agent</div></div>
+  </div>
+  <script>
+    (function () {
+      const T0 = 47.3, g = (t) => t - T0;
+      // same seeded field as the opening shot, so the last frame meets the first
+      const field = document.querySelector("#cl-field");
+      const hues = ["#225bff", "#ffb020", "#1fbf75", "#ff5a5f", "#8b5cf6", "#00b3c7", "#111111"];
+      let r = 7; const rnd = () => (r = (r * 9301 + 49297) % 233280) / 233280;
+      const tiles = [];
+      for (let i = 0; i < 46; i++) {
+        let x, y; do { x = rnd() * 1000 - 20; y = rnd() * 1860 - 20; } while (x > 170 && x < 790 && y > 360 && y < 1140);
+        const far = rnd() < 0.45; const el = document.createElement("div");
+        el.className = "tile"; el.style.left = x + "px"; el.style.top = y + "px"; el.style.opacity = "0";
+        if (far) { el.style.filter = "blur(7px)"; el.style.transform = "scale(0.7)"; }
+        el.innerHTML = '<i style="background:' + hues[i % hues.length] + ';opacity:.85"></i>';
+        field.appendChild(el); tiles.push({ el, x: x + 60, y: y + 60, far });
+      }
+      const avs = document.querySelector("#cl-avs");
+      for (let i = 0; i < 14; i++) { const a = document.createElement("div"); a.className = "av";
+        a.style.left = (i % 7) * 126 + "px"; a.style.top = Math.floor(i / 7) * 126 + "px";
+        a.style.background = "linear-gradient(140deg, hsl(" + (i * 26 + 10) + ",60%,80%), hsl(" + (i * 26 + 40) + ",45%,62%))"; avs.appendChild(a); }
+
+      const tl = gsap.timeline({ paused: true });
+      const slide = (sel, t, st) => tl.fromTo(sel, { opacity: 0, y: 50, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", stagger: st || 0 }, g(t));
+      const out = (sel, t) => tl.to(sel, { opacity: 0, y: -70, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, g(t));
+      gsap.set("#cl-you", { x: 700, y: 2050 }); gsap.set("#cl-bot", { x: 1250, y: 1300 });
+
+      // 13. "It's MIT licensed, still in beta, and 142 people are already building it."
+      tl.fromTo("#cl-mit", { opacity: 0, scaleX: 0.6 }, { opacity: 1, scaleX: 1, duration: 0.3, ease: "back.out(1.6)" }, g(47.48));
+      tl.to("#cl-mit", { x: -130, duration: 0.4, ease: "power3.inOut" }, g(49.05));
+      tl.fromTo("#cl-beta", { opacity: 0, x: 60, filter: "blur(8px)" }, { opacity: 1, x: 70, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, g(49.15));
+      tl.fromTo("#cl-avs .av", { opacity: 0, y: -260, scale: 0.6 }, { opacity: 1, y: 0, scale: 1, duration: 0.3, stagger: 0.12, ease: "power3.in" }, g(49.75));
+      tl.fromTo("#cl-n", { opacity: 0, y: 50, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.35, ease: "power3.out" }, g(49.95));
+      { const o = { v: 0 }; const el = document.querySelector("#cl-n");
+        tl.fromTo(o, { v: 0 }, { v: 142, duration: 0.55, ease: "power2.out", onUpdate: () => { el.textContent = Math.round(o.v); } }, g(50.0)); }
+      slide("#cl-ppl .w", 50.76, 0.3);
+
+      // 14. CTA: the avatars condense into one profile
+      out(["#cl-mit", "#cl-beta", "#cl-n", "#cl-ppl"], 52.4);
+      tl.to("#cl-avs .av", { x: (i) => 433 - ((i % 7) * 126 + 55), y: (i) => -60 - Math.floor(i / 7) * 126, scale: 0.4, opacity: 0, duration: 0.35, ease: "power3.in", stagger: 0.01 }, g(52.4));
+      tl.set("#cl-prof", { opacity: 1 }, g(52.72));
+      tl.fromTo("#cl-prof", { scale: 0.35 }, { scale: 1, duration: 0.4, ease: "back.out(1.5)", immediateRender: false }, g(52.72));
+      slide("#cl-handle .w", 52.75);
+      tl.fromTo("#cl-follow", { opacity: 0, y: 50, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, g(53.0));
+      slide("#cl-sub .w", 53.22, 0.22);
+      tl.to("#cl-you", { x: 660, y: 1012, duration: 0.7, ease: "power3.inOut" }, g(53.6));
+      tl.fromTo("#cl-follow", { scale: 1 }, { scale: 0.93, duration: 0.09, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, g(54.4));
+      tl.to("#cl-follow", { backgroundColor: "#121212", duration: 0.15 }, g(54.45));
+      { const o = { v: 0 }; const el = document.querySelector("#cl-ft");
+        tl.to(o, { v: 1, duration: 0.02, onUpdate: () => { el.textContent = o.v > 0.5 ? "Following ✓" : "Follow"; } }, g(54.45)); }
+
+      // 15. loop: pull back, the CTA becomes one tile among thousands
+      out("#cl-you", 55.15);
+      tl.to("#cl-cta", { scale: 0.13, opacity: 0, duration: 0.5, ease: "power3.in" }, g(55.3));
+      tl.fromTo("#cl-tile", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, g(55.65));
+      tiles.forEach(({ el, x, y, far }, i) => {
+        const dx = (x - 540) * 0.9, dy = (y - 920) * 0.9;
+        tl.fromTo(el, { x: dx, y: dy, opacity: 0 }, { x: 0, y: 0, opacity: far ? 0.5 : 1, duration: 1.4, ease: "power3.out" }, g(55.35) + (i % 5) * 0.03);
+      });
+      tl.to("#cl-bot", { x: 590, y: 900, duration: 0.6, ease: "power3.inOut" }, g(55.9));
+      tl.fromTo("#cl-bot svg", { scale: 1 }, { scale: 1.25, duration: 0.12, yoyo: true, repeat: 1, transformOrigin: "0 0", ease: "power2.out", immediateRender: false }, g(56.5));
+      slide("#cl-bw .w", 57.58, 0.12);
+      slide("#cl-mb .w", 58.03, 0.28);
+      // the last frame becomes the first: Meta symbol and the counter at zero
+      out(["#cl-bw", "#cl-mb", "#cl-bot"], 58.82);
+      tl.to("#cl-tile", { opacity: 0, scale: 0.6, duration: 0.25, ease: "power2.in" }, g(58.82));
+      tl.fromTo("#cl-meta", { opacity: 0, y: 40, scale: 0.92 }, { opacity: 1, y: 0, scale: 0.92, duration: 0.35, ease: "power3.out" }, g(58.98));
+      tl.fromTo("#cl-zero", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, g(59.02));
+      tl.set({}, {}, g(59.4));
+      window.__timelines["close"] = tl;
+    })();
+  </script>
+</template>

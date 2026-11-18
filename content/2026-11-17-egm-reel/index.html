@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Anton"; font-weight: 400; font-style: normal; font-display: block; src: url("assets/fonts/anton-latin.woff2") format("woff2"); }
+      :root { --navy: #0f1013; --blue: #1b6ef3; --blue2: #4d8dff; --orange: #e86e00; --orange2: #ff8a1f; --mute: #9aa0ab; --ink: #1a1b1f; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--navy); font-family: "Inter", sans-serif; color: #fff; }
+      #root { position: relative; width: 100%; height: 100%; }
+      .hd { position: absolute; left: 60px; width: 960px; text-align: center; font-weight: 800; letter-spacing: -0.035em; line-height: 1.04; white-space: nowrap; }
+      .lt { font-weight: 500; color: var(--mute); letter-spacing: -0.01em; }
+      .bl { color: var(--blue2); } .or { color: var(--orange2); }
+      .w { display: inline-block; white-space: pre; }
+      .chr { position: absolute; }
+      .chr img { display: block; width: 100%; }
+      .paper { position: absolute; background: #fff; color: var(--ink); border-radius: 30px; box-shadow: 0 50px 100px rgba(0,0,0,0.5); }
+      .ln { height: 20px; border-radius: 10px; background: #e6e7ea; margin-top: 26px; }
+      .pill { position: absolute; height: 92px; padding: 0 38px; border-radius: 999px; font-size: 40px; font-weight: 700; display: flex; align-items: center; gap: 16px; white-space: nowrap; box-shadow: 0 24px 48px rgba(0,0,0,0.4); }
+      .pill.b { background: var(--blue); color: #fff; }
+      .bub { position: absolute; background: #fff; color: #111; border-radius: 30px; padding: 18px 30px; font-size: 40px; font-weight: 800; white-space: nowrap; box-shadow: 0 24px 50px rgba(0,0,0,0.45); }
+      .cur { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 30; }
+      .cur svg { position: absolute; left: -6px; top: -4px; width: 66px; height: 78px; filter: drop-shadow(0 10px 12px rgba(0,0,0,0.5)); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="60.6" data-width="1080" data-height="1920" data-motion-blur="on">
+      <div id="bg" data-composition-id="bg" data-composition-src="compositions/bg.html" data-start="0" data-duration="60.6" data-track-index="0" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index:0"></div>
+      <div id="intro" data-composition-id="intro" data-composition-src="compositions/intro.html" data-start="0" data-duration="17.1" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index:2"></div>
+      <div id="memory" data-composition-id="memory" data-composition-src="compositions/memory.html" data-start="16.8" data-duration="12.3" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index:3"></div>
+      <div id="gaps" data-composition-id="gaps" data-composition-src="compositions/gaps.html" data-start="28.8" data-duration="19.2" data-track-index="3" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index:4"></div>
+      <div id="end" data-composition-id="end" data-composition-src="compositions/end.html" data-start="47.6" data-duration="13.0" data-track-index="4" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index:5"></div>
+
+      <audio id="a-vo" src="assets/vo.mp3" data-start="0.25" data-track-index="20" data-volume="1"></audio>
+      <audio id="a-bed" src="assets/music/bed.mp3" data-start="0" data-duration="60.6" data-track-index="21" data-volume="0.2"></audio>
+      <audio id="s01" src="assets/sfx/ui-pop-soft.mp3" data-start="0.395" data-track-index="22" data-volume="0.3"></audio> <!-- Google G spins in @ 0.45 -->
+      <audio id="s02" src="assets/sfx/ui-swipe-slide.mp3" data-start="1.755" data-track-index="23" data-volume="0.22"></audio> <!-- reviewer highlight box @ 1.76 -->
+      <audio id="s03" src="assets/sfx/whoosh-airy-b.mp3" data-start="2.27" data-track-index="24" data-volume="0.22"></audio> <!-- SUPERPOWER slides in (move) @ 2.42 -->
+      <audio id="s04" src="assets/sfx/hit-soft-boom.mp3" data-start="3.283" data-track-index="25" data-volume="0.4"></audio> <!-- FORGETTING lands @ 3.96 -->
+      <audio id="s05" src="assets/sfx/ui-swipe-slide.mp3" data-start="4.315" data-track-index="26" data-volume="0.2"></audio> <!-- word deletes itself @ 4.32 -->
+      <audio id="s06" src="assets/sfx/whoosh-airy-a.mp3" data-start="4.37" data-track-index="27" data-volume="0.22"></audio> <!-- chat grows from caret (move) @ 4.62 -->
+      <audio id="s07" src="assets/sfx/ui-pop-soft.mp3" data-start="4.895" data-track-index="28" data-volume="0.24"></audio> <!-- user bubble @ 4.95 -->
+      <audio id="s08" src="assets/sfx/ui-pop-soft.mp3" data-start="5.545" data-track-index="29" data-volume="0.2"></audio> <!-- AI line @ 5.6 -->
+      <audio id="s09" src="assets/sfx/ui-card-open-swoosh.mp3" data-start="5.945" data-track-index="30" data-volume="0.22"></audio> <!-- plan card in @ 5.95 -->
+      <audio id="s10" src="assets/sfx/hit-soft-boom.mp3" data-start="6.923" data-track-index="31" data-volume="0.38"></audio> <!-- check stamp @ 7.6 -->
+      <audio id="s11" src="assets/sfx/impact-smash-glass.mp3" data-start="8.115" data-track-index="32" data-volume="0.18"></audio> <!-- stamp cracks @ 8.12 -->
+      <audio id="s12" src="assets/sfx/whoosh-airy-b.mp3" data-start="8.2" data-track-index="33" data-volume="0.2"></audio> <!-- plan to full size (move) @ 8.35 -->
+      <audio id="s13" src="assets/sfx/ui-swipe-slide.mp3" data-start="11.995" data-track-index="34" data-volume="0.24"></audio> <!-- page flips @ 12.0 -->
+      <audio id="s14" src="assets/sfx/whoosh-airy-a.mp3" data-start="13.15" data-track-index="35" data-volume="0.2"></audio> <!-- marks slide together (move) @ 13.4 -->
+      <audio id="s15" src="assets/sfx/ui-pop-soft.mp3" data-start="14.165" data-track-index="36" data-volume="0.3"></audio> <!-- marks bump @ 14.22 -->
+      <audio id="s16" src="assets/sfx/ui-seal-confirm.mp3" data-start="15.558" data-track-index="37" data-volume="0.24"></audio> <!-- counter lands 20.5k @ 16.3 -->
+      <audio id="s17" src="assets/sfx/whoosh-airy-a.mp3" data-start="16.37" data-track-index="38" data-volume="0.22"></audio> <!-- mark grows into elephant (move) @ 16.62 -->
+      <audio id="s18" src="assets/sfx/ui-pop-soft.mp3" data-start="18.765" data-track-index="39" data-volume="0.24"></audio> <!-- pill your project @ 18.82 -->
+      <audio id="s19" src="assets/sfx/ui-pop-soft.mp3" data-start="19.445" data-track-index="40" data-volume="0.24"></audio> <!-- pill your goals @ 19.5 -->
+      <audio id="s20" src="assets/sfx/ui-pop-soft.mp3" data-start="20.225" data-track-index="41" data-volume="0.24"></audio> <!-- pill every decision @ 20.28 -->
+      <audio id="s21" src="assets/sfx/whoosh-airy-b.mp3" data-start="22.4" data-track-index="42" data-volume="0.22"></audio> <!-- paper flies (move) @ 22.55 -->
+      <audio id="s22" src="assets/sfx/ui-swipe-slide.mp3" data-start="22.845" data-track-index="43" data-volume="0.18"></audio> <!-- bowl appears @ 22.85 -->
+      <audio id="s23" src="assets/sfx/whoosh-airy-a.mp3" data-start="23.05" data-track-index="44" data-volume="0.2"></audio> <!-- paper drops into bowl (move) @ 23.3 -->
+      <audio id="s24" src="assets/sfx/whoosh-airy-b.mp3" data-start="24.15" data-track-index="45" data-volume="0.18"></audio> <!-- fish swim in (move) @ 24.3 -->
+      <audio id="s25" src="assets/sfx/ui-pop-soft.mp3" data-start="25.245" data-track-index="46" data-volume="0.18"></audio> <!-- memory bubbles @ 25.3 -->
+      <audio id="s26" src="assets/sfx/whoosh-airy-a.mp3" data-start="28.3" data-track-index="47" data-volume="0.22"></audio> <!-- fish part, page rises (move) @ 28.55 -->
+      <audio id="s27" src="assets/sfx/ui-card-open-swoosh.mp3" data-start="28.915" data-track-index="48" data-volume="0.2"></audio> <!-- page lands @ 28.92 -->
+      <audio id="s28" src="assets/sfx/ui-pop-soft.mp3" data-start="35.445" data-track-index="49" data-volume="0.32"></audio> <!-- bubble which volunteers @ 35.5 -->
+      <audio id="s29" src="assets/sfx/ui-pop-soft.mp3" data-start="36.565" data-track-index="50" data-volume="0.32"></audio> <!-- bubble what hours @ 36.62 -->
+      <audio id="s30" src="assets/sfx/ui-pop-soft.mp3" data-start="37.395" data-track-index="51" data-volume="0.32"></audio> <!-- bubble Friday rule @ 37.45 -->
+      <audio id="s31" src="assets/sfx/whoosh-airy-b.mp3" data-start="38.45" data-track-index="52" data-volume="0.22"></audio> <!-- pull back to elephant (move) @ 38.6 -->
+      <audio id="s32" src="assets/sfx/ui-pop-soft.mp3" data-start="39.045" data-track-index="53" data-volume="0.24"></audio> <!-- memory pill 1 @ 39.1 -->
+      <audio id="s33" src="assets/sfx/ui-pop-soft.mp3" data-start="39.465" data-track-index="54" data-volume="0.24"></audio> <!-- memory pill 2 @ 39.52 -->
+      <audio id="s34" src="assets/sfx/ui-swipe-slide.mp3" data-start="41.545" data-track-index="55" data-volume="0.22"></audio> <!-- page becomes findings @ 41.55 -->
+      <audio id="s35" src="assets/sfx/ui-click-tactile.mp3" data-start="43.464" data-track-index="56" data-volume="0.3"></audio> <!-- tick 1 @ 43.77 -->
+      <audio id="s36" src="assets/sfx/ui-click-tactile.mp3" data-start="43.914" data-track-index="57" data-volume="0.3"></audio> <!-- tick 2 @ 44.22 -->
+      <audio id="s37" src="assets/sfx/ui-click-tactile.mp3" data-start="44.914" data-track-index="58" data-volume="0.32"></audio> <!-- Approve click @ 45.22 -->
+      <audio id="s38" src="assets/sfx/ui-seal-confirm.mp3" data-start="44.558" data-track-index="59" data-volume="0.28"></audio> <!-- Approved @ 45.3 -->
+      <audio id="s39" src="assets/sfx/ui-swipe-slide.mp3" data-start="46.415" data-track-index="60" data-volume="0.16"></audio> <!-- agent bar unlocks @ 46.42 -->
+      <audio id="s40" src="assets/sfx/whoosh-airy-a.mp3" data-start="47.25" data-track-index="61" data-volume="0.22"></audio> <!-- page folds into chip (move) @ 47.5 -->
+      <audio id="s41" src="assets/sfx/ui-pop-soft.mp3" data-start="47.765" data-track-index="62" data-volume="0.28"></audio> <!-- EGM chip @ 47.82 -->
+      <audio id="s42" src="assets/sfx/ui-pop-soft.mp3" data-start="49.015" data-track-index="63" data-volume="0.26"></audio> <!-- Claude Code tile @ 49.07 -->
+      <audio id="s43" src="assets/sfx/ui-pop-soft.mp3" data-start="49.745" data-track-index="64" data-volume="0.26"></audio> <!-- Codex tile @ 49.8 -->
+      <audio id="s44" src="assets/sfx/ui-pop-soft.mp3" data-start="50.495" data-track-index="65" data-volume="0.26"></audio> <!-- ChatGPT tile @ 50.55 -->
+      <audio id="s45" src="assets/sfx/ui-pop-soft.mp3" data-start="51.575" data-track-index="66" data-volume="0.26"></audio> <!-- Antigravity tile @ 51.63 -->
+      <audio id="s46" src="assets/sfx/ui-swipe-slide.mp3" data-start="52.735" data-track-index="67" data-volume="0.2"></audio> <!-- licence pill @ 52.74 -->
+      <audio id="s47" src="assets/sfx/whoosh-airy-b.mp3" data-start="53.85" data-track-index="68" data-volume="0.22"></audio> <!-- tiles condense (move) @ 54.0 -->
+      <audio id="s48" src="assets/sfx/hit-soft-boom.mp3" data-start="53.683" data-track-index="69" data-volume="0.3"></audio> <!-- avatar lands @ 54.36 -->
+      <audio id="s49" src="assets/sfx/ui-click-tactile.mp3" data-start="55.464" data-track-index="70" data-volume="0.32"></audio> <!-- Follow click @ 55.77 -->
+      <audio id="s50" src="assets/sfx/ui-swipe-slide.mp3" data-start="55.845" data-track-index="71" data-volume="0.15"></audio> <!-- goldfish peeks @ 55.85 -->
+      <audio id="s51" src="assets/sfx/whoosh-airy-a.mp3" data-start="56.05" data-track-index="72" data-volume="0.22"></audio> <!-- CTA out (move) @ 56.3 -->
+      <audio id="s52" src="assets/sfx/hit-soft-boom.mp3" data-start="58.943" data-track-index="73" data-volume="0.42"></audio> <!-- FORGET lands @ 59.62 -->
+      <audio id="s53" src="assets/sfx/ui-swipe-slide.mp3" data-start="59.995" data-track-index="74" data-volume="0.2"></audio> <!-- word deletes itself @ 60.0 -->
+      <audio id="s54" src="assets/sfx/riser-reverse-cymbal.mp3" data-start="57.944" data-track-index="75" data-volume="0.16"></audio> <!-- riser into the loop @ 60.6 -->
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.set({}, {}, 60.6);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

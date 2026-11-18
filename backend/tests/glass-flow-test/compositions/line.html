@@ -1,0 +1,40 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    .ln-ghost { position: absolute; border-radius: 999px; filter: blur(6px); }
+    #ln-g1 { left: 560px; top: 150px; width: 800px; height: 300px; }
+    #ln-g2 { left: 560px; top: 630px; width: 800px; height: 300px; }
+    #ln-line {
+      position: absolute; left: 0; top: 485px; width: 1920px; text-align: center;
+      font-size: 100px; font-weight: 700; letter-spacing: -0.035em; color: var(--ink);
+    }
+    #ln-line .acc { color: #1442c4; }
+  </style>
+  <div id="root" data-composition-id="line" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <div id="ln-g1" class="ln-ghost glass"></div>
+    <div id="ln-g2" class="ln-ghost glass"></div>
+    <div id="ln-line"><span class="w">Never </span><span class="w">lose </span><span class="w">a </span><span class="w acc">ready </span><span class="w acc">buyer </span><span class="w">again.</span></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#ln-g1", { y: -260, opacity: 0 }, { y: 0, opacity: 0.7, duration: 0.8, ease: "expo.out" }, 0.0);
+      tl.fromTo("#ln-g2", { y: 260, opacity: 0 }, { y: 0, opacity: 0.7, duration: 0.8, ease: "expo.out" }, 0.05);
+      // words arrive at uneven heights and settle on one baseline (as in the reference close)
+      const ws = document.querySelectorAll("#ln-line .w");
+      const off = [-40, 30, -20, 46, -36, 24];
+      ws.forEach((w, i) => {
+        tl.fromTo(w, { opacity: 0, y: off[i], filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0.25 + i * 0.09);
+      });
+      // the ghost shapes keep moving apart slowly while the line holds still
+      tl.to("#ln-g1", { y: -40, duration: 1.6, ease: "sine.inOut" }, 0.85);
+      tl.to("#ln-g2", { y: 40, duration: 1.6, ease: "sine.inOut" }, 0.9);
+      // exit: word by word blur-out; ghosts close in to become the CTA's frame
+      tl.to(ws, { opacity: 0, filter: "blur(10px)", duration: 0.18, stagger: 0.04, ease: "power2.in" }, 2.5);
+      tl.to("#ln-g1", { y: 120, opacity: 0, duration: 0.4, ease: "power3.in" }, 2.65);
+      tl.to("#ln-g2", { y: -120, opacity: 0, duration: 0.4, ease: "power3.in" }, 2.65);
+      tl.set({}, {}, 3.05);
+      window.__timelines["line"] = tl;
+    })();
+  </script>
+</template>

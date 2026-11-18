@@ -1,0 +1,162 @@
+<template>
+  <style>
+    #in-root { position: absolute; inset: 0; perspective: 2200px; }
+    .sf { font-family: "EB Garamond", Georgia, serif; font-weight: 400; letter-spacing: -0.01em; color: #e9ebf0; }
+    .sf i { font-style: italic; color: #7fb0ff; }
+    .an { font-family: "Anton", "Inter", sans-serif; font-weight: 400; letter-spacing: 0.01em; line-height: 1; }
+    #in-g { position: absolute; left: 480px; top: 250px; width: 120px; height: 120px; opacity: 0; filter: drop-shadow(0 18px 30px rgba(0,0,0,0.5)); }
+    #in-h1 { top: 430px; font-size: 92px; }
+    #in-h2 { top: 520px; font-size: 92px; }
+    #in-b1 { top: 900px; font-size: 76px; }
+    #in-hl { position: relative; display: inline-block; color: #111; padding: 0 22px; margin-left: 10px; }
+    #in-hlbg { position: absolute; inset: -4px 0 -8px 0; background: #fff; border-radius: 12px; transform-origin: 0% 50%; z-index: -1; box-shadow: 0 18px 40px rgba(0,0,0,0.4); }
+    #in-sp { top: 880px; font-size: 196px; color: #fff; }
+    #in-fgw { top: 880px; font-size: 196px; }
+    .ch { display: inline-block; color: var(--orange2); }
+    .icar { display: inline-block; width: 16px; height: 160px; margin-left: 10px; border-radius: 4px; background: var(--orange2); vertical-align: -6px; box-shadow: 0 0 30px rgba(255,138,31,0.6); }
+    #in-car { position: absolute; left: 532px; top: 900px; width: 16px; height: 160px; border-radius: 4px; background: var(--orange2); opacity: 1; box-shadow: 0 0 30px rgba(255,138,31,0.6); }
+    #in-chat { position: absolute; left: 140px; top: 470px; width: 800px; height: 600px; border-radius: 36px; background: #fff; border: 2px solid #2a2d35;
+      clip-path: inset(71.7% 49% 1.7% 49% round 6px); opacity: 0; }
+    #in-repo { top: 388px; font-size: 32px; font-weight: 600; color: var(--mute); letter-spacing: 0; display: flex; justify-content: center; align-items: center; gap: 14px; }
+    #in-repo img { width: 38px; height: 38px; }
+    #in-ub { position: absolute; right: 36px; top: 40px; padding: 18px 28px; border-radius: 26px; background: #2a2d35; color: #e6e8ee; font-size: 34px; font-weight: 600; opacity: 0; }
+    #in-ai { position: absolute; left: 40px; top: 150px; font-size: 32px; color: #9aa0ab; font-weight: 600; opacity: 0; }
+    #in-plan { left: 190px; top: 470px; width: 700px; height: 560px; padding: 50px 56px; opacity: 0; transform-origin: 50% 50%; }
+    #in-plan .ln { margin-top: 70px; }
+    #in-plan b { display: block; font-size: 40px; font-weight: 800; letter-spacing: -0.02em; }
+    .gh { position: absolute; left: 44px; font-size: 34px; font-style: italic; color: #b4b7bf; opacity: 0; white-space: nowrap; }
+    #in-ok { position: absolute; left: 720px; top: 880px; width: 210px; height: 210px; border-radius: 50%; background: #1fbf75; opacity: 0; box-shadow: 0 30px 60px rgba(0,0,0,0.45); }
+    #in-ok svg { position: absolute; inset: 0; }
+    #in-t2 { top: 1120px; font-size: 68px; }
+    #in-t3a { top: 1070px; font-size: 52px; }
+    #in-t3b { top: 1138px; font-size: 52px; }
+    #in-brand { left: 190px; top: 470px; width: 700px; height: 600px; opacity: 0; }
+    #in-me { position: absolute; left: 133px; top: 60px; width: 211px; }
+    #in-mg { position: absolute; left: 356px; top: 60px; width: 212px; }
+    #in-title { position: absolute; left: 0; width: 700px; top: 330px; text-align: center; font-size: 60px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; color: #1a1b1f; }
+    #in-star { position: absolute; left: 200px; top: 500px; width: 300px; height: 76px; border-radius: 999px; background: #1a1b1f; color: #fff; font-size: 38px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; gap: 14px; }
+    #in-star img { width: 40px; height: 40px; }
+    #in-month { top: 1100px; font-size: 50px; }
+    #in-note { top: 1172px; font-size: 30px; color: #7d828c; font-weight: 500; letter-spacing: 0; }
+  </style>
+  <div id="in-root" data-composition-id="intro" data-width="1080" data-height="1920" data-layout-allow-overflow data-layout-allow-overlap>
+    <img id="in-g" src="assets/img/google-g.png" alt="">
+    <div id="in-h1" class="hd sf"><span class="w">Google </span><span class="w">just </span><span class="w"><i>open-sourced</i></span></div>
+    <div id="in-h2" class="hd sf"><span class="w">whose </span><span class="w"><i>superpower </i></span><span class="w">is…</span></div>
+    <div id="in-b1" class="hd"><span class="w">an </span><span class="w">AI</span><span class="w" id="in-hl"><span id="in-hlbg"></span>reviewer</span></div>
+    <div id="in-sp" class="hd an"><span class="w">SUPERPOWER</span></div>
+    <div id="in-fgw" class="hd an"><span class="w"><span class="ch">F</span><span class="ch">O</span><span class="ch">R</span><span class="ch">G</span><span class="ch">E</span><span class="ch">T</span><span class="ch">T</span><span class="ch">I</span><span class="ch">N</span><span class="ch">G</span><span class="icar"></span></span></div>
+    <div id="in-car"></div>
+
+    <div id="in-chat"><div id="in-ub">help me plan the study space</div><div id="in-ai">Sure! Here's your plan:</div></div>
+    <div id="in-plan" class="paper"><b>Study space plan</b>
+      <div class="ln" style="width:520px"></div><div class="ln" style="width:420px"></div><div class="ln" style="width:480px"></div>
+      <div class="gh" id="in-g1" style="top:212px">(who staffs it?)</div>
+      <div class="gh" id="in-g2" style="top:302px">(which hours?)</div>
+      <div class="gh" id="in-g3" style="top:392px">(what's the Friday rule?)</div>
+    </div>
+    <div id="in-ok"><svg viewBox="0 0 210 210"><polyline points="58,110 92,144 154,74" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline id="in-crack" points="112,0 96,62 122,96 92,140 116,210" fill="none" stroke="#0f1013" stroke-width="9" stroke-linejoin="round" opacity="0"/></svg></div>
+    <div id="in-t2" class="hd"><span class="w">the </span><span class="w">worst </span><span class="w">one </span><span class="w or">to </span><span class="w or">check </span><span class="w or">it.</span></div>
+    <div id="in-t3a" class="hd"><span class="w lt">knows </span><span class="w lt">what </span><span class="w lt">you </span><span class="w bl">meant…</span></div>
+    <div id="in-t3b" class="hd"><span class="w">misses </span><span class="w">what </span><span class="w">you </span><span class="w or">didn't </span><span class="w or">write.</span></div>
+
+    <div id="in-brand" class="paper">
+      <img id="in-me" src="assets/img/egm-elephant-c.png" alt=""><img id="in-mg" src="assets/img/egm-goldfish-c.png" alt="">
+      <div id="in-title">Elephant-Goldfish<br>Model</div>
+      <div id="in-star"><img src="assets/img/github-white.png" alt=""><span>&#9733; <span id="in-sn">0</span></span></div>
+    </div>
+    <div id="in-repo" class="hd"><img src="assets/img/google-g.png" alt=""><span>google / elephant-goldfish-model</span></div>
+    <div id="in-month" class="hd lt"><span class="w">in </span><span class="w">under </span><span class="w">a </span><span class="w">month</span></div>
+    <div id="in-note" class="hd" data-layout-ignore>not an officially supported Google product</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const slide = (sel, t, st) => tl.fromTo(sel, { opacity: 0, y: 50, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", stagger: st || 0 }, t);
+      const out = (sel, t) => tl.to(sel, { opacity: 0, y: -70, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, t);
+      const bob = (sel, t0, t1, amp, per) => tl.fromTo(sel, { y: 0 }, { y: -amp, duration: per, ease: "sine.inOut", yoyo: true, repeat: Math.max(1, Math.floor((t1 - t0) / per) - 1) }, t0);
+
+      // 1. type-only split hook. Frame 0 = the caret the reel ends on (loop)
+      tl.fromTo("#in-car", { opacity: 1 }, { opacity: 0.15, duration: 0.2, yoyo: true, repeat: 1, ease: "none" }, 0.0);
+      tl.to("#in-car", { opacity: 0, scaleY: 0.3, duration: 0.2, ease: "power2.in" }, 0.42);
+      tl.set("#in-g", { opacity: 1 }, 0.42);
+      tl.fromTo("#in-g", { scale: 0.3, rotation: -120, filter: "blur(10px)" }, { scale: 1, rotation: 0, filter: "blur(0px)", duration: 0.5, ease: "back.out(1.6)", immediateRender: false }, 0.42);
+      tl.fromTo("#in-g", { y: 0 }, { y: -12, duration: 0.8, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 0.95);
+      [0.47, 0.56, 0.76].forEach((t, i) => slide(document.querySelectorAll("#in-h1 .w")[i], t));
+      [1.36, 1.54].forEach((t, i) => slide(document.querySelectorAll("#in-b1 .w")[i], t));
+      tl.fromTo("#in-hl", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 1.74);
+      tl.fromTo("#in-hlbg", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power3.out" }, 1.74);
+      // "whose superpower is..." the top line changes, the bottom becomes one giant word
+      out(["#in-h1"], 2.0);
+      tl.to("#in-g", { y: -40, scale: 0.75, duration: 0.4, ease: "power3.inOut" }, 2.0);
+      [2.22, 2.44, 3.1].forEach((t, i) => slide(document.querySelectorAll("#in-h2 .w")[i], t));
+      out(["#in-b1"], 2.2);
+      tl.fromTo("#in-sp .w", { opacity: 0, x: 120, filter: "blur(10px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out" }, 2.42);
+      tl.fromTo("#in-sp", { scale: 1 }, { scale: 1.05, duration: 1.4, ease: "none" }, 2.42);
+      tl.to("#in-sp", { opacity: 0, y: -90, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 3.7);
+      // "forgetting." slides in, then deletes itself letter by letter, leaving only the caret
+      tl.fromTo("#in-fgw .w", { opacity: 0, y: 60, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, 3.92);
+      const ch = Array.from(document.querySelectorAll("#in-fgw .ch")).reverse();
+      ch.forEach((c, i) => { const t = 4.32 + i * 0.03; tl.to(c, { opacity: 0, duration: 0.025 }, t); tl.set(c, { display: "none" }, t + 0.028); });
+      // the caret rides at the end of the word as it deletes; the word stays centred, so the caret ends dead centre
+      tl.set("#in-fgw .icar", { opacity: 0 }, 4.62);
+      tl.set("#in-car", { opacity: 1, scaleY: 1 }, 4.62);
+      out(["#in-h2"], 4.4);
+      tl.to("#in-g", { opacity: 0, y: -100, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 4.4);
+      // the chat box grows out of the caret
+      tl.to("#in-car", { opacity: 0, duration: 0.1 }, 4.66);
+      tl.set("#in-chat", { opacity: 1 }, 4.62);
+      tl.fromTo("#in-chat", { clipPath: "inset(71.7% 49% 1.7% 49% round 6px)", backgroundColor: "#ff8a1f" },
+        { clipPath: "inset(0% 0% 0% 0% round 36px)", backgroundColor: "#1b1d23", duration: 0.5, ease: "power3.inOut", immediateRender: false }, 4.62);
+
+      // 2. "Because the AI that helped you write a plan is the worst one to check it."
+      tl.fromTo("#in-ub", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 4.95);
+      tl.fromTo("#in-ai", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 5.6);
+      tl.fromTo("#in-plan", { opacity: 0, y: 190, scale: 0.55 }, { opacity: 1, y: 150, scale: 0.62, duration: 0.45, ease: "power3.out" }, 5.95);
+      slide("#in-t2 .w", 7.05, 0.12);
+      tl.set("#in-ok", { opacity: 1 }, 7.6);
+      tl.fromTo("#in-ok", { scale: 2.6, rotation: -30 }, { scale: 1, rotation: -12, duration: 0.22, ease: "power4.in", immediateRender: false }, 7.6);
+      tl.to("#in-ok", { scaleX: 1.12, scaleY: 0.9, duration: 0.07, yoyo: true, repeat: 1, ease: "power2.out" }, 7.82);
+
+      // 3. "It already knows what you meant... so it never notices what you didn't write."
+      tl.set("#in-crack", { opacity: 1 }, 8.12);
+      tl.fromTo("#in-crack", { strokeDasharray: 300, strokeDashoffset: 300 }, { strokeDashoffset: 0, duration: 0.2, ease: "power2.out", immediateRender: false }, 8.12);
+      out("#in-t2", 8.3);
+      tl.to("#in-ok", { x: 60, y: -480, scale: 0.6, filter: "blur(8px)", opacity: 0, duration: 0.6, ease: "power3.inOut" }, 8.35);
+      tl.to("#in-chat", { scale: 1.12, opacity: 0, filter: "blur(12px)", duration: 0.45, ease: "power3.in" }, 8.3);
+      tl.to("#in-plan", { y: 0, scale: 1, duration: 0.55, ease: "power3.inOut" }, 8.35);
+      slide("#in-t3a .w", 8.4, 0.18);
+      tl.fromTo(".gh", { opacity: 0, x: -20 }, { opacity: 0.9, x: 0, duration: 0.4, stagger: 0.18, ease: "power3.out" }, 9.15);
+      tl.to(".gh", { opacity: 0, duration: 0.08, yoyo: true, repeat: 3, ease: "none", stagger: 0.05 }, 10.3);
+      tl.to(".gh", { opacity: 0, filter: "blur(6px)", duration: 0.3, stagger: 0.08 }, 11.15);
+      slide("#in-t3b .w", 9.85, 0.2);
+
+      // 4. the page flips over: its back is the EGM card
+      out(["#in-t3a", "#in-t3b"], 11.95);
+      tl.to("#in-plan", { rotationY: 90, duration: 0.22, ease: "power2.in" }, 12.0);
+      tl.set("#in-plan", { opacity: 0 }, 12.22);
+      tl.set("#in-brand", { opacity: 1 }, 12.22);
+      tl.fromTo("#in-brand", { rotationY: -90 }, { rotationY: 0, duration: 0.3, ease: "power3.out", immediateRender: false }, 12.22);
+      tl.fromTo("#in-me", { x: -260, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 13.4);
+      tl.fromTo("#in-mg", { x: 260, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 13.4);
+      tl.fromTo(["#in-me", "#in-mg"], { scale: 1 }, { scale: 1.08, duration: 0.09, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, 14.22);
+      tl.fromTo("#in-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 12.6);
+      tl.fromTo("#in-star", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 14.6);
+      { const o = { v: 0 }; const n = document.querySelector("#in-sn");
+        tl.fromTo(o, { v: 0 }, { v: 20500, duration: 1.4, ease: "power2.out", onUpdate: () => { n.textContent = o.v >= 20499 ? "20.5k" : Math.round(o.v).toLocaleString("en-US"); } }, 14.95); }
+      tl.fromTo("#in-repo", { opacity: 0, y: 30, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, 12.6);
+      slide("#in-month .w", 16.0, 0.08);
+      tl.fromTo("#in-note", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 14.7);
+      // the blue elephant half grows out of the card and becomes the elephant character
+      out(["#in-month", "#in-note", "#in-title", "#in-star", "#in-repo"], 16.45);
+      tl.to("#in-mg", { opacity: 0, x: 120, duration: 0.25 }, 16.6);
+      tl.to("#in-brand", { backgroundColor: "rgba(255,255,255,0)", boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.12 }, 16.45);
+      tl.to("#in-me", { x: 74, y: 120, scale: 2.1, duration: 0.35, ease: "power3.in" }, 16.62);
+      tl.to("#in-me", { opacity: 0, duration: 0.12 }, 16.92);
+      tl.set({}, {}, 17.1);
+      window.__timelines["intro"] = tl;
+    })();
+  </script>
+</template>

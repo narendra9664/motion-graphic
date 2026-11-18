@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/gsap.min.js"></script>
+<style>
+  /* Stage-0 smoke root — mounts one scene from compositions/ (canonical video structure) */
+  :root { --ground: #F5F5F0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+  #root { position: relative; width: 100%; height: 100%; }
+  .comp-layer { position: absolute; inset: 0; }
+</style>
+</head>
+<body>
+<div
+  id="root"
+  data-composition-id="main"
+  data-start="0"
+  data-duration="5"
+  data-width="1080"
+  data-height="1920"
+>
+  <div
+    id="scene"
+    class="comp-layer"
+    data-composition-id="scene-main"
+    data-composition-src="compositions/scene-main.html"
+    data-start="0"
+    data-duration="5"
+    data-track-index="1"
+  ></div>
+</div>
+
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+  tl.set({}, {}, 5); // pad root timeline to full duration
+  window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

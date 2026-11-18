@@ -1,0 +1,131 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #qu-head { position: absolute; left: 120px; top: 360px; width: 600px; font-size: 84px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; color: var(--ink); }
+    #qu-head .acc { color: #1442c4; }
+    #qu-sub { position: absolute; left: 124px; top: 570px; width: 560px; font-size: 32px; font-weight: 500; line-height: 1.35; color: #3f4e6b; }
+    #qu-stage { position: absolute; left: 790px; top: 170px; width: 1060px; height: 740px; perspective: 1900px; }
+    #qu-cam { position: absolute; inset: 0; transform-style: preserve-3d; }
+    #qu-panel { position: absolute; left: 0; top: 0; width: 1060px; height: 740px; border-radius: 34px; padding: 40px 44px; }
+    .qu-top { display: flex; align-items: center; justify-content: space-between; }
+    .qu-title { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; }
+    .qu-live { display: flex; align-items: center; gap: 12px; font-size: 28px; font-weight: 600; color: #1442c4; background: #e8efff; padding: 8px 20px; border-radius: 999px; }
+    .qu-live i { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); display: inline-block; }
+    .qu-cap { font-size: 28px; font-weight: 500; color: var(--dim); margin-top: 6px; }
+    #qu-rows { position: relative; margin-top: 34px; height: 500px; }
+    .qu-row {
+      position: absolute; left: 0; top: 0; width: 972px; height: 104px; border-radius: 22px;
+      background: #f6f8fd; border: 2px solid transparent;
+      display: flex; align-items: center; padding: 0 26px; gap: 22px;
+    }
+    .qu-av { flex: none; width: 62px; height: 62px; border-radius: 50%; color: #fff; font-size: 28px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .qu-id { width: 330px; }
+    .qu-name { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; }
+    .qu-what { font-size: 28px; font-weight: 500; color: var(--dim); }
+    .qu-bar { flex: 1; height: 14px; border-radius: 7px; background: #e3e9f6; overflow: hidden; }
+    .qu-fill { width: 100%; height: 100%; border-radius: 7px; background: linear-gradient(90deg, #7aa8ff, #1f5eff); transform-origin: 0 50%; }
+    .qu-score { width: 90px; text-align: right; font-size: 40px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    #qu-r-rahul { background: #fff; z-index: 5; }
+    #qu-btn {
+      position: absolute; right: 150px; top: 24px; height: 56px; padding: 0 26px; border-radius: 999px;
+      background: var(--accent); color: #fff; font-size: 28px; font-weight: 700; display: flex; align-items: center; gap: 10px; opacity: 0;
+      white-space: nowrap;
+    }
+    #qu-cur { position: absolute; left: 0; top: 0; }
+  </style>
+  <div id="root" data-composition-id="queue" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <div id="qu-head"><span class="w">AI </span><span class="w">ranks </span><span class="w">who&rsquo;s </span><span class="w acc">ready </span><span class="w acc">to </span><span class="w acc">buy.</span></div>
+    <div id="qu-sub">Every visit, download and click, scored in real time.</div>
+
+    <div id="qu-stage">
+      <div id="qu-cam">
+        <div id="qu-panel" class="solid-card">
+          <div class="qu-top">
+            <div>
+              <div class="qu-title">Hot leads &middot; Veloria Residences</div>
+              <div class="qu-cap">Ranked by intent</div>
+            </div>
+            <div class="qu-live"><i></i>Live</div>
+          </div>
+          <div id="qu-rows">
+            <div class="qu-row" id="qu-r-daniel">
+              <div class="qu-av" style="background:#8a9bb8">DF</div>
+              <div class="qu-id"><div class="qu-name">Daniel Fernandes</div><div class="qu-what">campaign click</div></div>
+              <div class="qu-bar"><div class="qu-fill" id="qu-f-daniel"></div></div>
+              <div class="qu-score" id="qu-s-daniel">0</div>
+            </div>
+            <div class="qu-row" id="qu-r-ananya">
+              <div class="qu-av" style="background:#7aa8ff">AR</div>
+              <div class="qu-id"><div class="qu-name">Ananya Rao</div><div class="qu-what">price list &times;3</div></div>
+              <div class="qu-bar"><div class="qu-fill" id="qu-f-ananya"></div></div>
+              <div class="qu-score" id="qu-s-ananya">0</div>
+            </div>
+            <div class="qu-row" id="qu-r-kavya">
+              <div class="qu-av" style="background:#b6c3da">KI</div>
+              <div class="qu-id"><div class="qu-name">Kavya Iyer</div><div class="qu-what">brochure open</div></div>
+              <div class="qu-bar"><div class="qu-fill" id="qu-f-kavya"></div></div>
+              <div class="qu-score" id="qu-s-kavya">0</div>
+            </div>
+            <div class="qu-row" id="qu-r-rahul">
+              <div class="qu-av" style="background:linear-gradient(135deg,#4c82ff,#1f5eff)">RM</div>
+              <div class="qu-id"><div class="qu-name">Rahul Mehta</div><div class="qu-what">Sky Penthouse A-4 &middot; 6 visits</div></div>
+              <div class="qu-bar"><div class="qu-fill" id="qu-f-rahul"></div></div>
+              <div class="qu-score" id="qu-s-rahul" style="color:var(--accent)">0</div>
+              <div id="qu-btn"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M3 12l18-9-6 18-3-7z" fill="#fff"/></svg>Follow up</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="qu-cur">
+      <svg class="cursor-svg" viewBox="0 0 24 24"><path d="M3 2l18 8.5-7.6 2.2L10 20z" fill="#0e2244" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const SLOT = 122;
+      const start = { daniel: 0, ananya: 1, kavya: 2, rahul: 3 };
+      const end = { rahul: 0, ananya: 1, daniel: 2, kavya: 3 };
+      const score = { rahul: 94, ananya: 88, daniel: 81, kavya: 63 };
+      Object.keys(start).forEach((k) => tl.set("#qu-r-" + k, { y: start[k] * SLOT }, 0));
+
+      // the panel arrives out of the lens world, tilted in space (as the reference does)
+      tl.fromTo("#qu-cam", { rotationY: -38, rotationX: 14, z: -500, opacity: 0 },
+        { rotationY: -14, rotationX: 7, z: 0, opacity: 1, duration: 1.0, ease: "expo.out" }, 0.0);
+      const hw = document.querySelectorAll("#qu-head .w");
+      tl.fromTo(hw, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.08, ease: "power2.out" }, 0.35);
+      tl.fromTo("#qu-sub", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 0.95);
+      tl.fromTo(".qu-row", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.45, stagger: 0.06, ease: "power3.out" }, 0.3);
+
+      // scores count up, bars fill
+      Object.keys(score).forEach((k, i) => {
+        const o = { v: 0 };
+        const el = document.querySelector("#qu-s-" + k);
+        tl.to(o, { v: score[k], duration: 1.1, ease: "power2.out", onUpdate: () => { el.textContent = Math.round(o.v); } }, 0.8 + i * 0.05);
+        tl.fromTo("#qu-f-" + k, { scaleX: 0 }, { scaleX: score[k] / 100, duration: 1.1, ease: "power2.out" }, 0.8 + i * 0.05);
+      });
+
+      // re-rank: Rahul rises to the top
+      Object.keys(end).forEach((k) => tl.to("#qu-r-" + k, { y: end[k] * SLOT, duration: 0.6, ease: "power3.inOut" }, 2.0));
+      tl.to("#qu-r-rahul", { borderColor: "#1f5eff", boxShadow: "0 18px 40px rgba(31,94,255,0.25)", duration: 0.4, ease: "power2.out" }, 2.3);
+
+      // camera leans in on the top row
+      tl.to("#qu-cam", { rotationY: -8, rotationX: 4, scale: 1.06, x: 10, y: 40, duration: 1.6, ease: "power2.inOut" }, 2.4);
+      tl.fromTo("#qu-btn", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.7)" }, 3.0);
+
+      // cursor comes in and clicks Follow up (film 15.55)
+      tl.fromTo("#qu-cur", { x: 1980, y: 1120 }, { x: 1560, y: 380, duration: 0.8, ease: "power3.out" }, 3.4);
+      tl.fromTo("#qu-cur svg", { scale: 1 }, { scale: 0.82, duration: 0.07, yoyo: true, repeat: 1, ease: "power1.inOut", transformOrigin: "10% 10%" }, 4.32);
+      tl.to("#qu-btn", { scale: 0.92, duration: 0.07, yoyo: true, repeat: 1, ease: "power1.inOut" }, 4.32);
+
+      // zoom through the button: its blue becomes the next frame's flood
+      tl.to(["#qu-head", "#qu-sub"], { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 4.45);
+      tl.to("#qu-cur", { opacity: 0, duration: 0.15 }, 4.45);
+      tl.to("#qu-cam", { scale: 2.6, x: -380, y: 620, opacity: 0, filter: "blur(12px)", duration: 0.55, ease: "power3.in" }, 4.45);
+      tl.set({}, {}, 5.05);
+      window.__timelines["queue"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,81 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #hk-stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    .hk-pill {
+      position: absolute;
+      left: 470px;
+      top: 470px;
+      width: 980px;
+      height: 140px;
+      border-radius: 40px;
+    }
+    #hk-back2 { opacity: 0; }
+    #hk-back1 { opacity: 0; }
+    #hk-main { display: flex; align-items: center; padding: 0 40px; gap: 28px; }
+    .hk-av {
+      flex: none;
+      width: 78px; height: 78px; border-radius: 50%;
+      background: linear-gradient(135deg, #4c82ff, #1f5eff);
+      color: #fff; font-weight: 700; font-size: 30px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hk-txt { position: relative; flex: 1; height: 88px; }
+    .hk-line { position: absolute; left: 0; top: 0; width: 100%; }
+    .hk-who { font-size: 28px; font-weight: 600; color: var(--dim); }
+    .hk-what { font-size: 38px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; margin-top: 4px; }
+    .hk-what b { color: var(--accent); font-weight: 700; }
+    .hk-time { flex: none; font-size: 28px; font-weight: 600; color: var(--dim); font-variant-numeric: tabular-nums; }
+  </style>
+  <div id="root" data-composition-id="hook" data-width="1920" data-height="1080">
+    <div id="hk-stage">
+      <div id="hk-back2" class="hk-pill glass"></div>
+      <div id="hk-back1" class="hk-pill glass"></div>
+      <div id="hk-main" class="hk-pill glass">
+        <div class="hk-av">RM</div>
+        <div class="hk-txt">
+          <div class="hk-line" id="hk-l1">
+            <div class="hk-who">Rahul Mehta &middot; Veloria Residences</div>
+            <div class="hk-what">Viewed <b>Sky Penthouse A-4</b></div>
+          </div>
+          <div class="hk-line" id="hk-l2">
+            <div class="hk-who">Rahul Mehta &middot; visit 4 of 6</div>
+            <div class="hk-what">Downloaded the <b>floor plan</b></div>
+          </div>
+          <div class="hk-line" id="hk-l3">
+            <div class="hk-who">Rahul Mehta &middot; visit 6 of 6</div>
+            <div class="hk-what">Opened the <b>price list</b> again</div>
+          </div>
+        </div>
+        <div class="hk-time" id="hk-time">11:42 PM</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // pill arrives: long tail, sharpening
+      tl.fromTo("#hk-main", { opacity: 0.8, scale: 0.95, y: 10, filter: "blur(3px)" },
+        { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", duration: 0.75, ease: "expo.out" }, 0);
+      tl.fromTo("#hk-l1", { opacity: 0.8, filter: "blur(3px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 0.1);
+      tl.set(["#hk-l2", "#hk-l3"], { opacity: 0 }, 0);
+
+      // swap 1: old notification tucks behind, new one blur-swaps in
+      tl.fromTo("#hk-back1", { opacity: 0, y: 0, scale: 1 }, { opacity: 0.75, y: -34, scale: 0.94, duration: 0.45, ease: "power3.out" }, 1.0);
+      tl.to("#hk-l1", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 1.0);
+      tl.fromTo("#hk-l2", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power2.out" }, 1.12);
+      tl.to("#hk-stage", { scale: 1.03, duration: 0.12, ease: "power2.out", yoyo: true, repeat: 1 }, 1.0);
+
+      // swap 2
+      tl.fromTo("#hk-back2", { opacity: 0, y: 0, scale: 1 }, { opacity: 0.5, y: -64, scale: 0.88, duration: 0.45, ease: "power3.out" }, 1.95);
+      tl.to("#hk-l2", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 1.95);
+      tl.fromTo("#hk-l3", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power2.out" }, 2.07);
+      tl.to("#hk-stage", { scale: 1.03, duration: 0.12, ease: "power2.out", yoyo: true, repeat: 1 }, 1.95);
+
+      // exit: the whole stack lifts away and blurs as the hero word arrives under it
+      tl.to("#hk-stage", { y: -300, scale: 0.72, opacity: 0, filter: "blur(14px)", duration: 0.42, ease: "power3.in" }, 2.75);
+      tl.set({}, {}, 3.2);
+      window.__timelines["hook"] = tl;
+    })();
+  </script>
+</template>

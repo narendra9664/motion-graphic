@@ -1,0 +1,21 @@
+<template>
+  <style>
+    #bg-root { position: absolute; inset: 0; overflow: hidden;
+      background: radial-gradient(120% 80% at 50% 46%, #fcf9f3 0%, #f4eee3 58%, #e8dfcf 100%); }
+    .blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.55; }
+  </style>
+  <div id="bg-root" data-composition-id="bg" data-width="1080" data-height="1920" data-layout-allow-overflow data-layout-allow-overlap>
+    <div class="blob" id="bg-b1" style="left:-260px;top:1180px;width:760px;height:760px;background:#ffe7a3"></div>
+    <div class="blob" id="bg-b2" style="left:620px;top:-180px;width:720px;height:720px;background:#ffd6cf"></div>
+    <div class="blob" id="bg-b3" style="left:560px;top:1320px;width:620px;height:620px;background:#d9e3ff"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#bg-b1", { x: 0, y: 0 }, { x: 220, y: -160, duration: 59.4, ease: "sine.inOut" }, 0);
+      tl.fromTo("#bg-b2", { x: 0, y: 0 }, { x: -200, y: 180, duration: 59.4, ease: "sine.inOut" }, 0);
+      tl.fromTo("#bg-b3", { x: 0, y: 0 }, { x: -160, y: -220, duration: 59.4, ease: "sine.inOut" }, 0);
+      window.__timelines["bg"] = tl;
+    })();
+  </script>
+</template>

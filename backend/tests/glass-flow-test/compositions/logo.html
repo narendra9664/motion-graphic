@@ -1,0 +1,70 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #lg-lens { position: absolute; left: 610px; top: 190px; width: 700px; height: 700px; border-radius: 50%; }
+    #lg-lock { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #lg-mark { position: absolute; left: 885px; top: 465px; width: 150px; height: 150px; }
+    .lg-orb {
+      width: 150px; height: 150px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #8fb4ff 0%, #3d76ff 45%, #1546c9 100%);
+      box-shadow: 0 20px 40px rgba(31, 94, 255, 0.35), inset 0 2px 0 rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lg-orb svg { width: 96px; height: 96px; }
+    #lg-word {
+      position: absolute; left: 905px; top: 470px; height: 140px; line-height: 140px;
+      font-size: 120px; font-weight: 700; letter-spacing: -0.04em; color: var(--ink); white-space: nowrap;
+    }
+    #lg-word b { color: var(--accent); font-weight: 700; }
+    #lg-sel {
+      position: absolute; left: 865px; top: 445px; width: 190px; height: 190px;
+      border: 3px solid var(--accent); border-radius: 6px;
+    }
+    .lg-h { position: absolute; width: 16px; height: 16px; background: #fff; border: 3px solid var(--accent); border-radius: 3px; }
+    #lg-cur { position: absolute; left: 0; top: 0; }
+    .lg-tag { position: absolute; left: 34px; top: 34px; padding: 8px 20px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 28px; font-weight: 600; }
+  </style>
+  <div id="root" data-composition-id="logo" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <div id="lg-lens" class="glass"></div>
+    <div id="lg-lock">
+      <div id="lg-word">frontdesk <b>AI</b></div>
+      <div id="lg-mark"><div class="lg-orb" id="lg-orb">
+        <svg viewBox="0 0 96 96"><path d="M8 50 H30 L38 30 L50 70 L60 40 L66 50 H88" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div></div>
+      <div id="lg-sel">
+        <div class="lg-h" style="left:-10px;top:-10px"></div><div class="lg-h" style="right:-10px;top:-10px"></div>
+        <div class="lg-h" style="left:-10px;bottom:-10px"></div><div class="lg-h" style="right:-10px;bottom:-10px"></div>
+      </div>
+    </div>
+    <div id="lg-cur">
+      <svg class="cursor-svg" viewBox="0 0 24 24"><path d="M3 2l18 8.5-7.6 2.2L10 20z" fill="#1f5eff" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <div class="lg-tag">You</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // lens opens behind as the line collapses into it
+      tl.fromTo("#lg-lens", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "expo.out" }, 0.05);
+      // DROP (film 9.0): the mark is born from the point
+      tl.fromTo("#lg-mark", { scale: 0, rotation: -40, filter: "blur(10px)" }, { scale: 1, rotation: 0, filter: "blur(0px)", duration: 0.6, ease: "back.out(1.6)" }, 0.2);
+      // your cursor selects it
+      tl.fromTo("#lg-cur", { x: 1500, y: 900 }, { x: 1040, y: 610, duration: 0.5, ease: "power3.out" }, 0.3);
+      tl.fromTo("#lg-sel", { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power3.out" }, 0.75);
+      tl.fromTo("#lg-cur svg", { scale: 1 }, { scale: 0.82, duration: 0.07, yoyo: true, repeat: 1, ease: "power1.inOut", transformOrigin: "10% 10%" }, 0.72);
+      // the mark makes room, the wordmark wipes in, the selection grows to hold both
+      tl.to("#lg-mark", { x: -330, duration: 0.55, ease: "power3.inOut" }, 1.0);
+      tl.fromTo("#lg-word", { clipPath: "inset(0 100% 0 0)", x: -330 }, { clipPath: "inset(0 0% 0 0)", x: -150, duration: 0.6, ease: "power3.inOut" }, 1.05);
+      tl.to("#lg-sel", { x: -330, width: 900, duration: 0.6, ease: "power3.inOut" }, 1.0);
+      tl.to("#lg-cur", { x: 1490, y: 650, duration: 0.6, ease: "power3.inOut" }, 1.0);
+      tl.to("#lg-sel", { opacity: 0, duration: 0.15, ease: "power1.in" }, 1.8);
+      tl.to("#lg-cur", { x: 2100, y: 1150, duration: 0.4, ease: "power3.in" }, 1.85);
+      // the lens becomes the world: it grows past the frame, the lockup blurs into it
+      tl.to("#lg-lock", { scale: 1.25, opacity: 0, filter: "blur(14px)", duration: 0.35, ease: "power2.in" }, 2.3);
+      tl.to("#lg-lens", { scale: 4.2, duration: 0.6, ease: "power2.inOut" }, 2.25);
+      tl.to("#lg-lens", { opacity: 0, duration: 0.25, ease: "power1.in" }, 2.65);
+      tl.set({}, {}, 2.95);
+      window.__timelines["logo"] = tl;
+    })();
+  </script>
+</template>

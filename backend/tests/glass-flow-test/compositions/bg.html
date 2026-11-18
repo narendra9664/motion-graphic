@@ -1,0 +1,57 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: var(--ground);
+    }
+    .bg-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      will-change: transform;
+    }
+    #bg-a { width: 1100px; height: 900px; left: -260px; top: 420px; background: var(--blob-a); opacity: 0.55; }
+    #bg-b { width: 900px; height: 800px; left: 1180px; top: -380px; background: var(--blob-b); opacity: 0.6; }
+    #bg-c { width: 1000px; height: 700px; left: 700px; top: 620px; background: var(--blob-c); opacity: 0.8; }
+    #bg-green {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background:
+        radial-gradient(900px 700px at 15% 85%, rgba(37, 211, 102, 0.55), transparent 70%),
+        radial-gradient(800px 600px at 90% 10%, rgba(120, 220, 200, 0.45), transparent 70%),
+        #eef8f2;
+    }
+    #bg-sheen {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0) 40%);
+    }
+  </style>
+  <div id="root" data-composition-id="bg" data-width="1920" data-height="1080">
+    <div id="bg-a" class="bg-blob"></div>
+    <div id="bg-b" class="bg-blob"></div>
+    <div id="bg-c" class="bg-blob"></div>
+    <div id="bg-green"></div>
+    <div id="bg-sheen"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // slow, constant drift: the world never stops (reference keeps blobs moving)
+      tl.fromTo("#bg-a", { x: 0, y: 0, scale: 1 }, { x: 900, y: -360, scale: 1.25, duration: 26, ease: "sine.inOut" }, 0);
+      tl.fromTo("#bg-b", { x: 0, y: 0, scale: 1 }, { x: -1000, y: 420, scale: 0.85, duration: 26, ease: "sine.inOut" }, 0);
+      tl.fromTo("#bg-c", { x: 0, y: 0 }, { x: -620, y: -520, duration: 26, ease: "sine.inOut" }, 0);
+      // logo drop: the ground brightens into the lens
+      tl.fromTo("#bg-sheen", { opacity: 1 }, { opacity: 0.2, duration: 0.6, ease: "power2.inOut" }, 9.0);
+      // follow-up shot: colour flood to WhatsApp green, then back to blue for the close
+      tl.fromTo("#bg-green", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.inOut" }, 16.0);
+      tl.to("#bg-green", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 19.95);
+      tl.to("#bg-sheen", { opacity: 1, duration: 0.6, ease: "power2.inOut" }, 20.0);
+      tl.set({}, {}, 26);
+      window.__timelines["bg"] = tl;
+    })();
+  </script>
+</template>

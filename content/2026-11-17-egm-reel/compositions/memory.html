@@ -1,0 +1,98 @@
+<template>
+  <style>
+    #me-root { position: absolute; inset: 0; }
+    #me-el { left: 260px; top: 400px; width: 560px; opacity: 0; }
+    #me-t1 { top: 1050px; font-size: 70px; }
+    #me-t2 { top: 1130px; font-size: 70px; }
+    #me-paper { position: absolute; left: 550px; top: 633px; width: 145px; height: 166px; border-radius: 14px; background: #fff; opacity: 0; box-shadow: 0 20px 40px rgba(0,0,0,0.45); padding: 18px 16px; }
+    #me-paper i { display: block; height: 10px; border-radius: 5px; background: #e1e3e8; margin-bottom: 14px; }
+    #me-bowl { position: absolute; left: 280px; top: 560px; width: 520px; height: 520px; border-radius: 50%; border: 6px solid rgba(255,255,255,0.32); opacity: 0;
+      background: radial-gradient(90% 60% at 50% 85%, rgba(77,141,255,0.28) 0%, rgba(77,141,255,0.06) 60%, rgba(255,255,255,0) 100%); box-shadow: inset 0 -30px 80px rgba(77,141,255,0.15); }
+    #me-rim { position: absolute; left: 330px; top: 548px; width: 420px; height: 46px; border-radius: 50%; border: 5px solid rgba(255,255,255,0.4); opacity: 0; }
+    #me-t3 { top: 1130px; font-size: 58px; }
+    .fish { position: absolute; opacity: 0; }
+    #me-f1 { left: 230px; top: 610px; width: 260px; }
+    #me-f2 { left: 560px; top: 580px; width: 280px; }
+    #me-f3 { left: 290px; top: 800px; width: 220px; }
+    #me-hist { position: absolute; left: 80px; top: 230px; width: 380px; height: 210px; border-radius: 26px; background: #1b1d23; border: 2px solid #2a2d35; padding: 26px; opacity: 0; filter: blur(3px); }
+    #me-hist i { display: block; height: 16px; border-radius: 8px; background: #3a3e48; margin-bottom: 22px; }
+    .bb { position: absolute; width: 30px; height: 30px; border-radius: 50%; border: 4px solid rgba(160,200,255,0.7); opacity: 0; }
+    #me-t4 { top: 1090px; font-size: 66px; }
+    #me-t5 { top: 1162px; font-size: 66px; }
+  </style>
+  <div id="me-root" data-composition-id="memory" data-width="1080" data-height="1920" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="me-hist"><i style="width:220px"></i><i style="width:300px"></i><i style="width:180px"></i></div>
+    <div class="bb" style="left:120px;top:400px"></div><div class="bb" style="left:200px;top:420px"></div><div class="bb" style="left:290px;top:390px"></div>
+    <div class="bb" style="left:360px;top:420px"></div><div class="bb" style="left:160px;top:330px"></div><div class="bb" style="left:330px;top:320px"></div>
+    <div id="me-bowl"></div><div id="me-rim"></div>
+    <div id="me-el" class="chr"><img src="assets/img/elephant.png" alt=""></div>
+    <div class="pill b" id="me-p1" style="left:80px;top:430px">your project</div>
+    <div class="pill b" id="me-p2" style="left:690px;top:560px">your goals</div>
+    <div class="pill b" id="me-p3" style="left:90px;top:880px">every decision</div>
+    <div id="me-t1" class="hd"><span class="w">The </span><span class="w">elephant</span></div>
+    <div id="me-t2" class="hd bl"><span class="w">remembers </span><span class="w">everything.</span></div>
+    <div id="me-paper"><i style="width:90px"></i><i></i><i style="width:80px"></i><i></i></div>
+    <div id="me-f1" class="fish"><img src="assets/img/goldfish.png" alt="" style="width:100%"></div>
+    <div id="me-f2" class="fish"><img src="assets/img/goldfish.png" alt="" style="width:100%"></div>
+    <div id="me-f3" class="fish"><img src="assets/img/goldfish.png" alt="" style="width:100%"></div>
+    <div id="me-t3" class="hd"><span class="w">Then </span><span class="w">the </span><span class="w or">goldfish </span><span class="w">read </span><span class="w">it.</span></div>
+    <div id="me-t4" class="hd"><span class="w">zero </span><span class="w">memory.</span></div>
+    <div id="me-t5" class="hd or"><span class="w">Just </span><span class="w">the </span><span class="w">page.</span></div>
+  </div>
+  <script>
+    (function () {
+      const T0 = 16.8, g = (t) => t - T0;
+      const tl = gsap.timeline({ paused: true });
+      const slide = (sel, t, st) => tl.fromTo(sel, { opacity: 0, y: 50, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", stagger: st || 0 }, g(t));
+      const out = (sel, t) => tl.to(sel, { opacity: 0, y: -70, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, g(t));
+
+      // 5. "The elephant remembers everything..."
+      tl.fromTo("#me-el", { opacity: 0, scale: 0.55, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "back.out(1.4)" }, g(16.85));
+      tl.fromTo("#me-el img", { y: 0 }, { y: -12, duration: 1.1, yoyo: true, repeat: 4, ease: "sine.inOut" }, g(17.3));
+      slide("#me-t1 .w", 16.95, 0.35);
+      slide("#me-t2 .w", 17.66, 0.32);
+      [["#me-p1", 18.82, -1], ["#me-p2", 19.5, 1], ["#me-p3", 20.28, -1]].forEach(([p, t, d]) => {
+        tl.fromTo(p, { opacity: 0, x: (i) => 0, scale: 0.4, filter: "blur(8px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.4, ease: "back.out(1.6)" }, g(t));
+        tl.fromTo(p, { y: 0 }, { y: -18 * d, duration: 1.3, yoyo: true, repeat: 2, ease: "sine.inOut" }, g(t) + 0.4);
+        tl.fromTo("#me-el", { rotation: 0 }, { rotation: 4 * d, duration: 0.16, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, g(t) + 0.05);
+      });
+      // "It drafts the plan with you." the pencil gets busy
+      tl.fromTo("#me-el", { rotation: 0 }, { rotation: 2.5, duration: 0.11, yoyo: true, repeat: 9, ease: "sine.inOut", immediateRender: false }, g(21.2));
+
+      // 6. the plan leaves the elephant's hands and drops into a fishbowl
+      out(["#me-p1", "#me-p2", "#me-p3", "#me-t1", "#me-t2"], 22.45);
+      tl.set("#me-paper", { opacity: 1 }, g(22.55));
+      tl.to("#me-paper", { x: -82, y: -330, rotation: -8, scale: 1.2, duration: 0.4, ease: "power3.out" }, g(22.55));
+      tl.to("#me-el", { x: -420, scale: 0.8, filter: "blur(12px)", opacity: 0.35, duration: 0.55, ease: "power3.inOut" }, g(22.65));
+      tl.fromTo(["#me-bowl", "#me-rim"], { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, g(22.85));
+      slide("#me-t3 .w", 22.88, 0.1);
+      tl.to("#me-paper", { x: -82, y: 230, rotation: 8, scale: 0.8, duration: 0.4, ease: "power2.in" }, g(23.3));
+      tl.to("#me-el", { opacity: 0, duration: 0.4 }, g(24.0));
+
+      // 7. "Fresh reviewers with zero memory... All they get is the page."
+      out("#me-t3", 24.12);
+      [["#me-f1", 24.3], ["#me-f2", 24.45], ["#me-f3", 24.6]].forEach(([f, t], i) => {
+        tl.fromTo(f, { opacity: 0, x: 700 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, g(t));
+        tl.fromTo(f + " img", { rotation: 0 }, { rotation: i % 2 ? 5 : -5, duration: 0.45, yoyo: true, repeat: 7, ease: "sine.inOut" }, g(t) + 0.6);
+        tl.fromTo(f + " img", { y: 0 }, { y: -14, duration: 0.7, yoyo: true, repeat: 5, ease: "sine.inOut" }, g(t) + 0.3);
+      });
+      tl.fromTo("#me-hist", { opacity: 0, x: -40 }, { opacity: 0.6, x: 0, duration: 0.4, ease: "power3.out" }, g(24.3));
+      tl.to("#me-hist", { opacity: 0, scale: 0.85, filter: "blur(10px)", duration: 0.6, ease: "power2.in" }, g(25.25));
+      tl.fromTo(".bb", { opacity: 0, y: 0, scale: 0.5 }, { opacity: 0.9, y: -60, scale: 1, duration: 0.4, stagger: 0.08, ease: "power2.out" }, g(25.3));
+      tl.to(".bb", { opacity: 0, y: -260, duration: 0.8, stagger: 0.08, ease: "power1.in" }, g(25.7));
+      slide("#me-t4 .w", 25.18, 0.35);
+      slide("#me-t5 .w", 27.2, 0.3);
+      tl.to("#me-paper", { y: 200, duration: 0.4, yoyo: true, repeat: 1, ease: "sine.inOut" }, g(27.9));
+
+      // the fish part, and the page rises out of the bowl
+      out(["#me-t4", "#me-t5"], 28.5);
+      tl.to(["#me-f1"], { x: -700, duration: 0.45, ease: "power3.in" }, g(28.55));
+      tl.to(["#me-f2", "#me-f3"], { x: 700, duration: 0.45, ease: "power3.in" }, g(28.55));
+      tl.to(["#me-bowl", "#me-rim"], { scale: 1.35, opacity: 0, filter: "blur(10px)", duration: 0.45, ease: "power3.in" }, g(28.6));
+      tl.to("#me-paper", { x: -82, y: 40, rotation: 0, scale: 2.4, duration: 0.35, ease: "power3.in" }, g(28.6));
+      tl.to("#me-paper", { opacity: 0, duration: 0.1 }, g(28.95));
+      tl.set({}, {}, g(29.1));
+      window.__timelines["memory"] = tl;
+    })();
+  </script>
+</template>

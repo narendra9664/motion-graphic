@@ -1,0 +1,42 @@
+# secrets: never commit
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# local-only folders
+reference/
+backend/engine/
+.claude/worktrees/
+.claude/settings.local.json
+
+# client work is confidential by default: everything under client/ stays local.
+# To publish a client that has cleared it, add a line like:  !client/<client-name>/
+client/*
+!client/README.md
+
+# licensed library audio (Mixkit: no redistribution of the files themselves)
+backend/assets/library/audio/
+
+# build output and caches
+**/renders/
+**/snaps/
+**/snaps*/
+**/.hyperframes/
+**/storyboard/frames/
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Mixkit audio copied into these two projects (restore from backend/assets/library locally)
+backend/tests/glass-flow-test/assets/music/
+backend/tests/glass-flow-test/assets/sfx/
+content/2026-11-05-nobody-called-them/assets/music/
+content/2026-11-05-nobody-called-them/assets/sfx/
+
+# temporary pipeline test project
+content/2026-11-18-smoke-test/

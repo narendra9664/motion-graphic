@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<link rel="stylesheet" href="../assets/fonts.css" />
+<link rel="stylesheet" href="../assets/brand.css" />
+<script src="../assets/gsap.min.js"></script>
+<style>
+  /* 04-proof — WhatsApp world. Film window: 15.68 – 22.16 (local = film - 15.68)
+     VO anchors (local): timestamp 0-1.43 · "messaged Rahul." 1.14-2.63 ·
+     "This Saturday…" 2.63-4.61 · Sky Penthouse word 4.12 · hold to 6.48 */
+  #proof-root { font-family: "inter-variable", sans-serif; color: var(--ink); }
+  #bg { inset: 0; }
+  #bg-inner { position: absolute; inset: 0; background: var(--ground); }
+  #bg-tint { position: absolute; inset: 0; background: radial-gradient(760px 760px at 78% 26%, rgba(37, 211, 102, 0.10), transparent 68%); }
+
+  #ts {
+    left: 90px;
+    top: 360px;
+  }
+  .ts-inner {
+    display: inline-block;
+    padding: 18px 32px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  #chat {
+    left: 90px;
+    top: 500px;
+    width: 900px;
+    height: 440px;
+  }
+  .wa-box {
+    width: 100%;
+    height: 100%;
+    background: var(--wa-green);
+    border-radius: 26px 26px 26px 10px;
+    box-shadow: 0 28px 64px rgba(11, 43, 20, 0.14);
+  }
+  .chat-head {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 30px;
+    border-bottom: 1.5px solid rgba(11, 43, 20, 0.1);
+  }
+  .avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "anton", sans-serif;
+  }
+  .chat-name { font-weight: 700; font-size: 30px; color: var(--wa-ink); }
+  .chat-sub { font-weight: 500; font-size: 28px; color: rgba(11, 43, 20, 0.62); margin-left: auto; font-variant-numeric: tabular-nums; }
+
+  .bubbles { position: relative; height: 320px; margin: 20px 30px 0; }
+  .type-dots {
+    position: absolute;
+    left: 8px;
+    top: 6px;
+    display: inline-flex;
+    gap: 12px;
+    padding: 16px 22px;
+    border-radius: 20px 20px 20px 6px;
+    background: var(--paper);
+  }
+  .tdot { width: 14px; height: 14px; border-radius: 50%; background: rgba(17, 17, 17, 0.22); }
+  .bubble {
+    position: absolute;
+    left: 0;
+    top: 56px;
+    max-width: 620px;
+    padding: 22px 28px;
+    border-radius: 4px 26px 26px 26px;
+    background: var(--paper);
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1.32;
+    color: var(--wa-ink);
+  }
+  .meta {
+    position: absolute;
+    right: 24px;
+    bottom: 8px;
+    font-weight: 600;
+    font-size: 28px;
+    color: rgba(11, 43, 20, 0.62);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .meta svg { width: 26px; height: 26px; stroke: var(--teal); }
+
+  /* confirmed booking card */
+  #booked {
+    left: 90px;
+    top: 960px;
+    width: 900px;
+  }
+  .booked-inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 32px;
+    background: var(--ink);
+    border-radius: 20px;
+    box-shadow: 0 22px 50px rgba(17, 17, 17, 0.25);
+  }
+  .b-when { font-family: "anton", sans-serif; font-size: 44px; color: var(--gold); letter-spacing: 0.01em; }
+  .b-what { margin-top: 6px; font-weight: 600; font-size: 28px; color: rgba(255, 255, 255, 0.92); }
+  .b-flag {
+    margin-left: auto;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 0.12em;
+  }
+</style>
+</head>
+<body>
+<div id="proof-root" data-composition-id="proof" data-start="0" data-duration="6.48" data-width="1080" data-height="1920">
+  <div id="bg" class="clip" data-start="0" data-duration="6.48" data-track-index="0"><div id="bg-inner"></div><div id="bg-tint"></div></div>
+
+  <div id="ts" class="clip" data-start="0" data-duration="6.48" data-track-index="1">
+    <div class="ts-inner">11:42 PM</div>
+  </div>
+
+  <div id="chat" class="clip" data-start="0" data-duration="6.48" data-track-index="2">
+    <div class="wa-box">
+      <div class="chat-head">
+        <span class="avatar">RM</span>
+        <span class="chat-name">Rahul Mehta</span>
+        <span class="chat-sub">whatsapp</span>
+      </div>
+      <div class="bubbles">
+        <div class="type-dots" id="dots"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div>
+        <div class="bubble" id="bubble">
+          Sky Penthouse A-4 is live tonight. Should I hold Saturday&nbsp;11:00 for you?
+          <span class="meta">11:42
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M2 12.5 8 18.5 16 9" /><path d="M9 12.5 13.5 17 21.5 8.5" opacity="0.9" /></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="booked" class="clip" data-start="0" data-duration="6.48" data-track-index="3">
+    <div class="booked-inner">
+      <div>
+        <div class="b-when">SAT 11:00 AM</div>
+        <div class="b-what">with Meera &middot; Sky Penthouse A-4</div>
+      </div>
+      <div class="b-flag">VIEWING BOOKED</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.fonts.ready.then(() => {
+    const tl = gsap.timeline({ paused: true });
+
+    // "At 11:42 PM" (0.0-1.43): the timestamp is the first thing seen
+    tl.fromTo("#ts .ts-inner", { autoAlpha: 0, y: -26, scale: 0.92 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.42, ease: "power4.out" }, 0.1);
+
+    tl.fromTo("#chat .wa-box", { autoAlpha: 0, y: 70, scale: 0.97 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.46, ease: "power4.out" }, 0.5);
+
+    // typing (0.6-1.3), then bubble lands with the click (film 17.32 = local 1.64)
+    tl.fromTo("#dots", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.25, ease: "power1.out" }, 0.6);
+    tl.to("#dots .tdot", { y: -8, duration: 0.26, ease: "power1.inOut", stagger: 0.07, yoyo: true, repeat: 2 }, 0.72);
+    tl.to("#dots", { autoAlpha: 0, scale: 0.9, duration: 0.18, ease: "power1.in" }, 1.42);
+    tl.fromTo("#bubble", { autoAlpha: 0, y: 26, scale: 0.94 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.36, ease: "back.out(1.5)" }, 1.64);
+
+    // "This Saturday…" — the confirmed card (film 18.81 = local 3.13, pop 18.95)
+    tl.fromTo("#booked .booked-inner", { autoAlpha: 0, y: 60, scale: 0.96 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: "power4.out" }, 3.13);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["proof"] = tl;
+  });
+</script>
+</body>
+</html>

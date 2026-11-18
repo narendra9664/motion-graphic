@@ -1,0 +1,118 @@
+<template>
+  <style>
+    #op-root { position: absolute; inset: 0; }
+    #op-field { position: absolute; inset: 0; }
+    #op-meta { position: absolute; left: 400px; top: 420px; width: 280px; height: 280px; }
+    #op-num { top: 760px; font-size: 170px; }
+    #op-apps { top: 970px; font-size: 56px; }
+    #op-vwrap { position: absolute; inset: 0; opacity: 0; clip-path: inset(45% 40% 47% 40% round 48px); }
+    #op-vin { position: absolute; inset: 0; overflow: hidden; background: #07090d; clip-path: circle(150% at 540px 920px); }
+    #op-vimg { position: absolute; left: -412px; top: -368px; width: 1512px; height: 2688px; transform-origin: 952px 1288px; }
+    #op-vig { position: absolute; inset: 0; background: radial-gradient(70% 50% at 50% 42%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg, rgba(4,6,10,0.85) 0%, rgba(4,6,10,0) 36%); }
+    #op-8 { top: 270px; font-size: 200px; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+    #op-left { top: 490px; font-size: 66px; color: #d3dae8; font-weight: 600; letter-spacing: -0.02em; text-shadow: 0 6px 24px rgba(0,0,0,0.7); }
+    #op-sym { position: absolute; left: 390px; top: 770px; width: 300px; height: 300px; opacity: 0; }
+    #op-wm { position: absolute; left: 220px; top: 760px; width: 640px; clip-path: inset(0 50% 0 50%); }
+    #op-star { left: 250px; top: 970px; width: 580px; height: 160px; display: flex; align-items: center; justify-content: center; gap: 26px; opacity: 0; }
+    #op-star img { width: 70px; height: 70px; }
+    #op-starn { font-size: 76px; font-weight: 800; letter-spacing: -0.04em; }
+    #op-starn b { color: #f5b301; }
+    #op-week { top: 1160px; font-size: 40px; opacity: 0; }
+    #op-but { top: 860px; font-size: 104px; }
+    #op-int { top: 990px; font-size: 68px; letter-spacing: -0.035em; }
+  </style>
+  <div id="op-root" data-composition-id="open" data-width="1080" data-height="1920" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="op-field"></div>
+    <img id="op-meta" src="assets/img/meta.png" alt="">
+    <div id="op-num" class="hd">0</div>
+    <div id="op-apps" class="hd lt"><span class="w">apps, </span><span class="w">one </span><span class="w">system.</span></div>
+
+    <div id="op-vwrap"><div id="op-vin">
+      <img id="op-vimg" src="assets/img/vault.png" alt="">
+      <div id="op-vig"></div>
+      <div id="op-8" class="hd"><span class="w">8 </span><span class="w">years</span></div>
+      <div id="op-left" class="hd"><span class="w">never </span><span class="w">left </span><span class="w">Meta.</span></div>
+    </div></div>
+
+    <img id="op-sym" src="assets/img/astryx.png" alt="">
+    <img id="op-wm" src="assets/img/astryx-wordmark-blue.png" alt="">
+    <div id="op-star" class="card"><img src="assets/img/github.png" alt=""><div id="op-starn"><b>&#9733;</b> <span id="op-sn">0</span></div></div>
+    <div id="op-week" class="hd lt">stars this week</div>
+
+    <div id="op-but" class="hd"><span class="w">But </span><span class="w">the </span><span class="w">stars</span></div>
+    <div id="op-int" class="hd"><span class="w">aren't </span><span class="w">the </span><span class="w bl">interesting </span><span class="w bl">part.</span></div>
+  </div>
+  <script>
+    (function () {
+      // the same seeded tile field opens and closes the reel (loop match)
+      const field = document.querySelector("#op-field");
+      const hues = ["#225bff", "#ffb020", "#1fbf75", "#ff5a5f", "#8b5cf6", "#00b3c7", "#111111"];
+      let r = 7; const rnd = () => (r = (r * 9301 + 49297) % 233280) / 233280;
+      const tiles = [];
+      for (let i = 0; i < 46; i++) {
+        let x, y; do { x = rnd() * 1000 - 20; y = rnd() * 1860 - 20; } while (x > 170 && x < 790 && y > 360 && y < 1140);
+        const far = rnd() < 0.45; const el = document.createElement("div");
+        el.className = "tile"; el.style.left = x + "px"; el.style.top = y + "px";
+        if (far) { el.style.filter = "blur(7px)"; el.style.opacity = "0.5"; el.style.transform = "scale(0.7)"; }
+        el.innerHTML = '<i style="background:' + hues[i % hues.length] + ';opacity:.85"></i>';
+        field.appendChild(el); tiles.push({ el, x: x + 60, y: y + 60, far });
+      }
+      const tl = gsap.timeline({ paused: true });
+      const slide = (sel, t, st) => tl.fromTo(sel, { opacity: 0, y: 50, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", stagger: st || 0 }, t);
+      const out = (sel, t) => tl.to(sel, { opacity: 0, y: -70, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, t);
+
+      // 1. hook: tiles stream past the lens, Meta + counter dead centre
+      tiles.forEach(({ el, x, y, far }) => {
+        const dx = (x - 540) * 0.35, dy = (y - 920) * 0.35;
+        tl.fromTo(el, { x: 0, y: 0 }, { x: dx, y: dy, duration: 3.7, ease: "sine.in" }, 0);
+      });
+      tl.fromTo("#op-meta", { scale: 0.92 }, { scale: 1, duration: 3.6, ease: "sine.out" }, 0);
+      { const o = { v: 0 }; const n = document.querySelector("#op-num");
+        tl.fromTo(o, { v: 0 }, { v: 13000, duration: 2.35, ease: "power2.out", onUpdate: () => { n.textContent = Math.round(o.v).toLocaleString("en-US"); } }, 0.2); }
+      tl.fromTo("#op-num", { scale: 1 }, { scale: 1.06, duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1 }, 2.48);
+      slide("#op-apps .w", 2.7, 0.14);
+
+      // all tiles are pulled into the centre and become the vault
+      out(["#op-meta", "#op-num", "#op-apps"], 3.55);
+      tiles.forEach(({ el, x, y }, i) => {
+        tl.to(el, { x: 540 - x, y: 920 - y, scale: 0.25, opacity: 0, filter: "blur(0px)", duration: 0.36, ease: "power3.in" }, 3.55 + (i % 6) * 0.015);
+      });
+      tl.set("#op-vwrap", { opacity: 1 }, 3.86);
+      tl.fromTo("#op-vwrap", { clipPath: "inset(45% 40% 47% 40% round 48px)" }, { clipPath: "inset(0% 0% 0% 0% round 0px)", duration: 0.45, ease: "power3.out", immediateRender: false }, 3.86);
+
+      // 2. "For eight years, it never left Meta."
+      tl.fromTo("#op-vimg", { scale: 1.12, rotation: -8 }, { scale: 1.22, rotation: 0, duration: 1.95, ease: "sine.out" }, 3.9);
+      slide("#op-8 .w", 4.12, 0.22);
+      slide("#op-left .w", 4.86, 0.3);
+      // the wheel spins open; the camera dives into the hub, which becomes the Astryx symbol
+      out(["#op-8", "#op-left"], 5.82);
+      tl.to("#op-vimg", { rotation: 140, scale: 3.4, duration: 0.55, ease: "power3.in" }, 5.85);
+      tl.to("#op-vin", { clipPath: "circle(0% at 540px 920px)", duration: 0.32, ease: "power3.in" }, 6.12);
+      tl.set("#op-vwrap", { opacity: 0 }, 6.46);
+      tl.set("#op-sym", { opacity: 1 }, 6.2);
+      tl.fromTo("#op-sym", { scale: 0.12, rotation: 140, y: 0 }, { scale: 1, rotation: 0, duration: 0.42, ease: "back.out(1.4)", immediateRender: false }, 6.2);
+
+      // 3. "It's called Astryx." symbol rises, wordmark slides out from behind it
+      tl.to("#op-sym", { y: -330, duration: 0.5, ease: "power3.inOut" }, 6.6);
+      tl.fromTo("#op-wm", { clipPath: "inset(0% 50% 0% 50%)", y: 0 }, { clipPath: "inset(0% 0% 0% 0%)", y: 0, duration: 0.5, ease: "power3.out", immediateRender: false }, 6.82);
+      // "...gained almost eleven thousand stars on GitHub."
+      tl.fromTo("#op-star", { opacity: 0, y: 120, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }, 7.45);
+      { const o = { v: 0 }; const n = document.querySelector("#op-sn");
+        tl.fromTo(o, { v: 0 }, { v: 10939, duration: 1.75, ease: "power2.out", onUpdate: () => { n.textContent = Math.round(o.v).toLocaleString("en-US"); } }, 7.9); }
+      slide("#op-week", 9.6);
+      tl.fromTo("#op-star", { scale: 1 }, { scale: 1.05, duration: 0.15, yoyo: true, repeat: 1, ease: "power2.out" }, 9.62);
+
+      // 4. head fake: the counter freezes and falls out of focus behind the words
+      out(["#op-sym", "#op-wm", "#op-week"], 10.6);
+      tl.to("#op-star", { y: -330, scale: 0.8, filter: "blur(12px)", opacity: 0.4, duration: 0.5, ease: "power3.inOut" }, 10.62);
+      slide("#op-but .w", 10.72, 0.16);
+      tl.set("#op-but .w:nth-child(3)", {}, 11.18);
+      slide("#op-int .w", 11.68, 0.12);
+      // exit: everything slides away; the next shot grows from the centre
+      out(["#op-but", "#op-int"], 12.62);
+      tl.to("#op-star", { opacity: 0, duration: 0.3 }, 12.5);
+      tl.set({}, {}, 12.8);
+      window.__timelines["open"] = tl;
+    })();
+  </script>
+</template>

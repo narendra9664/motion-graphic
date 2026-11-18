@@ -1,0 +1,10 @@
+{
+  "name": "2026-11-17-egm-reel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.9.53 preview",
+    "check": "npx --yes hyperframes@0.9.53 check",
+    "render": "npx --yes hyperframes@0.9.53 render"
+  }
+}

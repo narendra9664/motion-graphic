@@ -1,6 +1,6 @@
 # Motion Graphic Studio
 
-An AI-run motion graphics studio in one repo. You describe a video in plain English; an AI coding agent (Claude Code or OpenCode) writes the script, sources the assets, builds every frame in HTML + GSAP on [HyperFrames](https://github.com/heygen-com/hyperframes), renders an MP4, and mixes voice, music and sound effects.
+> **AI motion graphics studio.** Describe a video in plain English and an AI agent (Claude Code or OpenCode) scripts it, designs it, animates every frame, adds voice, music and sound, and renders an MP4. Built on [HyperFrames](https://github.com/heygen-com/hyperframes). One backend, two pipelines: social reels that grow an audience, and SaaS launch videos for clients.
 
 One backend, two frontends:
 

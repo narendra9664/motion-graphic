@@ -24,7 +24,7 @@ Voiceover: `node backend/scripts/voiceover.mjs vo/script.txt assets` (ElevenLabs
 Numbered table: time, voice line, frame and motion, how it becomes the next shot. Wait for "approved".
 
 ## 4. Build
-Use the **hyperframes** skill (render contract) and **hyperframes-registry** for ready blocks. One composition per act, one paused GSAP timeline each. Transforms only (no left/top tweens). Fonts that resolve: Inter, EB Garamond, JetBrains Mono, or a local @font-face (Anton in `backend/assets/fonts`).
+Use the **hyperframes** skill (render contract) and **hyperframes-registry** for ready blocks. For variety, borrow transitions from the **saas-motion-kit** atlas and motion craft from **product-launch-motion**; for explainer diagrams use **animated-diagrams**. One composition per act, one paused GSAP timeline each. Transforms only (no left/top tweens). Fonts that resolve: Inter, EB Garamond, JetBrains Mono, or a local @font-face (Anton in `backend/assets/fonts`).
 Loop ending: the last frame matches the first.
 `npm run check`, `npm run snapshot -- --at 1,5,...`, fix, then `npm run render`. Send the picture pass and wait for picture approval.
 

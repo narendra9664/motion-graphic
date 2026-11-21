@@ -7,6 +7,7 @@ description: The client pipeline. Make SaaS explainers, product promos and launc
 
 Client projects live in `client/<client-name>/<yyyy-mm-dd>-<slug>/`. They are confidential by default: never publish, post or reuse a client's material without written permission, and never commit a client folder the client has not cleared (add it to `.gitignore`).
 Read `backend/workflows/house-rules.md` first, then use **saas-animation** (look and craft) and **launch-motion** (timing and motion rules, brief and storyboard templates).
+Also available: **saas-motion-kit** (themes, 24-transition atlas, tone matrix, variety audit so no two films feel the same), **product-launch-motion** (one-shape morph continuity, springs, cursor-driven UI, beat-grid timing; motion reference library in `references/v1/`), **animated-diagrams** (animated architecture/flow diagrams for "how it works" scenes) and **watch-video** (study reference motion with Gemini).
 
 ## 0. Brief
 Fill `backend/workflows/client-brief.md` with the client. The story path is always: hook (the pain) -> problem -> the product fixes it (real UI) -> payoff -> logo + CTA.

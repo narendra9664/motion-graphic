@@ -48,7 +48,7 @@ cd content/<date>-my-topic && npm run check && npm run render && npm run finish
 
 ## Skills
 
-`content-reel`, `client-video` (the two pipelines), `short-form-script`, `long-form-script`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`, `saas-animation`, `launch-motion`, `watch-video` (Gemini watches reference videos and reports their motion). See `docs/Motion-Graphic-Studio-Guide.pdf` for what each one does.
+`content-reel`, `client-video` (the two pipelines), `short-form-script`, `long-form-script`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`, `saas-animation`, `launch-motion`, `watch-video` (Gemini watches reference videos and reports their motion), plus three community skills: `saas-motion-kit` (MIT), `product-launch-motion` (MIT) and `animated-diagrams` (Apache-2.0), each with its licence in its folder. See `docs/Motion-Graphic-Studio-Guide.pdf` for what each one does.
 
 ## Inspiration and credits
 
